@@ -9,14 +9,14 @@
 import UIKit
 
 struct Styles {
-    struct main {
+    struct Main {
         static let backgroundColor = UIColor(hex: 0xE6F2FF)
-        
-        struct button {
-            static let backgroundColor = UIColor.white
-            static let textColor = UIColor.gray
-            static let borderColor = UIColor.gray
-        }
+    }
+    
+    struct BigButton {
+        static let backgroundColor = UIColor.white
+        static let textColor = UIColor.gray
+        static let borderColor = UIColor.gray
     }
 }
 

@@ -17,7 +17,7 @@ class FlashcardsWireframe {
     }
     
     func present(to window: UIWindow) {
-        window.backgroundColor = Styles.main.backgroundColor
+        window.backgroundColor = Styles.Main.backgroundColor
         window.rootViewController = rootViewController
         window.makeKeyAndVisible()
     }

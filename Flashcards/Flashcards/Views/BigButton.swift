@@ -13,8 +13,8 @@ class BigButton : UIButton {
     required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         self.layer.borderWidth = 1
-        self.backgroundColor = Styles.main.button.backgroundColor
-        self.setTitleColor(Styles.main.button.textColor, for: .normal)
-        self.layer.borderColor = Styles.main.button.borderColor.cgColor
+        self.backgroundColor = Styles.BigButton.backgroundColor
+        self.setTitleColor(Styles.BigButton.textColor, for: .normal)
+        self.layer.borderColor = Styles.BigButton.borderColor.cgColor
     }
 }
