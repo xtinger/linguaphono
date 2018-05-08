@@ -8,11 +8,13 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class GameVC: UIViewController, IGameViewInput  {
 
+    var output: IGameViewOutput!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        output.viewDidLoad()
     }
 
     override func didReceiveMemoryWarning() {
