@@ -13,7 +13,8 @@ class GameAssembly {
     
     required init() {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let presenter : IGameViewOutput =  GamePresenter()
+        let game : IGameService = GameService(dataService: DataService())
+        let presenter : IGameViewOutput = GamePresenter(gameService: game)
         let viewController = storyboard.instantiateViewController(withIdentifier: "GameVC") as! GameVC
         viewController.output = presenter
         self.viewController = viewController

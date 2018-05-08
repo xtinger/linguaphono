@@ -16,6 +16,9 @@ protocol IGameViewInput {
 // presenter
 protocol IGameViewOutput {
     func viewDidLoad()
+    func userDidTouchYes()
+    func userDidTouchNo()
+    func userDidTouchRepeat()
 }
 
 

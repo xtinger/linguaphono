@@ -9,7 +9,26 @@
 import Foundation
 
 class GamePresenter : IGameViewOutput {
+
+    var gameService : IGameService
+    
+    required init(gameService : IGameService) {
+        self.gameService = gameService
+    }
+    
     func viewDidLoad() {
+        
+    }
+    
+    func userDidTouchYes() {
+        
+    }
+    
+    func userDidTouchNo() {
+        
+    }
+    
+    func userDidTouchRepeat() {
         
     }
  

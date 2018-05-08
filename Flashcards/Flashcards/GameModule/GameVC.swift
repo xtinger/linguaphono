@@ -22,6 +22,16 @@ class GameVC: UIViewController, IGameViewInput  {
         // Dispose of any resources that can be recreated.
     }
 
+    @IBAction func buttonYesTouched(_ sender: Any) {
+        output.userDidTouchYes()
+    }
 
+    @IBAction func buttonNoTouched(_ sender: Any) {
+        output.userDidTouchNo()
+    }
+    
+    @IBAction func buttonRepeatTouched(_ sender: Any) {
+        output.userDidTouchRepeat()
+    }
 }
 

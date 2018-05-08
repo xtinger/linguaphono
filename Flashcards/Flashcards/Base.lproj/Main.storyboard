@@ -7,6 +7,7 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -22,17 +23,26 @@
                             <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uDs-4f-Bfx" customClass="BigButton" customModule="Flashcards" customModuleProvider="target">
                                 <rect key="frame" x="16" y="480.5" width="163.5" height="166.5"/>
                                 <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="buttonYesTouched:" destination="BYZ-38-t0r" eventType="touchUpInside" id="vdm-Ot-b5i"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gvh-E7-o4H" customClass="BigButton" customModule="Flashcards" customModuleProvider="target">
                                 <rect key="frame" x="195.5" y="480.5" width="163.5" height="166.5"/>
                                 <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="buttonNoTouched:" destination="BYZ-38-t0r" eventType="touchUpInside" id="LHL-4y-I99"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wlv-q9-JLq" customClass="BigButton" customModule="Flashcards" customModuleProvider="target">
                                 <rect key="frame" x="16" y="398" width="343" height="66.5"/>
                                 <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="buttonRepeatTouched:" destination="BYZ-38-t0r" eventType="touchUpInside" id="qhk-Wu-DnH"/>
+                                </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" red="0.90196078431372551" green="0.94901960784313721" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" name="BackColor"/>
                         <constraints>
                             <constraint firstItem="gvh-E7-o4H" firstAttribute="height" secondItem="uDs-4f-Bfx" secondAttribute="height" id="6HN-y2-dmO"/>
                             <constraint firstItem="BXW-Gf-S4J" firstAttribute="trailing" secondItem="Wlv-q9-JLq" secondAttribute="trailing" constant="16" id="A3B-gn-5OG"/>
@@ -55,4 +65,9 @@
             </objects>
         </scene>
     </scenes>
+    <resources>
+        <namedColor name="BackColor">
+            <color red="0.90196078431372551" green="0.94901960784313721" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
 </document>
