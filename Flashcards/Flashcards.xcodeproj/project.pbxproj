@@ -20,6 +20,7 @@
 		92C2F3EB20A1F28B00F5982B /* IDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C2F3EA20A1F28B00F5982B /* IDataService.swift */; };
 		92C2F3ED20A1F3C900F5982B /* GameService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C2F3EC20A1F3C900F5982B /* GameService.swift */; };
 		92C2F3F020A1F3EF00F5982B /* IGameService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C2F3EF20A1F3EF00F5982B /* IGameService.swift */; };
+		92C2F3F220A1FAA000F5982B /* HexColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C2F3F120A1FAA000F5982B /* HexColor.swift */; };
 		92F4AE2220A0A8F100E3EF19 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F4AE2120A0A8F100E3EF19 /* AppDelegate.swift */; };
 		92F4AE2420A0A8F100E3EF19 /* GameVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F4AE2320A0A8F100E3EF19 /* GameVC.swift */; };
 		92F4AE2720A0A8F100E3EF19 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 92F4AE2520A0A8F100E3EF19 /* Main.storyboard */; };
@@ -40,6 +41,7 @@
 		92C2F3EA20A1F28B00F5982B /* IDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDataService.swift; sourceTree = "<group>"; };
 		92C2F3EC20A1F3C900F5982B /* GameService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameService.swift; sourceTree = "<group>"; };
 		92C2F3EF20A1F3EF00F5982B /* IGameService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IGameService.swift; sourceTree = "<group>"; };
+		92C2F3F120A1FAA000F5982B /* HexColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HexColor.swift; sourceTree = "<group>"; };
 		92F4AE1E20A0A8F100E3EF19 /* Flashcards.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Flashcards.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		92F4AE2120A0A8F100E3EF19 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		92F4AE2320A0A8F100E3EF19 /* GameVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameVC.swift; sourceTree = "<group>"; };
@@ -97,6 +99,14 @@
 			path = Game;
 			sourceTree = "<group>";
 		};
+		92C2F3F320A1FAA900F5982B /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				92C2F3F120A1FAA000F5982B /* HexColor.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
 		92F4AE1520A0A8F100E3EF19 = {
 			isa = PBXGroup;
 			children = (
@@ -128,6 +138,7 @@
 				92C2F3E720A1EFFB00F5982B /* Data */,
 				92C2F3CE20A1DD5500F5982B /* GameModule */,
 				92C2F3A920A1A91200F5982B /* Views */,
+				92C2F3F320A1FAA900F5982B /* Helpers */,
 			);
 			path = Flashcards;
 			sourceTree = "<group>";
@@ -228,6 +239,7 @@
 				92C2F3F020A1F3EF00F5982B /* IGameService.swift in Sources */,
 				92F4AE2420A0A8F100E3EF19 /* GameVC.swift in Sources */,
 				92F4AE2220A0A8F100E3EF19 /* AppDelegate.swift in Sources */,
+				92C2F3F220A1FAA000F5982B /* HexColor.swift in Sources */,
 				92C2F3D620A1E4F100F5982B /* GamePresenter.swift in Sources */,
 				92C2F3AB20A1A95300F5982B /* BigButton.swift in Sources */,
 				92C2F3DC20A1E58C00F5982B /* GameProtocols.swift in Sources */,
