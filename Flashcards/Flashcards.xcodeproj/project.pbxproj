@@ -74,6 +74,7 @@
 				92F4AE1A20A0A8F100E3EF19 /* Sources */,
 				92F4AE1B20A0A8F100E3EF19 /* Frameworks */,
 				92F4AE1C20A0A8F100E3EF19 /* Resources */,
+				92C2F3A820A1A73500F5982B /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -129,6 +130,22 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		92C2F3A820A1A73500F5982B /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "${PROJECT_DIR}/tools/bump_build_number.sh \"${PROJECT_DIR}/${INFOPLIST_FILE}\" >> ${PROJECT_DIR}/BumpLog.txt";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		92F4AE1A20A0A8F100E3EF19 /* Sources */ = {
