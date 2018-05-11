@@ -21,30 +21,15 @@ class GameService : IGameService {
 
     required init(dataService: IDataService) {
         self.dataService = dataService
-//        self.createWindowFirstTime()
-        
-        
     }
 
-    
-//    private func createWindowFirstTime() {
-//        dataService.windowStart = 0
-//        dataService.windowEnd = self.dataService.windowStart + GameService.WindowLength
-//        dataService.currentCard = self.dataService.allCards[self.dataService.windowStart]
-//    }
-    
     func readyToPresent() {
-        self.dataService.prepare { [unowned self] in
-            //            if self.dataService.currentCard == nil {
-            //                self.createWindowFirstTime()
-        }
+        self.dataService.prepare()
+        
         current = dataService.cards.first!
         output.presentCard(current)
-        //        }
     }
 
-    
-    
     func answered(with action: GameInputAction) {
         
         switch action {
@@ -61,9 +46,6 @@ class GameService : IGameService {
         current = dataService.cards[index]
         output.presentCard(current)
     }
-    
-    
-
 }
 
 

@@ -40,7 +40,6 @@ class GamePresenter : IGamePresenter, IGameViewOutput {
     func say(card: CardModel) {
         let utterance = AVSpeechUtterance(string: card.textEng)
         utterance.voice = AVSpeechSynthesisVoice(language: "en-US")
-        utterance.rate = 0.4
         
         let synthesizer = AVSpeechSynthesizer()
         synthesizer.speak(utterance)

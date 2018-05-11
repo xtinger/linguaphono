@@ -16,7 +16,7 @@ class TestingDataService : IDataService{
     required init() {
     }
     
-    func prepare(completion: PrepareCompletion){
+    func prepare() {
         cards = [
             CardModel(id: 1, textEng: "Thank you very much", textRu: "Большое спасибо", corrects: 0, incorrects: 0),
             CardModel(id: 2, textEng: "Nice to meet you", textRu: "Приятно познакомиться", corrects: 0, incorrects: 0),
@@ -118,10 +118,6 @@ class TestingDataService : IDataService{
             CardModel(id: 98, textEng: "Can I buy it on installment?", textRu: "Можно купить это в рассрочку?", corrects: 0, incorrects: 0),
             CardModel(id: 99, textEng: "We need an interpreter", textRu: "Нам нужен переводчик", corrects: 0, incorrects: 0),
             CardModel(id: 100, textEng: "I quite understand you", textRu: "Я вполне понимаю Вас", corrects: 0, incorrects: 0)
-
         ]
-
-        completion()
-        
     }
 }

@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		92B18D5120A45B0300F3CF08 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B18D5020A45B0300F3CF08 /* CardView.swift */; };
 		92B18D5320A45C5D00F3CF08 /* IGameServiceOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B18D5220A45C5D00F3CF08 /* IGameServiceOutput.swift */; };
-		92B924F720A59D80009A20B4 /* StateMachine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B924F620A59D80009A20B4 /* StateMachine.swift */; };
 		92B924F920A5AEAB009A20B4 /* GameConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B924F820A5AEAB009A20B4 /* GameConfig.swift */; };
 		92C2F3AB20A1A95300F5982B /* BigButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C2F3AA20A1A95300F5982B /* BigButton.swift */; };
 		92C2F3D020A1DE0400F5982B /* GameAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C2F3CF20A1DE0400F5982B /* GameAssembly.swift */; };
@@ -68,7 +67,6 @@
 /* Begin PBXFileReference section */
 		92B18D5020A45B0300F3CF08 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		92B18D5220A45C5D00F3CF08 /* IGameServiceOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IGameServiceOutput.swift; sourceTree = "<group>"; };
-		92B924F620A59D80009A20B4 /* StateMachine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateMachine.swift; sourceTree = "<group>"; };
 		92B924F820A5AEAB009A20B4 /* GameConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameConfig.swift; sourceTree = "<group>"; };
 		92C2F3AA20A1A95300F5982B /* BigButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BigButton.swift; sourceTree = "<group>"; };
 		92C2F3CF20A1DE0400F5982B /* GameAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameAssembly.swift; sourceTree = "<group>"; };
@@ -144,7 +142,6 @@
 				92C2F3EF20A1F3EF00F5982B /* IGameService.swift */,
 				92C2F3EC20A1F3C900F5982B /* GameService.swift */,
 				92B18D5220A45C5D00F3CF08 /* IGameServiceOutput.swift */,
-				92B924F620A59D80009A20B4 /* StateMachine.swift */,
 			);
 			path = Game;
 			sourceTree = "<group>";
@@ -325,7 +322,6 @@
 				92C2F3AB20A1A95300F5982B /* BigButton.swift in Sources */,
 				92C2F3DC20A1E58C00F5982B /* GameProtocols.swift in Sources */,
 				92C2F3EB20A1F28B00F5982B /* IDataService.swift in Sources */,
-				92B924F720A59D80009A20B4 /* StateMachine.swift in Sources */,
 				92C2F3D020A1DE0400F5982B /* GameAssembly.swift in Sources */,
 				92C2F3E920A1F01E00F5982B /* CardModel.swift in Sources */,
 			);
