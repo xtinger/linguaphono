@@ -8,9 +8,13 @@
 
 import UIKit
 
-class GameVC: UIViewController, IGameViewInput  {
+class GameVC: UIViewController  {
 
     var output: IGameViewOutput!
+    
+    @IBOutlet weak var cardsPlace: UIView!
+    
+    weak var cardView: UIView?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,6 +36,16 @@ class GameVC: UIViewController, IGameViewInput  {
     
     @IBAction func buttonRepeatTouched(_ sender: Any) {
         output.userDidTouchRepeat()
+    }
+}
+
+extension GameVC : IGameViewInput {
+    func showCardView(_ cardView: CardView) {
+        if let existingCardView = self.cardView {
+            existingCardView.removeFromSuperview()
+        }
+        cardsPlace.addSubview(cardView)
+        cardView.addFillSuperviewConstraints()
     }
 }
 

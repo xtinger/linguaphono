@@ -11,6 +11,7 @@ import UIKit
 struct Styles {
     struct Main {
         static let backgroundColor = UIColor(hex: 0xE6F2FF)
+        static let cornerRadius : CGFloat = 12
     }
     
     struct BigButton {

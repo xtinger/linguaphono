@@ -12,4 +12,6 @@ struct CardModel {
     var id : Int
     var textEng : String
     var textRu : String
+    var corrects : Int = 0
+    var incorrects : Int = 0
 }

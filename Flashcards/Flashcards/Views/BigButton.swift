@@ -12,7 +12,8 @@ import UIKit
 class BigButton : UIButton {
     required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        self.layer.borderWidth = 1
+        self.layer.borderWidth = 0
+        self.layer.cornerRadius = Styles.Main.cornerRadius
         self.backgroundColor = Styles.BigButton.backgroundColor
         self.setTitleColor(Styles.BigButton.textColor, for: .normal)
         self.layer.borderColor = Styles.BigButton.borderColor.cgColor

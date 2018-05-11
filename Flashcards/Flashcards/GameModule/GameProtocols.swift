@@ -8,9 +8,13 @@
 
 import Foundation
 
+protocol IGamePresenter {
+    var view: IGameViewInput! {get set}
+}
+
 // view
-protocol IGameViewInput {
-    
+protocol IGameViewInput : class {
+    func showCardView(_ cardView: CardView)
 }
 
 // presenter

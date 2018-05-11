@@ -8,6 +8,16 @@
 
 import Foundation
 
-protocol IGameService {
-    
+enum GameInputAction {
+    case Yes;
+    case No;
+    case Repeat
 }
+
+protocol IGameService {
+    var output: IGameServiceOutput! {get set}
+    func readyToPresent()
+    func answered(with action: GameInputAction)
+}
+
+
