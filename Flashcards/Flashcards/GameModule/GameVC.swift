@@ -36,11 +36,28 @@ class GameVC: UIViewController  {
 
 extension GameVC : IGameViewInput {
     func showCardView(_ cardView: CardView) {
+
         if let existingCardView = self.cardView {
-            existingCardView.removeFromSuperview()
+            
+            cardView.isHidden = true
+            cardsPlace.addSubview(cardView)
+            cardView.addFillSuperviewConstraints()
+            
+            UIView.transition(from: existingCardView, to: cardView, duration: 0.25, options: [.transitionFlipFromRight, .showHideTransitionViews]) { (finished) in
+                existingCardView.removeFromSuperview()
+            }
+            
+//            existingCardView.removeFromSuperview()
         }
-        cardsPlace.addSubview(cardView)
-        cardView.addFillSuperviewConstraints()
+        else {
+            cardsPlace.addSubview(cardView)
+            cardView.addFillSuperviewConstraints()
+        }
+        
+        self.cardView = cardView
+        
+//        cardsPlace.addSubview(cardView)
+//        cardView.addFillSuperviewConstraints()
     }
 }
 

@@ -8,10 +8,24 @@
 
 import Foundation
 
+enum AnswerType {
+    case Known, Unknown
+}
+
 struct CardModel {
     var id : Int
     var textEng : String
     var textRu : String
-    var corrects : Int = 0
-    var incorrects : Int = 0
+    var lastAnswers : [Bool]
+    var corrects : Int
+    var incorrects : Int
+    
+    init(id: Int, textEng: String, textRu: String, corrects: Int, incorrects: Int) {
+        self.id = id
+        self.textEng = textEng
+        self.textRu = textRu
+        self.corrects = corrects
+        self.incorrects = incorrects
+        self.lastAnswers = []
+    }
 }

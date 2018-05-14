@@ -13,7 +13,8 @@ import EvergreenBitsUI
 @IBDesignable
 class CardView : UIView {
     @IBOutlet weak var view: UIView!
-    @IBOutlet weak var label: UILabel!
+    @IBOutlet weak var labelEng: UILabel!
+    @IBOutlet weak var labelRu: UILabel!
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -41,6 +42,7 @@ class CardView : UIView {
     }
     
     public func configure(with cardModel: CardModel) {
-        label.text = cardModel.textEng
+        labelEng.text = cardModel.textEng
+        labelRu.text = cardModel.textRu
     }
 }

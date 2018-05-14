@@ -9,14 +9,18 @@
 import Foundation
 import AVFoundation
 
-class GamePresenter : IGamePresenter, IGameViewOutput {
+class GamePresenter : NSObject, IGamePresenter, IGameViewOutput {
 
     var gameService : IGameService
     weak var view: IGameViewInput!
     var presentingCard : CardModel?
+
+    lazy var synthesizer = {return AVSpeechSynthesizer()}()
     
     required init(gameService : IGameService) {
         self.gameService = gameService
+        super.init()
+        synthesizer.delegate = self
     }
     
     func viewDidLoad() {
@@ -24,24 +28,30 @@ class GamePresenter : IGamePresenter, IGameViewOutput {
     }
     
     func userDidTouchYes() {
-        gameService.answered(with: .Yes)
+        gameService.answered(with: .Known)
     }
     
     func userDidTouchNo() {
-        gameService.answered(with: .No)
+        gameService.answered(with: .Unknown)
     }
     
     func userDidTouchRepeat() {
         if let card = presentingCard {
-            say(card: card)
+            sayEnglish(card: card)
         }
     }
     
-    func say(card: CardModel) {
+    func sayEnglish(card: CardModel) {
+        synthesizer.stopSpeaking(at: .immediate)
         let utterance = AVSpeechUtterance(string: card.textEng)
         utterance.voice = AVSpeechSynthesisVoice(language: "en-US")
-        
-        let synthesizer = AVSpeechSynthesizer()
+        synthesizer.speak(utterance)
+    }
+    
+    func sayRussian(card: CardModel) {
+        synthesizer.stopSpeaking(at: .immediate)
+        let utterance = AVSpeechUtterance(string: card.textRu)
+        utterance.voice = AVSpeechSynthesisVoice(language: "ru-RU")
         synthesizer.speak(utterance)
     }
 }
@@ -52,6 +62,20 @@ extension GamePresenter : IGameServiceOutput {
         cardView.configure(with: card)
         presentingCard = card
         view.showCardView(cardView)
-        say(card: card)
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + GameConfig.delayBeforeEnglishSpeech, execute: { [weak self] in
+            self?.sayEnglish(card: card)
+        })
+    }
+}
+
+extension GamePresenter : AVSpeechSynthesizerDelegate {
+    public func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didFinish utterance: AVSpeechUtterance) {
+        if utterance.voice?.language == "en-US" {
+            if let card = presentingCard {
+                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + GameConfig.delayBeforeRussiahSpeech, execute: { [weak self] in
+                    self?.sayRussian(card: card)
+                })
+            }
+        }
     }
 }

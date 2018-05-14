@@ -8,6 +8,7 @@
 
 import Foundation
 
-class GameConfig {
-    var rotationSize = 10
+struct GameConfig {
+    static var delayBeforeEnglishSpeech = 0.5
+    static var delayBeforeRussiahSpeech = 0.25
 }
