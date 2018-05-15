@@ -24,14 +24,14 @@
                                 <rect key="frame" x="16" y="480.5" width="163.5" height="166.5"/>
                                 <state key="normal" title="Нет"/>
                                 <connections>
-                                    <action selector="buttonYesTouched:" destination="BYZ-38-t0r" eventType="touchUpInside" id="vdm-Ot-b5i"/>
+                                    <action selector="buttonNoTouched:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Yrh-te-Bbb"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gvh-E7-o4H" customClass="BigButton" customModule="Flashcards" customModuleProvider="target">
                                 <rect key="frame" x="195.5" y="480.5" width="163.5" height="166.5"/>
                                 <state key="normal" title="Да"/>
                                 <connections>
-                                    <action selector="buttonNoTouched:" destination="BYZ-38-t0r" eventType="touchUpInside" id="LHL-4y-I99"/>
+                                    <action selector="buttonYesTouched:" destination="BYZ-38-t0r" eventType="touchUpInside" id="eyl-JX-Qys"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wlv-q9-JLq" customClass="BigButton" customModule="Flashcards" customModuleProvider="target">
@@ -45,8 +45,8 @@
                                 <rect key="frame" x="16" y="36" width="343" height="346"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rU8-tU-JZ5" customClass="CardView" customModule="Flashcards" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="343" height="362"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="343" height="346"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </view>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -59,6 +59,12 @@
                                 <variation key="default">
                                     <mask key="subviews">
                                         <exclude reference="rU8-tU-JZ5"/>
+                                    </mask>
+                                    <mask key="constraints">
+                                        <exclude reference="DiV-41-LFW"/>
+                                        <exclude reference="dKR-0P-eBY"/>
+                                        <exclude reference="hMf-u0-oYV"/>
+                                        <exclude reference="luL-ed-frv"/>
                                     </mask>
                                 </variation>
                             </view>

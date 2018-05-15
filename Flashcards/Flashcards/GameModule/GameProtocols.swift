@@ -14,7 +14,8 @@ protocol IGamePresenter {
 
 // view
 protocol IGameViewInput : class {
-    func showCardView(_ cardView: CardView)
+    func show(cardView: CardView)
+    func flipTo(cardView: CardView, andBack flipBack: Bool)
 }
 
 // presenter

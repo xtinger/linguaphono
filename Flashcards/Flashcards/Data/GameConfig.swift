@@ -9,6 +9,7 @@
 import Foundation
 
 struct GameConfig {
-    static var delayBeforeEnglishSpeech = 0.5
-    static var delayBeforeRussiahSpeech = 0.25
+    static var delayBeforeEnglishSpeech = 0.7
+    static var delayBeforeRussianSpeech = 0.7
+    static var cardChangeAnimationDuration = 0.25
 }

@@ -12,8 +12,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CardView" customModule="Flashcards" customModuleProvider="target">
             <connections>
-                <outlet property="labelEng" destination="lgC-dF-sbp" id="fA5-md-8Bf"/>
-                <outlet property="labelRu" destination="22h-L0-oqH" id="daK-Un-fcq"/>
+                <outlet property="label" destination="lgC-dF-sbp" id="fA5-md-8Bf"/>
                 <outlet property="view" destination="iN0-l3-epB" id="Jfn-gU-yAF"/>
             </connections>
         </placeholder>
@@ -28,22 +27,13 @@
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="22h-L0-oqH">
-                    <rect key="frame" x="16" y="213.5" width="343" height="20.5"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <color key="textColor" red="0.95461871411358978" green="0.98111152625508558" blue="0.99961405992507935" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    <nil key="highlightedColor"/>
-                </label>
             </subviews>
-            <color key="backgroundColor" red="0.51517078488372092" green="0.8007558437138026" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color key="backgroundColor" red="0.51372549019607838" green="0.80000000000000004" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="lgC-dF-sbp" firstAttribute="centerY" secondItem="vUN-kp-3ea" secondAttribute="centerY" id="B9K-1y-gDm"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="lgC-dF-sbp" secondAttribute="trailing" constant="32" id="Q2p-7Z-uAq"/>
-                <constraint firstItem="22h-L0-oqH" firstAttribute="top" secondItem="lgC-dF-sbp" secondAttribute="bottom" constant="16" id="agt-2r-Q6V"/>
                 <constraint firstItem="lgC-dF-sbp" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="32" id="gbe-WW-iTq"/>
-                <constraint firstItem="22h-L0-oqH" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="16" id="mbT-FY-gGe"/>
                 <constraint firstItem="lgC-dF-sbp" firstAttribute="centerX" secondItem="vUN-kp-3ea" secondAttribute="centerX" id="sWU-or-zfJ"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="22h-L0-oqH" secondAttribute="trailing" constant="16" id="zV9-lB-RI8"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>

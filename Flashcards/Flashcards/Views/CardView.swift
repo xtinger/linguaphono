@@ -13,8 +13,13 @@ import EvergreenBitsUI
 @IBDesignable
 class CardView : UIView {
     @IBOutlet weak var view: UIView!
-    @IBOutlet weak var labelEng: UILabel!
-    @IBOutlet weak var labelRu: UILabel!
+    @IBOutlet weak var label: UILabel!
+    
+    public var backColor: UIColor? {
+        didSet {
+            view?.backgroundColor = backColor
+        }
+    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -27,6 +32,7 @@ class CardView : UIView {
     }
     
     private func setup() {
+        self.backgroundColor = UIColor.clear
         view = loadViewFromNib()
         view.layer.cornerRadius = Styles.Main.cornerRadius
         addSubview(view)
@@ -41,8 +47,4 @@ class CardView : UIView {
         return view
     }
     
-    public func configure(with cardModel: CardModel) {
-        labelEng.text = cardModel.textEng
-        labelRu.text = cardModel.textRu
-    }
 }

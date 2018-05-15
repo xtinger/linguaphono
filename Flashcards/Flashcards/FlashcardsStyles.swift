@@ -19,5 +19,10 @@ struct Styles {
         static let textColor = UIColor.gray
         static let borderColor = UIColor.gray
     }
+    
+    struct Card {
+        static let backgroundColorNormal = UIColor(hex: 0x83CCFF)
+        static let backgroundColorFlipped = UIColor.green
+    }
 }
 

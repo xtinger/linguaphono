@@ -42,8 +42,13 @@ class SimpleGameService : IGameService {
         
         dataService.currentCardIndex += 1
         let index = dataService.currentCardIndex
-        current = dataService.cards[index]
-        output.presentCard(current)
+        if index < dataService.cards.count {
+            current = dataService.cards[index]
+            output.presentCard(current)
+        }
+        else {
+            output.finish()
+        }
     }
 }
 
