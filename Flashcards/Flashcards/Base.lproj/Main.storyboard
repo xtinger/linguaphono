@@ -68,19 +68,29 @@
                                     </mask>
                                 </variation>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6BT-Sh-gFJ">
+                                <rect key="frame" x="16" y="36" width="343" height="346"/>
+                                <connections>
+                                    <action selector="cardButtonTouched:" destination="BYZ-38-t0r" eventType="touchUpInside" id="IJS-OF-RzF"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" name="BackColor"/>
                         <constraints>
+                            <constraint firstItem="6BT-Sh-gFJ" firstAttribute="bottom" secondItem="bnr-dy-jaE" secondAttribute="bottom" id="2o8-a3-r0x"/>
                             <constraint firstItem="gvh-E7-o4H" firstAttribute="height" secondItem="uDs-4f-Bfx" secondAttribute="height" id="6HN-y2-dmO"/>
                             <constraint firstItem="BXW-Gf-S4J" firstAttribute="trailing" secondItem="Wlv-q9-JLq" secondAttribute="trailing" constant="16" id="A3B-gn-5OG"/>
+                            <constraint firstItem="6BT-Sh-gFJ" firstAttribute="leading" secondItem="bnr-dy-jaE" secondAttribute="leading" id="CxN-sh-JF8"/>
                             <constraint firstItem="uDs-4f-Bfx" firstAttribute="height" secondItem="o9W-BV-fmd" secondAttribute="height" multiplier="0.25" id="FlG-ye-6jA"/>
                             <constraint firstItem="Wlv-q9-JLq" firstAttribute="height" secondItem="o9W-BV-fmd" secondAttribute="height" multiplier="0.1" id="GqT-94-NEj"/>
                             <constraint firstItem="Wlv-q9-JLq" firstAttribute="leading" secondItem="BXW-Gf-S4J" secondAttribute="leading" constant="16" id="I2x-Tn-qhw"/>
+                            <constraint firstItem="6BT-Sh-gFJ" firstAttribute="top" secondItem="bnr-dy-jaE" secondAttribute="top" id="IoD-4M-PBV"/>
                             <constraint firstItem="BXW-Gf-S4J" firstAttribute="trailing" secondItem="gvh-E7-o4H" secondAttribute="trailing" constant="16" id="Nl8-wQ-Lls"/>
                             <constraint firstItem="gvh-E7-o4H" firstAttribute="leading" secondItem="uDs-4f-Bfx" secondAttribute="trailing" constant="16" id="O4C-Te-cnx"/>
                             <constraint firstItem="bnr-dy-jaE" firstAttribute="top" secondItem="BXW-Gf-S4J" secondAttribute="top" constant="16" id="Oor-af-WUw"/>
                             <constraint firstItem="Wlv-q9-JLq" firstAttribute="leading" secondItem="BXW-Gf-S4J" secondAttribute="leading" constant="16" id="TJD-NM-OAL"/>
                             <constraint firstItem="uDs-4f-Bfx" firstAttribute="leading" secondItem="BXW-Gf-S4J" secondAttribute="leading" constant="16" id="TlH-1S-pZE"/>
+                            <constraint firstItem="6BT-Sh-gFJ" firstAttribute="trailing" secondItem="bnr-dy-jaE" secondAttribute="trailing" id="cvS-Mr-Fmt"/>
                             <constraint firstItem="uDs-4f-Bfx" firstAttribute="width" secondItem="gvh-E7-o4H" secondAttribute="width" id="eqA-us-gZb"/>
                             <constraint firstItem="Wlv-q9-JLq" firstAttribute="top" secondItem="bnr-dy-jaE" secondAttribute="bottom" constant="16" id="f0r-1P-XTS"/>
                             <constraint firstItem="BXW-Gf-S4J" firstAttribute="trailing" secondItem="bnr-dy-jaE" secondAttribute="trailing" constant="16" id="nTx-tj-6Ry"/>

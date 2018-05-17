@@ -14,13 +14,17 @@ protocol IGamePresenter {
 
 // view
 protocol IGameViewInput : class {
-    func show(cardView: CardView)
-    func flipTo(cardView: CardView, andBack flipBack: Bool)
+    typealias FlipCompletion = ()->()
+    func show(cardView: CardView, completion:FlipCompletion?)
+    func flipTo(cardView: CardView)
+    func flipTo(cardView: CardView, completion:FlipCompletion?)
+    func userInputEnabled(enabled: Bool)
 }
 
 // presenter
 protocol IGameViewOutput {
     func viewDidLoad()
+    func userDidTouchCard()
     func userDidTouchYes()
     func userDidTouchNo()
     func userDidTouchRepeat()

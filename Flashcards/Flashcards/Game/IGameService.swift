@@ -9,8 +9,8 @@
 import Foundation
 
 enum GameInputAction {
-    case Known;
-    case Unknown;
+    case Yes;
+    case No;
     case Repeat
 }
 

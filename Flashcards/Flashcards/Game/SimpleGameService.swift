@@ -32,9 +32,9 @@ class SimpleGameService : IGameService {
     func answered(with action: GameInputAction) {
         
         switch action {
-        case .Known:
+        case .Yes:
             current.corrects += 1
-        case .Unknown:
+        case .No:
             current.incorrects += 1
         case .Repeat:
             break

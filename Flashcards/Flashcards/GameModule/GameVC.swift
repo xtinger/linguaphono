@@ -32,10 +32,18 @@ class GameVC: UIViewController  {
     @IBAction func buttonRepeatTouched(_ sender: Any) {
         output.userDidTouchRepeat()
     }
+    
+    @IBAction func cardButtonTouched(_ sender: Any) {
+        output.userDidTouchCard()
+    }
 }
 
 extension GameVC : IGameViewInput {
-    func show(cardView: CardView) {
+    func userInputEnabled(enabled: Bool) {
+        self.view.isUserInteractionEnabled = enabled
+    }
+    
+    func show(cardView: CardView, completion:FlipCompletion?) {
 
         if let existingCardView = self.cardView {
             cardView.transform = CGAffineTransform(translationX: 0, y: -500)
@@ -48,14 +56,22 @@ extension GameVC : IGameViewInput {
                 
             }) { (finished) in
                 existingCardView.removeFromSuperview()
+                self.cardView = cardView
+                if let completion = completion {
+                    completion()
+                }
             }
         }
         else {
             cardsPlace.addSubview(cardView)
             cardView.addFillSuperviewConstraints()
+            self.cardView = cardView
+            if let completion = completion {
+                completion()
+            }
         }
         
-        self.cardView = cardView
+        
         
         /*
         if let existingCardView = self.cardView {
@@ -76,24 +92,32 @@ extension GameVC : IGameViewInput {
         self.cardView = cardView
  */
     }
-    
-    func flipTo(cardView: CardView, andBack flipBack: Bool) {
+
+    func flipTo(cardView: CardView, completion:FlipCompletion?) {
         if let existingCardView = self.cardView {
-            
             cardView.isHidden = true
             cardsPlace.addSubview(cardView)
             cardView.addFillSuperviewConstraints()
-            
             UIView.transition(from: existingCardView, to: cardView, duration: 0.25, options: [.transitionFlipFromRight, .showHideTransitionViews]) { (finished) in
                 existingCardView.removeFromSuperview()
+                self.cardView = cardView
+                if let completion = completion {
+                    completion()
+                }
             }
         }
         else {
             cardsPlace.addSubview(cardView)
             cardView.addFillSuperviewConstraints()
+            self.cardView = cardView
+            if let completion = completion {
+                completion()
+            }
         }
-        
-        self.cardView = cardView
+    }
+    
+    func flipTo(cardView: CardView ) {
+        flipTo(cardView: cardView, completion: nil)
     }
 }
 

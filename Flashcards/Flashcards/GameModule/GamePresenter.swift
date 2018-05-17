@@ -14,6 +14,10 @@ class GamePresenter : NSObject, IGamePresenter, IGameViewOutput {
     var gameService : IGameService
     weak var view: IGameViewInput!
     var presentingCard : CardModel?
+    
+    var cardNormal : CardView?
+    var cardFlipped : CardView?
+    weak var cardCurrent : CardView? // cardNormal or cardFlipped
 
     var speaker = Speaker()
     
@@ -26,30 +30,64 @@ class GamePresenter : NSObject, IGamePresenter, IGameViewOutput {
         gameService.readyToPresent()
     }
     
+    func userDidTouchCard() {
+        view.userInputEnabled(enabled: false)
+        flip()
+    }
+    
     func userDidTouchYes() {
-        gameService.answered(with: .Known)
+        view.userInputEnabled(enabled: false)
+        gameService.answered(with: .Yes)
     }
     
     func userDidTouchNo() {
-        showFlipped {
+        view.userInputEnabled(enabled: false)
+        
+        if (isOnNormalSide()) {
+            guard let presentingCard = presentingCard, let cardFlipped = cardFlipped else {
+                return
+            }
             
+            view.flipTo(cardView: cardFlipped)
+            
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + GameConfig.delayBeforeRussianSpeech, execute: { [weak self] in
+                self?.sayRussian(card: presentingCard, completion: {
+                    self?.gameService.answered(with: .No)
+                })
+            })
+        }
+        else {
+            gameService.answered(with: .No)
         }
     }
     
-    func showFlipped(completion: Completion) {
-        if let card = presentingCard {
-            
-            let cardView = CardView()
-            cardView.label.text = card.textRu
-            cardView.backColor = Styles.Card.backgroundColorFlipped
-            
-            view.flipTo(cardView: cardView, andBack: true)
-            
-            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + GameConfig.delayBeforeRussianSpeech, execute: { [weak self] in
-                self?.sayRussian(card: card, completion: {
-                    self?.gameService.answered(with: .Unknown)
-                })
-            })
+    func isOnNormalSide() -> Bool {
+        if let cn = cardNormal, let cc = cardCurrent {
+            return cc === cn
+        }
+        else {
+            return false // TODO: precondi
+        }
+    }
+    
+    func flip() {
+        guard let presentingCard = presentingCard, let cardFlipped = cardFlipped, let cardNormal = cardNormal else {
+            return
+        }
+        
+        if isOnNormalSide() {
+            view.flipTo(cardView: cardFlipped)
+            sayRussian(card: presentingCard) {
+                self.view.userInputEnabled(enabled: true)
+            }
+            cardCurrent = cardFlipped
+        }
+        else {
+            view.flipTo(cardView: cardNormal)
+            sayEnglish(card: presentingCard) {
+                self.view.userInputEnabled(enabled: true)
+            }
+            cardCurrent = cardNormal
         }
     }
     
@@ -59,24 +97,45 @@ class GamePresenter : NSObject, IGamePresenter, IGameViewOutput {
         }
     }
     
+    func sayEnglish(card: CardModel, completion: Completion?) {
+        speaker.say(text: card.textEng, language: .english, completion: completion)
+    }
+    
     func sayEnglish(card: CardModel) {
-        speaker.say(text: card.textEng, language: .english)
+        sayEnglish(card:card, completion: nil)
     }
     
     func sayRussian(card: CardModel, completion: Completion?) {
         speaker.say(text: card.textRu, language: .russian, completion: completion)
     }
+    
+    func sayRussian(card: CardModel) {
+        speaker.say(text: card.textRu, language: .russian, completion: nil)
+    }
 }
 
 extension GamePresenter : IGameServiceOutput {
     func presentCard(_ card: CardModel) {
-        let cardView = CardView()
-        cardView.label.text = card.textEng
-        cardView.backColor = Styles.Card.backgroundColorNormal
+        
+        let cardViewNormal = CardView()
+        cardViewNormal.label.text = card.textEng
+        cardViewNormal.backColor = Styles.Card.backgroundColorNormal
+        self.cardNormal = cardViewNormal
+        
+        let cardViewFlipped = CardView()
+        cardViewFlipped.label.text = card.textRu
+        cardViewFlipped.backColor = Styles.Card.backgroundColorFlipped
+        self.cardFlipped = cardViewFlipped
+
         presentingCard = card
-        view.show(cardView: cardView)
+        
+        view.show(cardView: cardViewNormal, completion: nil)
+        cardCurrent = cardViewNormal
+        
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + GameConfig.delayBeforeEnglishSpeech, execute: { [weak self] in
-            self?.sayEnglish(card: card)
+            self?.sayEnglish(card: card) {
+                self?.view.userInputEnabled(enabled: true)
+            }
         })
     }
     
