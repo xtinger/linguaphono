@@ -23,10 +23,10 @@ class SimpleGameService : IGameService {
     }
 
     func readyToPresent() {
-        self.dataService.prepare()
-        
-        current = dataService.cards.first!
-        output.presentCard(current)
+        self.dataService.prepare {
+            self.current = self.dataService.cards.first!
+            self.output.presentCard(self.current)
+        }
     }
 
     func answered(with action: GameInputAction) {

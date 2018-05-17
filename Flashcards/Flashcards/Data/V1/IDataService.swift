@@ -11,7 +11,7 @@ import Foundation
 protocol IDataService {
     var cards: [CardModel] {get set}
     var currentCardIndex :Int {get set}
-    
-    func prepare()
+    typealias PrepareCompletion = ()->()
+    func prepare(completion: PrepareCompletion?)
 }
 

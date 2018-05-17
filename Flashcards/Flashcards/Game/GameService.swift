@@ -23,7 +23,9 @@ class GameService : IGameService {
     }
     
     func readyToPresent() {
-        dataService.prepare()
+        dataService.prepare {
+            
+        }
         
         
     }

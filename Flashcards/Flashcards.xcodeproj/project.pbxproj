@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		92106C8A20ADBCF7000B16C8 /* Block.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92106C8920ADBCF7000B16C8 /* Block.swift */; };
+		92106C8C20ADBD02000B16C8 /* Lesson.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92106C8B20ADBD02000B16C8 /* Lesson.swift */; };
+		92106C8E20ADBD1D000B16C8 /* WordSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92106C8D20ADBD1D000B16C8 /* WordSet.swift */; };
+		92106C9020ADBD3C000B16C8 /* Phrase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92106C8F20ADBD3C000B16C8 /* Phrase.swift */; };
+		926674BC20ADC08200F91D32 /* DataServiceV2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926674BB20ADC08200F91D32 /* DataServiceV2.swift */; };
+		926674BF20ADC10600F91D32 /* Root.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926674BE20ADC10600F91D32 /* Root.swift */; };
 		92B18D5120A45B0300F3CF08 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B18D5020A45B0300F3CF08 /* CardView.swift */; };
 		92B18D5320A45C5D00F3CF08 /* IGameServiceOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B18D5220A45C5D00F3CF08 /* IGameServiceOutput.swift */; };
 		92B924F920A5AEAB009A20B4 /* GameConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B924F820A5AEAB009A20B4 /* GameConfig.swift */; };
@@ -18,7 +24,6 @@
 		92C2F3DC20A1E58C00F5982B /* GameProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C2F3DB20A1E58C00F5982B /* GameProtocols.swift */; };
 		92C2F3DE20A1E6D800F5982B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 92C2F3DD20A1E6D800F5982B /* LaunchScreen.storyboard */; };
 		92C2F3E020A1EA6B00F5982B /* Icon.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 92C2F3DF20A1EA6A00F5982B /* Icon.xcassets */; };
-		92C2F3E620A1EFF500F5982B /* TestingDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C2F3E520A1EFF500F5982B /* TestingDataService.swift */; };
 		92C2F3E920A1F01E00F5982B /* CardModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C2F3E820A1F01E00F5982B /* CardModel.swift */; };
 		92C2F3EB20A1F28B00F5982B /* IDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C2F3EA20A1F28B00F5982B /* IDataService.swift */; };
 		92C2F3ED20A1F3C900F5982B /* SimpleGameService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C2F3EC20A1F3C900F5982B /* SimpleGameService.swift */; };
@@ -67,6 +72,12 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		92106C8920ADBCF7000B16C8 /* Block.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Block.swift; sourceTree = "<group>"; };
+		92106C8B20ADBD02000B16C8 /* Lesson.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lesson.swift; sourceTree = "<group>"; };
+		92106C8D20ADBD1D000B16C8 /* WordSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordSet.swift; sourceTree = "<group>"; };
+		92106C8F20ADBD3C000B16C8 /* Phrase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Phrase.swift; sourceTree = "<group>"; };
+		926674BB20ADC08200F91D32 /* DataServiceV2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataServiceV2.swift; sourceTree = "<group>"; };
+		926674BE20ADC10600F91D32 /* Root.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Root.swift; sourceTree = "<group>"; };
 		92B18D5020A45B0300F3CF08 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		92B18D5220A45C5D00F3CF08 /* IGameServiceOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IGameServiceOutput.swift; sourceTree = "<group>"; };
 		92B924F820A5AEAB009A20B4 /* GameConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameConfig.swift; sourceTree = "<group>"; };
@@ -108,6 +119,35 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		92106C8820ADBCCA000B16C8 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				926674BE20ADC10600F91D32 /* Root.swift */,
+				92106C8920ADBCF7000B16C8 /* Block.swift */,
+				92106C8B20ADBD02000B16C8 /* Lesson.swift */,
+				92106C8D20ADBD1D000B16C8 /* WordSet.swift */,
+				92106C8F20ADBD3C000B16C8 /* Phrase.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		92106C9320ADBFE4000B16C8 /* V1 */ = {
+			isa = PBXGroup;
+			children = (
+				92C2F3EA20A1F28B00F5982B /* IDataService.swift */,
+				92C2F3E520A1EFF500F5982B /* TestingDataService.swift */,
+			);
+			path = V1;
+			sourceTree = "<group>";
+		};
+		92106C9420ADC02D000B16C8 /* V2 */ = {
+			isa = PBXGroup;
+			children = (
+				926674BB20ADC08200F91D32 /* DataServiceV2.swift */,
+			);
+			path = V2;
+			sourceTree = "<group>";
+		};
 		92C2F3A920A1A91200F5982B /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -132,8 +172,9 @@
 		92C2F3E720A1EFFB00F5982B /* Data */ = {
 			isa = PBXGroup;
 			children = (
-				92C2F3EA20A1F28B00F5982B /* IDataService.swift */,
-				92C2F3E520A1EFF500F5982B /* TestingDataService.swift */,
+				92106C9420ADC02D000B16C8 /* V2 */,
+				92106C9320ADBFE4000B16C8 /* V1 */,
+				92106C8820ADBCCA000B16C8 /* Models */,
 				92C2F3E820A1F01E00F5982B /* CardModel.swift */,
 				92B924F820A5AEAB009A20B4 /* GameConfig.swift */,
 			);
@@ -313,10 +354,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				92C2F3E620A1EFF500F5982B /* TestingDataService.swift in Sources */,
 				92B924F920A5AEAB009A20B4 /* GameConfig.swift in Sources */,
 				92C2F3D420A1E38D00F5982B /* FlashcardsStyles.swift in Sources */,
 				92EE108B20A98C1000D5C0F4 /* GameService.swift in Sources */,
+				92106C8E20ADBD1D000B16C8 /* WordSet.swift in Sources */,
 				92C2F3D220A1E1E700F5982B /* FlashcardsWireframe.swift in Sources */,
 				92C2F3ED20A1F3C900F5982B /* SimpleGameService.swift in Sources */,
 				92B18D5120A45B0300F3CF08 /* CardView.swift in Sources */,
@@ -325,12 +366,17 @@
 				92F4AE2220A0A8F100E3EF19 /* AppDelegate.swift in Sources */,
 				92B18D5320A45C5D00F3CF08 /* IGameServiceOutput.swift in Sources */,
 				92C2F3F220A1FAA000F5982B /* HexColor.swift in Sources */,
+				92106C8C20ADBD02000B16C8 /* Lesson.swift in Sources */,
 				92C2F3D620A1E4F100F5982B /* GamePresenter.swift in Sources */,
 				92C2F3AB20A1A95300F5982B /* BigButton.swift in Sources */,
 				92C2F3DC20A1E58C00F5982B /* GameProtocols.swift in Sources */,
 				92CE27B820AB38820057988B /* Speaker.swift in Sources */,
 				92C2F3EB20A1F28B00F5982B /* IDataService.swift in Sources */,
+				92106C8A20ADBCF7000B16C8 /* Block.swift in Sources */,
+				926674BF20ADC10600F91D32 /* Root.swift in Sources */,
+				92106C9020ADBD3C000B16C8 /* Phrase.swift in Sources */,
 				92C2F3D020A1DE0400F5982B /* GameAssembly.swift in Sources */,
+				926674BC20ADC08200F91D32 /* DataServiceV2.swift in Sources */,
 				92C2F3E920A1F01E00F5982B /* CardModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
