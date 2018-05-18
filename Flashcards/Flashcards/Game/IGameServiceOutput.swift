@@ -9,6 +9,6 @@
 import Foundation
 
 protocol IGameServiceOutput {
-    func presentCard(_ card: CardModel)
+    func presentCard(_ card: StatPhrase)
     func finish()
 }

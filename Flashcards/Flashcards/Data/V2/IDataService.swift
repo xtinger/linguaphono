@@ -9,9 +9,6 @@
 import Foundation
 
 protocol IDataService {
-    var cards: [CardModel] {get set}
-    var currentCardIndex :Int {get set}
-    typealias PrepareCompletion = ()->()
+    typealias PrepareCompletion = (StatRoot)->()
     func prepare(completion: PrepareCompletion?)
 }
-

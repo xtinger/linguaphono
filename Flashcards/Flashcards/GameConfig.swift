@@ -9,6 +9,7 @@
 import Foundation
 
 struct GameConfig {
+    static var newLessonPhaseMinQuestionsForeachPhrase = 2
     static var delayBeforeEnglishSpeech = 0.7
     static var delayBeforeRussianSpeech = 0.7
     static var cardChangeAnimationDuration = 0.25

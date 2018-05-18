@@ -14,9 +14,6 @@ class DataServiceV2 : IDataService{
         case invalidUrl
     }
     
-    var cards: [CardModel] = []
-    var currentCardIndex :Int = 0
-
     required init() {
     }
     
@@ -32,18 +29,28 @@ class DataServiceV2 : IDataService{
             do {
                 let decoder = JSONDecoder()
                 let root = try decoder.decode(Root.self, from: data)
-                let phrases = root.blocks
-                    .flatMap{return $0.lessons}
-                    .flatMap{return $0.words}
-                    .flatMap{return $0.phrases}
-                self.cards = phrases.map({ (phrase) -> CardModel in
-                    return CardModel(id: 0, textEng: phrase.textNormal, textRu: phrase.textBack, corrects: 0, incorrects: 0)
-                })
-                print("OK \(phrases.count)")
+                let statRoot = StatRoot(blocks:
+                    root.blocks.map({ (block) -> StatBlock in
+                        return StatBlock(lessons:
+                            block.lessons.map({ (lesson) -> StatLesson in
+                                return StatLesson(words:
+                                    lesson.words.map({ (word) -> StatWord in
+                                        return StatWord(text:word.text, phrases:
+                                            word.phrases.map({ (phrase) -> StatPhrase in
+                                                return StatPhrase(textEng: phrase.textNormal, textRu: phrase.textBack, corrects: 0, incorrects: 0)
+                                            })
+                                        )
+                                    })
+                                )
+                            })
+                        )
+                    })
+                )
+                print("prepare OK")
                 
                 if let completion = completion {
                     DispatchQueue.main.async( execute: {
-                        completion()
+                        completion(statRoot)
                     })
                 }
                 
@@ -52,20 +59,5 @@ class DataServiceV2 : IDataService{
             }
         }
         dataTask.resume()
-        
-//        do {
-//            guard let url = URL(string: "http://api.jsoneditoronline.org/v1/docs/65e7bbf9db7e4d23a5393ed969358cee/data") else {throw DataServiceV2Errors.invalidUrl}
-//            let data = try Data(contentsOf: url, options: .mappedIfSafe)
-//            let decoder = JSONDecoder()
-//            let root = try decoder.decode(Root.self, from: data)
-//            let phrases = root.blocks
-//                .flatMap{return $0.lessons}
-//                .flatMap{return $0.words}
-//                .flatMap{return $0.phrases}
-//            print("OK \(phrases.count)")
-//        }
-//        catch {
-//            print(error.localizedDescription)
-//        }
     }
 }

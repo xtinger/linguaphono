@@ -13,7 +13,7 @@ class GamePresenter : NSObject, IGamePresenter, IGameViewOutput {
     
     var gameService : IGameService
     weak var view: IGameViewInput!
-    var presentingCard : CardModel?
+    var presentingCard : StatPhrase?
     
     var cardNormal : CardView?
     var cardFlipped : CardView?
@@ -97,25 +97,25 @@ class GamePresenter : NSObject, IGamePresenter, IGameViewOutput {
         }
     }
     
-    func sayEnglish(card: CardModel, completion: Completion?) {
-        speaker.say(text: card.textEng, language: .english, completion: completion)
+    func sayEnglish(card: StatPhrase, completion: Completion?) {
+        speaker.say(text: card.textEng, language: .languageNormal, completion: completion)
     }
     
-    func sayEnglish(card: CardModel) {
+    func sayEnglish(card: StatPhrase) {
         sayEnglish(card:card, completion: nil)
     }
     
-    func sayRussian(card: CardModel, completion: Completion?) {
-        speaker.say(text: card.textRu, language: .russian, completion: completion)
+    func sayRussian(card: StatPhrase, completion: Completion?) {
+        speaker.say(text: card.textRu, language: .languageBack, completion: completion)
     }
     
-    func sayRussian(card: CardModel) {
-        speaker.say(text: card.textRu, language: .russian, completion: nil)
+    func sayRussian(card: StatPhrase) {
+        speaker.say(text: card.textRu, language: .languageBack, completion: nil)
     }
 }
 
 extension GamePresenter : IGameServiceOutput {
-    func presentCard(_ card: CardModel) {
+    func presentCard(_ card: StatPhrase) {
         
         let cardViewNormal = CardView()
         cardViewNormal.label.text = card.textEng
@@ -140,7 +140,7 @@ extension GamePresenter : IGameServiceOutput {
     }
     
     func finish() {
-        
+        exit(0)
     }
 }
 //

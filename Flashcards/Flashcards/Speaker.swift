@@ -13,7 +13,7 @@ import AVFoundation
 
 class Speaker : NSObject {
     enum SpeakerLanguage : String {
-        case english = "en-US", russian = "ru-RU"
+        case languageNormal = "fr-FR", languageBack = "ru-RU"
     }
     
     typealias Completion = ()->()
