@@ -17,9 +17,12 @@ class OnePortionGameService : IGameService {
     var currentBlock : StatBlock!
     var currentLesson : StatLesson!
     var words : [StatWord]!
-    var phrases : [StatPhrase]!
-    var current : StatPhrase!
-    var currentPhraseIndex: Int = -1
+    var phrasesInGame : [StatPhrase]!
+    var currentPhrase : StatPhrase? {
+        get {
+            return phrasesInGame.first
+        }
+    }
 
     required init(dataService: IDataService) {
         self.dataService = dataService
@@ -32,40 +35,42 @@ class OnePortionGameService : IGameService {
                 //                self.output.presentCard(self.current)
                 this.currentLesson = this.currentBlock.lessons.first
                 this.words = this.currentLesson.words
-                this.phrases = this.words.flatMap{return $0.phrases}
+                this.phrasesInGame = this.words.flatMap{return $0.phrases}
                 this.duplicatePhrases()
                 this.shufflePhrases()
-                this.pickPhrase()
+//                this.pickPhrase()
 //                this.phrases = this.words.flatMap{return $0.phrases}
-                this.output.presentCard(this.phrases[this.currentPhraseIndex])
+                if let currentPhrase = this.currentPhrase {
+                    this.output.presentCard(currentPhrase)
+                }
             }
         }
     }
     
     func duplicatePhrases() {
-        let phrases1piece = phrases!
+        let phrases1piece = phrasesInGame!
         var result = [StatPhrase]()
         for _ in 1...GameConfig.newLessonPhaseMinQuestionsForeachPhrase {
             result += phrases1piece
         }
-        self.phrases = result
+        self.phrasesInGame = result
     }
     
-    @discardableResult
-    func pickPhrase() -> Bool {
-        // -1, 0 ... n-1
-        if currentPhraseIndex < phrases.count - 1 {
-            currentPhraseIndex += 1
-            current = phrases[currentPhraseIndex]
-            return true
-        }
-        else {
-            return false
-        }
-    }
+//    @discardableResult
+//    func pickPhrase() -> Bool {
+//        // -1, 0 ... n-1
+//        if currentPhraseIndex < phrasesInGame.count - 1 {
+//            currentPhraseIndex += 1
+//            current = phrasesInGame[currentPhraseIndex]
+//            return true
+//        }
+//        else {
+//            return false
+//        }
+//    }
     
     func shufflePhrases() {
-        var result :[StatPhrase] = phrases
+        var result :[StatPhrase] = phrasesInGame
         
         for i in 0..<result.count {
             let swapping = result[i]
@@ -87,27 +92,40 @@ class OnePortionGameService : IGameService {
             }
         }
         
-        self.phrases = result
+        self.phrasesInGame = result
     }
 
     func answered(with action: GameInputAction) {
         
+        guard var currentPhrase = self.currentPhrase else {
+            return
+        }
+        
         switch action {
         case .Yes:
-            current.corrects += 1
+            currentPhrase.corrects += 1
+            removePhraseFromGame()
         case .No:
-            current.incorrects += 1
+            currentPhrase.incorrects += 1
+            putPhraseBackInGame()
         case .Repeat:
             break
         }
         
-        if pickPhrase() {
-            output.presentCard(current)
+        if let currentPhrase = self.currentPhrase {
+            output.presentCard(currentPhrase)
         }
         else {
             output.finish()
         }
     }
     
+    func removePhraseFromGame() {
+        phrasesInGame.remove(at: 0)
+    }
+    
+    func putPhraseBackInGame() {
+        
+    }
     
 }
