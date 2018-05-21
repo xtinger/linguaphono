@@ -10,5 +10,6 @@ import Foundation
 
 protocol IGameServiceOutput {
     func presentCard(_ card: StatPhrase)
+    func updateProgress(_ progress: Float)
     func finish()
 }

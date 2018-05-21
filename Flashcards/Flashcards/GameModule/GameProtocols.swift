@@ -6,7 +6,7 @@
 //  Copyright © 2018 Emanor. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 protocol IGamePresenter {
     var view: IGameViewInput! {get set}
@@ -19,6 +19,8 @@ protocol IGameViewInput : class {
     func flipTo(cardView: CardView)
     func flipTo(cardView: CardView, completion:FlipCompletion?)
     func userInputEnabled(enabled: Bool)
+    func changeProgress(value: Float)
+    func alert(alert: UIAlertController, animated: Bool)
 }
 
 // presenter

@@ -52,6 +52,10 @@ class OnePortionGameService : IGameService {
             print("\n\n\(phrasesInGame!)")
             output.presentCard(currentPhrase)
         }
+        
+        let total: Float = Float(GameConfig.newLessonPhaseMinQuestionsForeachPhrase * sourcePhrases.count)
+        let progressValue: Float = (total - Float(phrasesInGame.count)) / total
+        output.updateProgress(progressValue)
     }
     
     func duplicatePhrases() {
@@ -123,6 +127,7 @@ class OnePortionGameService : IGameService {
             presentPhrase()
         }
         else {
+            output.updateProgress(1.0)
             output.finish()
         }
     }

@@ -6,7 +6,7 @@
 //  Copyright © 2018 Emanor. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 class GamePresenter : NSObject, IGamePresenter, IGameViewOutput {
     typealias Completion = ()->()
@@ -145,6 +145,10 @@ class GamePresenter : NSObject, IGamePresenter, IGameViewOutput {
 }
 
 extension GamePresenter : IGameServiceOutput {
+    func updateProgress(_ progress: Float) {
+        view.changeProgress(value: progress)
+    }
+    
     func presentCard(_ card: StatPhrase) {
         
         let cardViewNormal = CardView()
@@ -180,7 +184,12 @@ extension GamePresenter : IGameServiceOutput {
     }
     
     func finish() {
-        exit(0)
+        let alert = UIAlertController(title: "Поздравляем!", message: "Вы прошли обучение", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Выйти", style: .default, handler: {(action) in
+            exit(0)
+            
+        }))
+        view.alert(alert: alert, animated: true)
     }
 }
 //

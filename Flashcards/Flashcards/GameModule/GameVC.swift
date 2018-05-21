@@ -12,15 +12,19 @@ class GameVC: UIViewController  {
 
     var output: IGameViewOutput!
     
+    @IBOutlet weak var progressView: UIProgressView!
     @IBOutlet weak var cardsPlace: UIView!
     
     weak var cardView: UIView?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        progressView.progressTintColor = Styles.Card.backgroundColorNormal
+        
         output.viewDidLoad()
     }
-    
+
     @IBAction func buttonNoTouched(_ sender: Any) {
         output.userDidTouchNo()
     }
@@ -39,6 +43,10 @@ class GameVC: UIViewController  {
 }
 
 extension GameVC : IGameViewInput {
+    func changeProgress(value: Float) {
+        progressView.progress = value
+    }
+    
     func userInputEnabled(enabled: Bool) {
         self.view.isUserInteractionEnabled = enabled
     }
@@ -118,6 +126,10 @@ extension GameVC : IGameViewInput {
     
     func flipTo(cardView: CardView ) {
         flipTo(cardView: cardView, completion: nil)
+    }
+    
+    func alert(alert: UIAlertController, animated: Bool) {
+        present(alert, animated: animated)
     }
 }
 

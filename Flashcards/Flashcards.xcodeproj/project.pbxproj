@@ -19,6 +19,7 @@
 		927101ED20AEFA30003B9D20 /* StatWord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927101EC20AEFA30003B9D20 /* StatWord.swift */; };
 		92B18D5120A45B0300F3CF08 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B18D5020A45B0300F3CF08 /* CardView.swift */; };
 		92B18D5320A45C5D00F3CF08 /* IGameServiceOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B18D5220A45C5D00F3CF08 /* IGameServiceOutput.swift */; };
+		92B2760020B31CDB008E51A7 /* RoundedProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B275FF20B31CDB008E51A7 /* RoundedProgressView.swift */; };
 		92B924F920A5AEAB009A20B4 /* GameConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B924F820A5AEAB009A20B4 /* GameConfig.swift */; };
 		92C2F3AB20A1A95300F5982B /* BigButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C2F3AA20A1A95300F5982B /* BigButton.swift */; };
 		92C2F3D020A1DE0400F5982B /* GameAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C2F3CF20A1DE0400F5982B /* GameAssembly.swift */; };
@@ -87,6 +88,7 @@
 		927101EC20AEFA30003B9D20 /* StatWord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatWord.swift; sourceTree = "<group>"; };
 		92B18D5020A45B0300F3CF08 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		92B18D5220A45C5D00F3CF08 /* IGameServiceOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IGameServiceOutput.swift; sourceTree = "<group>"; };
+		92B275FF20B31CDB008E51A7 /* RoundedProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedProgressView.swift; sourceTree = "<group>"; };
 		92B924F820A5AEAB009A20B4 /* GameConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameConfig.swift; sourceTree = "<group>"; };
 		92C2F3AA20A1A95300F5982B /* BigButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BigButton.swift; sourceTree = "<group>"; };
 		92C2F3CF20A1DE0400F5982B /* GameAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameAssembly.swift; sourceTree = "<group>"; };
@@ -164,6 +166,7 @@
 				92C2F3AA20A1A95300F5982B /* BigButton.swift */,
 				92B18D5020A45B0300F3CF08 /* CardView.swift */,
 				92E85FA620A462A100A54819 /* CardView.xib */,
+				92B275FF20B31CDB008E51A7 /* RoundedProgressView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -192,8 +195,8 @@
 			isa = PBXGroup;
 			children = (
 				92C2F3EF20A1F3EF00F5982B /* IGameService.swift */,
-				92EE108A20A98C1000D5C0F4 /* OnePortionGameService.swift */,
 				92B18D5220A45C5D00F3CF08 /* IGameServiceOutput.swift */,
+				92EE108A20A98C1000D5C0F4 /* OnePortionGameService.swift */,
 			);
 			path = Game;
 			sourceTree = "<group>";
@@ -362,6 +365,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				927101E920AEFA12003B9D20 /* StatBlock.swift in Sources */,
+				92B2760020B31CDB008E51A7 /* RoundedProgressView.swift in Sources */,
 				92B924F920A5AEAB009A20B4 /* GameConfig.swift in Sources */,
 				92C2F3D420A1E38D00F5982B /* FlashcardsStyles.swift in Sources */,
 				92EE108B20A98C1000D5C0F4 /* OnePortionGameService.swift in Sources */,
