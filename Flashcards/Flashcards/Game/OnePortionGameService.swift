@@ -17,6 +17,7 @@ class OnePortionGameService : IGameService {
     var currentBlock : StatBlock!
     var currentLesson : StatLesson!
     var words : [StatWord]!
+    var sourcePhrases : Set<StatPhrase> = []
     var phrasesInGame : [StatPhrase]!
     var currentPhrase : StatPhrase? {
         get {
@@ -36,14 +37,20 @@ class OnePortionGameService : IGameService {
                 this.currentLesson = this.currentBlock.lessons.first
                 this.words = this.currentLesson.words
                 this.phrasesInGame = this.words.flatMap{return $0.phrases}
+                this.sourcePhrases = Set<StatPhrase>(this.phrasesInGame)
                 this.duplicatePhrases()
                 this.shufflePhrases()
 //                this.pickPhrase()
 //                this.phrases = this.words.flatMap{return $0.phrases}
-                if let currentPhrase = this.currentPhrase {
-                    this.output.presentCard(currentPhrase)
-                }
+                this.presentPhrase()
             }
+        }
+    }
+    
+    func presentPhrase() {
+        if let currentPhrase = currentPhrase {
+            print("\n\n\(phrasesInGame!)")
+            output.presentCard(currentPhrase)
         }
     }
     
@@ -111,21 +118,46 @@ class OnePortionGameService : IGameService {
         case .Repeat:
             break
         }
-        
-        if let currentPhrase = self.currentPhrase {
-            output.presentCard(currentPhrase)
+
+        if let _ = self.currentPhrase {
+            presentPhrase()
         }
         else {
             output.finish()
         }
     }
     
-    func removePhraseFromGame() {
-        phrasesInGame.remove(at: 0)
+    @discardableResult
+    func removePhraseFromGame() -> StatPhrase{
+        return phrasesInGame.remove(at: 0)
     }
     
     func putPhraseBackInGame() {
+        guard let currentPhrase = self.currentPhrase else {
+            return
+        }
         
+        let answeredCard = removePhraseFromGame()
+        
+        let whereToInsert = phrasesInGame.prefix(GameConfig.placeInQueueMaxOffset)
+        guard !whereToInsert.contains(currentPhrase) else {
+            return
+        }
+
+        let indexToInsert = 5;//GameConfig.placeInQueueMaxOffset + Int(arc4random() % UInt32(GameConfig.placeInQueueMaxOffset - GameConfig.placeInQueueMinOffset))
+
+        while phrasesInGame.count < indexToInsert {
+            // множество фразы для вставки
+            let uniquePhrasesThatInGame = Set<StatPhrase>(phrasesInGame!)
+            
+            let phrasesAvailableToInsert = Array(sourcePhrases.filter{!uniquePhrasesThatInGame.contains($0) && $0 != answeredCard})
+            let randomIndex = Int(arc4random_uniform(UInt32(phrasesAvailableToInsert.count)))
+            let randomPhraseToInsert = phrasesAvailableToInsert[randomIndex]
+            phrasesInGame.append(randomPhraseToInsert)
+//            uniquePhrasesToInsert.remove(randomPhraseThatNotInGame)
+        }
+        
+        phrasesInGame.insert(answeredCard, at: indexToInsert)
     }
     
 }
