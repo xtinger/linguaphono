@@ -48,13 +48,23 @@ class GamePresenter : NSObject, IGamePresenter, IGameViewOutput {
                 return
             }
             
-            view.flipTo(cardView: cardFlipped)
+            let completion : IGameViewInput.FlipCompletion = { [weak self] in
+                self?.gameService.answered(with: .No)
+            }
             
-            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + GameConfig.delayBeforeRussianSpeech, execute: { [weak self] in
-                self?.sayRussian(card: presentingCard, completion: {
-                    self?.gameService.answered(with: .No)
+            view.flipTo(cardView: cardFlipped) {
+                if GameConfig.muted {
+                    DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + GameConfig.delayAfterAnimationIfMuted, execute: {
+                        completion()
+                    })
+                }
+            }
+            
+            if !GameConfig.muted {
+                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + GameConfig.delayBeforeRussianSpeech, execute: { [weak self] in
+                    self?.sayRussian(card: presentingCard, completion: completion)
                 })
-            })
+            }
         }
         else {
             gameService.answered(with: .No)
@@ -75,25 +85,45 @@ class GamePresenter : NSObject, IGamePresenter, IGameViewOutput {
             return
         }
         
+        let completion = {
+            self.view.userInputEnabled(enabled: true)
+        }
+        
         if isOnNormalSide() {
-            view.flipTo(cardView: cardFlipped)
-            sayRussian(card: presentingCard) {
-                self.view.userInputEnabled(enabled: true)
+            view.flipTo(cardView: cardFlipped) {
+                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + GameConfig.delayAfterAnimationIfMuted, execute: {
+                    completion()
+                })
+            }
+            if !GameConfig.muted {
+                sayRussian(card: presentingCard) {
+                    completion()
+                }
             }
             cardCurrent = cardFlipped
         }
         else {
-            view.flipTo(cardView: cardNormal)
-            sayEnglish(card: presentingCard) {
-                self.view.userInputEnabled(enabled: true)
+            view.flipTo(cardView: cardNormal) {
+                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + GameConfig.delayAfterAnimationIfMuted, execute: {
+                    completion()
+                })
             }
+            if !GameConfig.muted {
+                sayEnglish(card: presentingCard) {
+                    completion()
+                }
+            }
+            
             cardCurrent = cardNormal
         }
     }
     
     func userDidTouchRepeat() {
+        self.view.userInputEnabled(enabled: false)
         if let card = presentingCard {
-            sayEnglish(card: card)
+            sayEnglish(card: card) {
+                self.view.userInputEnabled(enabled: true)
+            }
         }
     }
     
@@ -129,14 +159,24 @@ extension GamePresenter : IGameServiceOutput {
 
         presentingCard = card
         
-        view.show(cardView: cardViewNormal, completion: nil)
+        let completion = {
+            self.view.userInputEnabled(enabled: true)
+        }
+        
+        view.show(cardView: cardViewNormal) {
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + GameConfig.delayAfterAnimationIfMuted, execute: {
+                completion()
+            })
+        }
         cardCurrent = cardViewNormal
         
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + GameConfig.delayBeforeEnglishSpeech, execute: { [weak self] in
-            self?.sayEnglish(card: card) {
-                self?.view.userInputEnabled(enabled: true)
-            }
-        })
+        if !GameConfig.muted {
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + GameConfig.delayBeforeEnglishSpeech, execute: { [weak self] in
+                self?.sayEnglish(card: card) {
+                    completion()
+                }
+            })
+        }
     }
     
     func finish() {
