@@ -38,7 +38,7 @@ class LessonGameService : IGameService {
 
     func presentPhrase() {
         if let currentPhrase = currentPhrase {
-            print("\n\n\(phrasesInGame!)")
+//            print("\n\n\(phrasesInGame!)")
             output.presentCard(currentPhrase)
         }
         
@@ -55,19 +55,6 @@ class LessonGameService : IGameService {
         }
         self.phrasesInGame = result
     }
-    
-//    @discardableResult
-//    func pickPhrase() -> Bool {
-//        // -1, 0 ... n-1
-//        if currentPhraseIndex < phrasesInGame.count - 1 {
-//            currentPhraseIndex += 1
-//            current = phrasesInGame[currentPhraseIndex]
-//            return true
-//        }
-//        else {
-//            return false
-//        }
-//    }
     
     func shufflePhrases() {
         var result :[StatPhrase] = phrasesInGame

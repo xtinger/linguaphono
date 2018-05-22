@@ -50,6 +50,7 @@ extension GameVC : IGameViewInput {
     
     func userInputEnabled(enabled: Bool) {
         self.view.isUserInteractionEnabled = enabled
+        print("userInputEnabled(\(enabled ? "true" : "false")) ")
     }
     
     func show(cardView: CardView, completion:FlipCompletion?) {

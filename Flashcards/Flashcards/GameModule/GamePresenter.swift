@@ -31,16 +31,19 @@ class GamePresenter : NSObject, IGamePresenter, IGameViewOutput {
     }
     
     func userDidTouchCard() {
+        print("userDidTouchCard()")
         view.userInputEnabled(enabled: false)
         flip()
     }
     
     func userDidTouchYes() {
+        print("userDidTouchYes()")
         view.userInputEnabled(enabled: false)
         gameService.answered(with: .Yes)
     }
     
     func userDidTouchNo() {
+        print("userDidTouchNo()")
         view.userInputEnabled(enabled: false)
         
         if (isOnNormalSide()) {
@@ -91,9 +94,11 @@ class GamePresenter : NSObject, IGamePresenter, IGameViewOutput {
         
         if isOnNormalSide() {
             view.flipTo(cardView: cardFlipped) {
-                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + GameConfig.delayAfterAnimationIfMuted, execute: {
-                    completion()
-                })
+                if GameConfig.muted {
+                    DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + GameConfig.delayAfterAnimationIfMuted, execute: {
+                        completion()
+                    })
+                }
             }
             if !GameConfig.muted {
                 sayRussian(card: presentingCard) {
@@ -104,9 +109,11 @@ class GamePresenter : NSObject, IGamePresenter, IGameViewOutput {
         }
         else {
             view.flipTo(cardView: cardNormal) {
-                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + GameConfig.delayAfterAnimationIfMuted, execute: {
-                    completion()
-                })
+                if GameConfig.muted {
+                    DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + GameConfig.delayAfterAnimationIfMuted, execute: {
+                        completion()
+                    })
+                }
             }
             if !GameConfig.muted {
                 sayEnglish(card: presentingCard) {
@@ -163,14 +170,18 @@ extension GamePresenter : IGameServiceOutput {
 
         presentingCard = card
         
+        self.view.userInputEnabled(enabled: false)
+        
         let completion = {
             self.view.userInputEnabled(enabled: true)
         }
         
         view.show(cardView: cardViewNormal) {
-            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + GameConfig.delayAfterAnimationIfMuted, execute: {
-                completion()
-            })
+            if GameConfig.muted {
+                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + GameConfig.delayAfterAnimationIfMuted, execute: {
+                    completion()
+                })
+            }
         }
         cardCurrent = cardViewNormal
         
