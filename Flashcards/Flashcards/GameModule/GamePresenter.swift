@@ -56,16 +56,12 @@ class GamePresenter : NSObject, IGamePresenter, IGameViewOutput {
             }
             
             view.flipTo(cardView: cardFlipped) {
-                if GameConfig.muted {
-                    DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + GameConfig.delayAfterAnimationIfMuted, execute: {
-                        completion()
-                    })
-                }
+                self.completeIfMuted(completion)
             }
             
             if !GameConfig.muted {
                 DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + GameConfig.delayBeforeRussianSpeech, execute: { [weak self] in
-                    self?.sayRussian(card: presentingCard, completion: completion)
+                    self?.attemptToSayRussian(card: presentingCard, completion: completion)
                 })
             }
         }
@@ -94,32 +90,16 @@ class GamePresenter : NSObject, IGamePresenter, IGameViewOutput {
         
         if isOnNormalSide() {
             view.flipTo(cardView: cardFlipped) {
-                if GameConfig.muted {
-                    DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + GameConfig.delayAfterAnimationIfMuted, execute: {
-                        completion()
-                    })
-                }
+                self.completeIfMuted(completion)
             }
-            if !GameConfig.muted {
-                sayRussian(card: presentingCard) {
-                    completion()
-                }
-            }
+            attemptToSayRussian(card: presentingCard, completion: completion)
             cardCurrent = cardFlipped
         }
         else {
             view.flipTo(cardView: cardNormal) {
-                if GameConfig.muted {
-                    DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + GameConfig.delayAfterAnimationIfMuted, execute: {
-                        completion()
-                    })
-                }
+                self.completeIfMuted(completion)
             }
-            if !GameConfig.muted {
-                sayEnglish(card: presentingCard) {
-                    completion()
-                }
-            }
+            attemptToSayEnglish(card: presentingCard, completion: completion)
             
             cardCurrent = cardNormal
         }
@@ -128,26 +108,38 @@ class GamePresenter : NSObject, IGamePresenter, IGameViewOutput {
     func userDidTouchRepeat() {
         self.view.userInputEnabled(enabled: false)
         if let card = presentingCard {
-            sayEnglish(card: card) {
+            attemptToSayEnglish(card: card) {
                 self.view.userInputEnabled(enabled: true)
             }
         }
     }
     
-    func sayEnglish(card: StatPhrase, completion: Completion?) {
+    func attemptToSayEnglish(card: StatPhrase, completion: Completion?) {
+        guard !GameConfig.muted else {return}
         speaker.say(text: card.textEng, language: .languageNormal, completion: completion)
     }
     
-    func sayEnglish(card: StatPhrase) {
-        sayEnglish(card:card, completion: nil)
+    func attemptToSayEnglish(card: StatPhrase) {
+        guard !GameConfig.muted else {return}
+        attemptToSayEnglish(card:card, completion: nil)
     }
     
-    func sayRussian(card: StatPhrase, completion: Completion?) {
+    func attemptToSayRussian(card: StatPhrase, completion: Completion?) {
+        guard !GameConfig.muted else {return}
         speaker.say(text: card.textRu, language: .languageBack, completion: completion)
     }
     
-    func sayRussian(card: StatPhrase) {
+    func attemptToSayRussian(card: StatPhrase) {
+        guard !GameConfig.muted else {return}
         speaker.say(text: card.textRu, language: .languageBack, completion: nil)
+    }
+    
+    func completeIfMuted(_ completion: @escaping Completion) {
+        if GameConfig.muted {
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + GameConfig.delayAfterAnimationIfMuted, execute: {
+                completion()
+            })
+        }
     }
 }
 
@@ -172,24 +164,18 @@ extension GamePresenter : IGameServiceOutput {
         
         self.view.userInputEnabled(enabled: false)
         
-        let completion = {
+        let enableUI = {
             self.view.userInputEnabled(enabled: true)
         }
         
         view.show(cardView: cardViewNormal) {
-            if GameConfig.muted {
-                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + GameConfig.delayAfterAnimationIfMuted, execute: {
-                    completion()
-                })
-            }
+            self.completeIfMuted(enableUI)
         }
         cardCurrent = cardViewNormal
         
         if !GameConfig.muted {
             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + GameConfig.delayBeforeEnglishSpeech, execute: { [weak self] in
-                self?.sayEnglish(card: card) {
-                    completion()
-                }
+                self?.attemptToSayEnglish(card: card, completion: enableUI)
             })
         }
     }
