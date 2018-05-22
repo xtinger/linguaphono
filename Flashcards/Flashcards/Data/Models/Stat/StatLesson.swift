@@ -10,4 +10,8 @@ import Foundation
 
 struct StatLesson : Codable {
     var words: [StatWord]
+    
+    init(words: [StatWord]) {
+        self.words = words
+    }
 }

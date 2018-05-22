@@ -8,14 +8,14 @@
 
 import Foundation
 
-class OnePortionGameService : IGameService {
+class LessonGameService : IGameService {
 
-    private var dataService : IDataService
+    private var dataService : IDataService!
     let config = GameConfig()
     var output: IGameServiceOutput!
     
-    var currentBlock : StatBlock!
-    var currentLesson : StatLesson!
+    var lesson: StatLesson
+
     var words : [StatWord]!
     var sourcePhrases : Set<StatPhrase> = []
     var phrasesInGame : [StatPhrase]!
@@ -25,28 +25,37 @@ class OnePortionGameService : IGameService {
         }
     }
 
-    required init(dataService: IDataService) {
-        self.dataService = dataService
+    required init(lesson: StatLesson) {
+        self.lesson = lesson
+        words = lesson.words
+        phrasesInGame = words.flatMap{return $0.phrases}
+        sourcePhrases = Set<StatPhrase>(phrasesInGame)
     }
     
     func readyToPresent() {
-        self.dataService.prepare { [weak self] (root) -> () in
-            if let this = self {
-                this.currentBlock = root.blocks.first
-                //                self.output.presentCard(self.current)
-                this.currentLesson = this.currentBlock.lessons.first
-                this.words = this.currentLesson.words
-                this.phrasesInGame = this.words.flatMap{return $0.phrases}
-                this.sourcePhrases = Set<StatPhrase>(this.phrasesInGame)
-                this.duplicatePhrases()
-                this.shufflePhrases()
-//                this.pickPhrase()
-//                this.phrases = this.words.flatMap{return $0.phrases}
-                this.presentPhrase()
-            }
-        }
+        duplicatePhrases()
+        shufflePhrases()
+        presentPhrase()
     }
     
+//    func nextLesson() {
+//        if currentLessonIndex < currentBlockIndex.lessons.endIndex {
+//            currentLessonIndex += 1
+//
+//            words = currentBlockIndex.lessons[currentLessonIndex].words
+//            phrasesInGame = words.flatMap{return $0.phrases}
+//            sourcePhrases = Set<StatPhrase>(phrasesInGame)
+//            duplicatePhrases()
+//            shufflePhrases()
+//            //                this.pickPhrase()
+//            //                this.phrases = this.words.flatMap{return $0.phrases}
+//            presentPhrase()
+//        }
+//        else {
+//            finish()
+//        }
+//    }
+
     func presentPhrase() {
         if let currentPhrase = currentPhrase {
             print("\n\n\(phrasesInGame!)")
@@ -108,7 +117,7 @@ class OnePortionGameService : IGameService {
 
     func answered(with action: GameInputAction) {
         
-        guard var currentPhrase = self.currentPhrase else {
+        guard let currentPhrase = self.currentPhrase else {
             return
         }
         

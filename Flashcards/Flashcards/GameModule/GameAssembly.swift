@@ -11,9 +11,9 @@ import UIKit
 class GameAssembly {
     var viewController : UIViewController!
     
-    required init() {
+    required init(lesson: StatLesson) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        var game : IGameService = OnePortionGameService(dataService: DataServiceV2())
+        var game : IGameService = LessonGameService(lesson: lesson)
         var presenter : IGamePresenter & IGameViewOutput & IGameServiceOutput = GamePresenter(gameService: game)
         game.output = presenter
         

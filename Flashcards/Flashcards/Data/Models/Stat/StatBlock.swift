@@ -10,4 +10,8 @@ import Foundation
 
 struct StatBlock : Codable {
     var lessons: [StatLesson]
+    
+    init(lessons: [StatLesson]) {
+        self.lessons = lessons
+    }
 }

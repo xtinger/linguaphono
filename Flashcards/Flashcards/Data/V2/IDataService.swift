@@ -9,6 +9,9 @@
 import Foundation
 
 protocol IDataService {
-    typealias PrepareCompletion = (StatRoot)->()
+    typealias PrepareCompletion = ()->()
+    
+    var currentLesson: StatLesson? {get}
+
     func prepare(completion: PrepareCompletion?)
 }

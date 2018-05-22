@@ -20,6 +20,7 @@ class GameVC: UIViewController  {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        navigationItem.title = "Flashcards"
         progressView.progressTintColor = Styles.Card.backgroundColorNormal
         
         output.viewDidLoad()

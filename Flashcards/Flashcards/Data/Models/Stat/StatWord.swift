@@ -8,7 +8,12 @@
 
 import Foundation
 
-struct StatWord : Codable {
+class StatWord : Codable {
     var text: String
     var phrases: [StatPhrase]
+    
+    init(text: String, phrases: [StatPhrase]) {
+        self.text = text
+        self.phrases = phrases
+    }
 }

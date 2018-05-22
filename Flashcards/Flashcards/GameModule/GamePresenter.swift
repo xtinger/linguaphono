@@ -182,7 +182,7 @@ extension GamePresenter : IGameServiceOutput {
             })
         }
     }
-    
+
     func finish() {
         let alert = UIAlertController(title: "Поздравляем!", message: "Вы прошли обучение", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Выйти", style: .default, handler: {(action) in

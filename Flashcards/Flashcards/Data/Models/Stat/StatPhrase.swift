@@ -12,11 +12,10 @@ enum AnswerType : Int, Codable{
     case Known = 0, Unknown
 }
 
-struct StatPhrase: Codable, Equatable, Hashable {
+class StatPhrase: Codable, Hashable {
 
     var textEng : String
     var textRu : String
-    var lastAnswers : [AnswerType]
     var corrects : Int
     var incorrects : Int
     
@@ -29,7 +28,12 @@ struct StatPhrase: Codable, Equatable, Hashable {
         self.textRu = textRu
         self.corrects = corrects
         self.incorrects = incorrects
-        self.lastAnswers = []
+    }
+}
+
+extension StatPhrase: Equatable {
+    static func == (lhs: StatPhrase, rhs: StatPhrase) -> Bool {
+        return lhs.hashValue == rhs.hashValue
     }
 }
 

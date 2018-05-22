@@ -9,6 +9,10 @@
 import Foundation
 
 class DataServiceV2 : IDataService{
+    
+    var statRoot: StatRoot?
+    
+    var currentLesson: StatLesson?
 
     enum DataServiceV2Errors: Error {
         case invalidUrl
@@ -16,7 +20,7 @@ class DataServiceV2 : IDataService{
     
     required init() {
     }
-    
+        
     func prepare(completion: IDataService.PrepareCompletion?) {
         
         let endpointURL = URL(string: "http://api.jsoneditoronline.org/v1/docs/647354f539464a22948c99613a47b269/data")
@@ -29,7 +33,7 @@ class DataServiceV2 : IDataService{
             do {
                 let decoder = JSONDecoder()
                 let root = try decoder.decode(Root.self, from: data)
-                let statRoot = StatRoot(blocks:
+                self.statRoot = StatRoot(blocks:
                     root.blocks.map({ (block) -> StatBlock in
                         return StatBlock(lessons:
                             block.lessons.map({ (lesson) -> StatLesson in
@@ -46,14 +50,17 @@ class DataServiceV2 : IDataService{
                         )
                     })
                 )
-                print("prepare OK")
+                
+                self.currentLesson = self.statRoot?.blocks.first?.lessons.first
                 
                 if let completion = completion {
                     DispatchQueue.main.async( execute: {
-                        completion(statRoot)
+                        completion()
                     })
                 }
-                
+
+                print("prepare OK")
+
             } catch {
                 print(error)
             }

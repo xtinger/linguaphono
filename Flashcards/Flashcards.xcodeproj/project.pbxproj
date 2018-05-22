@@ -11,6 +11,8 @@
 		92106C8C20ADBD02000B16C8 /* Lesson.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92106C8B20ADBD02000B16C8 /* Lesson.swift */; };
 		92106C8E20ADBD1D000B16C8 /* Word.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92106C8D20ADBD1D000B16C8 /* Word.swift */; };
 		92106C9020ADBD3C000B16C8 /* Phrase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92106C8F20ADBD3C000B16C8 /* Phrase.swift */; };
+		9243DFC220B426D900651713 /* BlockGameWireframe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9243DFC120B426D900651713 /* BlockGameWireframe.swift */; };
+		9243DFC520B4356C00651713 /* LoadingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9243DFC420B4356C00651713 /* LoadingVC.swift */; };
 		926674BC20ADC08200F91D32 /* DataServiceV2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926674BB20ADC08200F91D32 /* DataServiceV2.swift */; };
 		926674BF20ADC10600F91D32 /* Root.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926674BE20ADC10600F91D32 /* Root.swift */; };
 		927101E720AEF9ED003B9D20 /* StatRoot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927101E620AEF9ED003B9D20 /* StatRoot.swift */; };
@@ -37,7 +39,7 @@
 		92E85FA720A462A100A54819 /* CardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 92E85FA620A462A100A54819 /* CardView.xib */; };
 		92E85FC520A46F4100A54819 /* EvergreenBitsUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92E85FC220A46EA800A54819 /* EvergreenBitsUI.framework */; };
 		92E85FC620A46F4100A54819 /* EvergreenBitsUI.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 92E85FC220A46EA800A54819 /* EvergreenBitsUI.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		92EE108B20A98C1000D5C0F4 /* OnePortionGameService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92EE108A20A98C1000D5C0F4 /* OnePortionGameService.swift */; };
+		92EE108B20A98C1000D5C0F4 /* LessonGameService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92EE108A20A98C1000D5C0F4 /* LessonGameService.swift */; };
 		92F4AE2220A0A8F100E3EF19 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F4AE2120A0A8F100E3EF19 /* AppDelegate.swift */; };
 		92F4AE2420A0A8F100E3EF19 /* GameVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F4AE2320A0A8F100E3EF19 /* GameVC.swift */; };
 		92F4AE2720A0A8F100E3EF19 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 92F4AE2520A0A8F100E3EF19 /* Main.storyboard */; };
@@ -80,6 +82,8 @@
 		92106C8B20ADBD02000B16C8 /* Lesson.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lesson.swift; sourceTree = "<group>"; };
 		92106C8D20ADBD1D000B16C8 /* Word.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Word.swift; sourceTree = "<group>"; };
 		92106C8F20ADBD3C000B16C8 /* Phrase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Phrase.swift; sourceTree = "<group>"; };
+		9243DFC120B426D900651713 /* BlockGameWireframe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockGameWireframe.swift; sourceTree = "<group>"; };
+		9243DFC420B4356C00651713 /* LoadingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingVC.swift; sourceTree = "<group>"; };
 		926674BB20ADC08200F91D32 /* DataServiceV2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataServiceV2.swift; sourceTree = "<group>"; };
 		926674BE20ADC10600F91D32 /* Root.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Root.swift; sourceTree = "<group>"; };
 		927101E620AEF9ED003B9D20 /* StatRoot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatRoot.swift; sourceTree = "<group>"; };
@@ -105,7 +109,7 @@
 		92CE27B720AB38820057988B /* Speaker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Speaker.swift; sourceTree = "<group>"; };
 		92E85FA620A462A100A54819 /* CardView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CardView.xib; sourceTree = "<group>"; };
 		92E85FBD20A46EA600A54819 /* EvergreenBitsUI.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = EvergreenBitsUI.xcodeproj; path = EvergreenBitsUI/EvergreenBitsUI.xcodeproj; sourceTree = "<group>"; };
-		92EE108A20A98C1000D5C0F4 /* OnePortionGameService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnePortionGameService.swift; sourceTree = "<group>"; };
+		92EE108A20A98C1000D5C0F4 /* LessonGameService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonGameService.swift; sourceTree = "<group>"; };
 		92F4AE1E20A0A8F100E3EF19 /* Flashcards.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Flashcards.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		92F4AE2120A0A8F100E3EF19 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		92F4AE2320A0A8F100E3EF19 /* GameVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameVC.swift; sourceTree = "<group>"; };
@@ -129,12 +133,8 @@
 		92106C8820ADBCCA000B16C8 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				923D036720B41B02001173D7 /* GameResource */,
 				927101E520AEF9CE003B9D20 /* Stat */,
-				926674BE20ADC10600F91D32 /* Root.swift */,
-				92106C8920ADBCF7000B16C8 /* Block.swift */,
-				92106C8B20ADBD02000B16C8 /* Lesson.swift */,
-				92106C8D20ADBD1D000B16C8 /* Word.swift */,
-				92106C8F20ADBD3C000B16C8 /* Phrase.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -146,6 +146,34 @@
 				926674BB20ADC08200F91D32 /* DataServiceV2.swift */,
 			);
 			path = V2;
+			sourceTree = "<group>";
+		};
+		923D036720B41B02001173D7 /* GameResource */ = {
+			isa = PBXGroup;
+			children = (
+				926674BE20ADC10600F91D32 /* Root.swift */,
+				92106C8920ADBCF7000B16C8 /* Block.swift */,
+				92106C8B20ADBD02000B16C8 /* Lesson.swift */,
+				92106C8D20ADBD1D000B16C8 /* Word.swift */,
+				92106C8F20ADBD3C000B16C8 /* Phrase.swift */,
+			);
+			path = GameResource;
+			sourceTree = "<group>";
+		};
+		9243DFC020B425DA00651713 /* BlockGameWireframe */ = {
+			isa = PBXGroup;
+			children = (
+				9243DFC120B426D900651713 /* BlockGameWireframe.swift */,
+			);
+			path = BlockGameWireframe;
+			sourceTree = "<group>";
+		};
+		9243DFC320B4276900651713 /* FlashcardsWireframe */ = {
+			isa = PBXGroup;
+			children = (
+				92C2F3D120A1E1E700F5982B /* FlashcardsWireframe.swift */,
+			);
+			path = FlashcardsWireframe;
 			sourceTree = "<group>";
 		};
 		927101E520AEF9CE003B9D20 /* Stat */ = {
@@ -196,7 +224,7 @@
 			children = (
 				92C2F3EF20A1F3EF00F5982B /* IGameService.swift */,
 				92B18D5220A45C5D00F3CF08 /* IGameServiceOutput.swift */,
-				92EE108A20A98C1000D5C0F4 /* OnePortionGameService.swift */,
+				92EE108A20A98C1000D5C0F4 /* LessonGameService.swift */,
 			);
 			path = Game;
 			sourceTree = "<group>";
@@ -243,10 +271,12 @@
 				92C2F3DF20A1EA6A00F5982B /* Icon.xcassets */,
 				92F4AE2820A0A8F600E3EF19 /* Assets.xcassets */,
 				92F4AE2D20A0A8F600E3EF19 /* Info.plist */,
-				92C2F3D120A1E1E700F5982B /* FlashcardsWireframe.swift */,
 				92C2F3D320A1E38D00F5982B /* FlashcardsStyles.swift */,
 				92CE27B720AB38820057988B /* Speaker.swift */,
 				92B924F820A5AEAB009A20B4 /* GameConfig.swift */,
+				9243DFC420B4356C00651713 /* LoadingVC.swift */,
+				9243DFC320B4276900651713 /* FlashcardsWireframe */,
+				9243DFC020B425DA00651713 /* BlockGameWireframe */,
 				92C2F3E720A1EFFB00F5982B /* Data */,
 				92C2F3EE20A1F3D400F5982B /* Game */,
 				92C2F3CE20A1DD5500F5982B /* GameModule */,
@@ -368,13 +398,14 @@
 				92B2760020B31CDB008E51A7 /* RoundedProgressView.swift in Sources */,
 				92B924F920A5AEAB009A20B4 /* GameConfig.swift in Sources */,
 				92C2F3D420A1E38D00F5982B /* FlashcardsStyles.swift in Sources */,
-				92EE108B20A98C1000D5C0F4 /* OnePortionGameService.swift in Sources */,
+				92EE108B20A98C1000D5C0F4 /* LessonGameService.swift in Sources */,
 				92106C8E20ADBD1D000B16C8 /* Word.swift in Sources */,
 				92C2F3D220A1E1E700F5982B /* FlashcardsWireframe.swift in Sources */,
 				92B18D5120A45B0300F3CF08 /* CardView.swift in Sources */,
 				92C2F3F020A1F3EF00F5982B /* IGameService.swift in Sources */,
 				92F4AE2420A0A8F100E3EF19 /* GameVC.swift in Sources */,
 				92F4AE2220A0A8F100E3EF19 /* AppDelegate.swift in Sources */,
+				9243DFC220B426D900651713 /* BlockGameWireframe.swift in Sources */,
 				92B18D5320A45C5D00F3CF08 /* IGameServiceOutput.swift in Sources */,
 				92C2F3F220A1FAA000F5982B /* HexColor.swift in Sources */,
 				92106C8C20ADBD02000B16C8 /* Lesson.swift in Sources */,
@@ -392,6 +423,7 @@
 				92C2F3D020A1DE0400F5982B /* GameAssembly.swift in Sources */,
 				926674BC20ADC08200F91D32 /* DataServiceV2.swift in Sources */,
 				92C2F3E920A1F01E00F5982B /* StatPhrase.swift in Sources */,
+				9243DFC520B4356C00651713 /* LoadingVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
