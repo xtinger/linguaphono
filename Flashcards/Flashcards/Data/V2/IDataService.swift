@@ -13,5 +13,5 @@ protocol IDataService {
     
     var currentLesson: StatLesson? {get}
 
-    func prepare(completion: PrepareCompletion?)
+    func prepare(completion: @escaping PrepareCompletion)
 }

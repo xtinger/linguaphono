@@ -11,6 +11,9 @@ import Foundation
 struct StatRoot : Codable {
     var blocks: [StatBlock]
     
+    var currentBlockIndex = -1
+    var currentLessonIndex = -1
+    
     init(blocks: [StatBlock]) {
         self.blocks = blocks
     }

@@ -8,21 +8,63 @@
 
 import Foundation
 
-class DataServiceV2 : IDataService{
+class DataService : IDataService{
+    static let userDefaultsStatDataKey = "Stat"
     
     var statRoot: StatRoot?
-    
     var currentLesson: StatLesson?
+    
+    private var dataStore: IDataStore
 
     enum DataServiceV2Errors: Error {
         case invalidUrl
     }
     
-    required init() {
+    required init(dataStore: IDataStore) {
+        self.dataStore = dataStore
     }
         
-    func prepare(completion: IDataService.PrepareCompletion?) {
+    func prepare(completion: @escaping IDataService.PrepareCompletion) {
         
+        let loadedCompletion = {
+            if var statRoot = self.statRoot {
+                if statRoot.currentBlockIndex == -1 {
+                    statRoot.currentBlockIndex = 0
+                }
+                if statRoot.currentLessonIndex == -1 {
+                    statRoot.currentLessonIndex = 0
+                }
+                if self.currentLesson == nil {
+                    self.currentLesson = statRoot.blocks[statRoot.currentBlockIndex].lessons[statRoot.currentLessonIndex]
+                }
+                
+                assert(statRoot.currentBlockIndex >= 0)
+                assert(statRoot.currentLessonIndex >= 0)
+                assert(self.currentLesson != nil)
+            }
+
+            DispatchQueue.main.async( execute: {
+                completion()
+            })
+        }
+        
+        do {
+            if dataStore.dataExists() {
+                try self.statRoot = dataStore.load()
+                loadedCompletion()
+            }
+            else {
+                loadStatRootFromURL {
+                    loadedCompletion()
+                }
+            }
+        }
+        catch {
+            
+        }
+    }
+    
+    func loadStatRootFromURL(completion: @escaping IDataService.PrepareCompletion) {
         let endpointURL = URL(string: "http://api.jsoneditoronline.org/v1/docs/647354f539464a22948c99613a47b269/data")
         
         let dataTask = URLSession.shared.dataTask(with: endpointURL!) { data, response, error in
@@ -51,16 +93,16 @@ class DataServiceV2 : IDataService{
                     })
                 )
                 
-                self.currentLesson = self.statRoot?.blocks.first?.lessons.first
-                
-                if let completion = completion {
-                    DispatchQueue.main.async( execute: {
-                        completion()
-                    })
+                do {
+                    try self.dataStore.save(data: self.statRoot!)
                 }
-
+                catch {
+                    print("Unable to save game data!")
+                }
+                completion()
+                
                 print("prepare OK")
-
+                
             } catch {
                 print(error)
             }

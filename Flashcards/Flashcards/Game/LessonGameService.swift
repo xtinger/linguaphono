@@ -16,7 +16,6 @@ class LessonGameService : IGameService {
     
     var lesson: StatLesson
 
-    var words : [StatWord]!
     var sourcePhrases : Set<StatPhrase> = []
     var phrasesInGame : [StatPhrase]!
     var currentPhrase : StatPhrase? {
@@ -27,8 +26,7 @@ class LessonGameService : IGameService {
 
     required init(lesson: StatLesson) {
         self.lesson = lesson
-        words = lesson.words
-        phrasesInGame = words.flatMap{return $0.phrases}
+        phrasesInGame = lesson.words.flatMap{return $0.phrases}
         sourcePhrases = Set<StatPhrase>(phrasesInGame)
     }
     
@@ -37,24 +35,6 @@ class LessonGameService : IGameService {
         shufflePhrases()
         presentPhrase()
     }
-    
-//    func nextLesson() {
-//        if currentLessonIndex < currentBlockIndex.lessons.endIndex {
-//            currentLessonIndex += 1
-//
-//            words = currentBlockIndex.lessons[currentLessonIndex].words
-//            phrasesInGame = words.flatMap{return $0.phrases}
-//            sourcePhrases = Set<StatPhrase>(phrasesInGame)
-//            duplicatePhrases()
-//            shufflePhrases()
-//            //                this.pickPhrase()
-//            //                this.phrases = this.words.flatMap{return $0.phrases}
-//            presentPhrase()
-//        }
-//        else {
-//            finish()
-//        }
-//    }
 
     func presentPhrase() {
         if let currentPhrase = currentPhrase {

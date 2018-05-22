@@ -13,8 +13,10 @@
 		92106C9020ADBD3C000B16C8 /* Phrase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92106C8F20ADBD3C000B16C8 /* Phrase.swift */; };
 		9243DFC220B426D900651713 /* BlockGameWireframe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9243DFC120B426D900651713 /* BlockGameWireframe.swift */; };
 		9243DFC520B4356C00651713 /* LoadingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9243DFC420B4356C00651713 /* LoadingVC.swift */; };
-		926674BC20ADC08200F91D32 /* DataServiceV2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926674BB20ADC08200F91D32 /* DataServiceV2.swift */; };
+		926674BC20ADC08200F91D32 /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926674BB20ADC08200F91D32 /* DataService.swift */; };
 		926674BF20ADC10600F91D32 /* Root.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926674BE20ADC10600F91D32 /* Root.swift */; };
+		926CB86F20B46C0C00A232D5 /* UserDefaultsDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926CB86E20B46C0C00A232D5 /* UserDefaultsDataStore.swift */; };
+		926CB87120B46D5200A232D5 /* IDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926CB87020B46D5200A232D5 /* IDataStore.swift */; };
 		927101E720AEF9ED003B9D20 /* StatRoot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927101E620AEF9ED003B9D20 /* StatRoot.swift */; };
 		927101E920AEFA12003B9D20 /* StatBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927101E820AEFA12003B9D20 /* StatBlock.swift */; };
 		927101EB20AEFA23003B9D20 /* StatLesson.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927101EA20AEFA23003B9D20 /* StatLesson.swift */; };
@@ -84,8 +86,10 @@
 		92106C8F20ADBD3C000B16C8 /* Phrase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Phrase.swift; sourceTree = "<group>"; };
 		9243DFC120B426D900651713 /* BlockGameWireframe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockGameWireframe.swift; sourceTree = "<group>"; };
 		9243DFC420B4356C00651713 /* LoadingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingVC.swift; sourceTree = "<group>"; };
-		926674BB20ADC08200F91D32 /* DataServiceV2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataServiceV2.swift; sourceTree = "<group>"; };
+		926674BB20ADC08200F91D32 /* DataService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
 		926674BE20ADC10600F91D32 /* Root.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Root.swift; sourceTree = "<group>"; };
+		926CB86E20B46C0C00A232D5 /* UserDefaultsDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsDataStore.swift; sourceTree = "<group>"; };
+		926CB87020B46D5200A232D5 /* IDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDataStore.swift; sourceTree = "<group>"; };
 		927101E620AEF9ED003B9D20 /* StatRoot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatRoot.swift; sourceTree = "<group>"; };
 		927101E820AEFA12003B9D20 /* StatBlock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatBlock.swift; sourceTree = "<group>"; };
 		927101EA20AEFA23003B9D20 /* StatLesson.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatLesson.swift; sourceTree = "<group>"; };
@@ -133,7 +137,7 @@
 		92106C8820ADBCCA000B16C8 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				923D036720B41B02001173D7 /* GameResource */,
+				923D036720B41B02001173D7 /* JSONData */,
 				927101E520AEF9CE003B9D20 /* Stat */,
 			);
 			path = Models;
@@ -143,12 +147,12 @@
 			isa = PBXGroup;
 			children = (
 				92C2F3EA20A1F28B00F5982B /* IDataService.swift */,
-				926674BB20ADC08200F91D32 /* DataServiceV2.swift */,
+				926674BB20ADC08200F91D32 /* DataService.swift */,
 			);
 			path = V2;
 			sourceTree = "<group>";
 		};
-		923D036720B41B02001173D7 /* GameResource */ = {
+		923D036720B41B02001173D7 /* JSONData */ = {
 			isa = PBXGroup;
 			children = (
 				926674BE20ADC10600F91D32 /* Root.swift */,
@@ -157,7 +161,7 @@
 				92106C8D20ADBD1D000B16C8 /* Word.swift */,
 				92106C8F20ADBD3C000B16C8 /* Phrase.swift */,
 			);
-			path = GameResource;
+			path = JSONData;
 			sourceTree = "<group>";
 		};
 		9243DFC020B425DA00651713 /* BlockGameWireframe */ = {
@@ -174,6 +178,15 @@
 				92C2F3D120A1E1E700F5982B /* FlashcardsWireframe.swift */,
 			);
 			path = FlashcardsWireframe;
+			sourceTree = "<group>";
+		};
+		926CB87220B46D5600A232D5 /* DataStore */ = {
+			isa = PBXGroup;
+			children = (
+				926CB86E20B46C0C00A232D5 /* UserDefaultsDataStore.swift */,
+				926CB87020B46D5200A232D5 /* IDataStore.swift */,
+			);
+			path = DataStore;
 			sourceTree = "<group>";
 		};
 		927101E520AEF9CE003B9D20 /* Stat */ = {
@@ -277,6 +290,7 @@
 				9243DFC420B4356C00651713 /* LoadingVC.swift */,
 				9243DFC320B4276900651713 /* FlashcardsWireframe */,
 				9243DFC020B425DA00651713 /* BlockGameWireframe */,
+				926CB87220B46D5600A232D5 /* DataStore */,
 				92C2F3E720A1EFFB00F5982B /* Data */,
 				92C2F3EE20A1F3D400F5982B /* Game */,
 				92C2F3CE20A1DD5500F5982B /* GameModule */,
@@ -415,13 +429,15 @@
 				927101EB20AEFA23003B9D20 /* StatLesson.swift in Sources */,
 				92C2F3DC20A1E58C00F5982B /* GameProtocols.swift in Sources */,
 				92CE27B820AB38820057988B /* Speaker.swift in Sources */,
+				926CB86F20B46C0C00A232D5 /* UserDefaultsDataStore.swift in Sources */,
 				92C2F3EB20A1F28B00F5982B /* IDataService.swift in Sources */,
 				927101E720AEF9ED003B9D20 /* StatRoot.swift in Sources */,
 				92106C8A20ADBCF7000B16C8 /* Block.swift in Sources */,
 				926674BF20ADC10600F91D32 /* Root.swift in Sources */,
 				92106C9020ADBD3C000B16C8 /* Phrase.swift in Sources */,
+				926CB87120B46D5200A232D5 /* IDataStore.swift in Sources */,
 				92C2F3D020A1DE0400F5982B /* GameAssembly.swift in Sources */,
-				926674BC20ADC08200F91D32 /* DataServiceV2.swift in Sources */,
+				926674BC20ADC08200F91D32 /* DataService.swift in Sources */,
 				92C2F3E920A1F01E00F5982B /* StatPhrase.swift in Sources */,
 				9243DFC520B4356C00651713 /* LoadingVC.swift in Sources */,
 			);

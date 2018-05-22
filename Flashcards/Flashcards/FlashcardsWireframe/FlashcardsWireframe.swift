@@ -25,14 +25,12 @@ class FlashcardsWireframe {
         window.rootViewController = rootViewController
         window.makeKeyAndVisible()
         
-        let dataServiceV2: IDataService = DataServiceV2()
+        let dataServiceV2: IDataService = DataService(dataStore: UserDefaultsDataStore())
         dataServiceV2.prepare { [weak self] in
             if let ws = self {
                 let blockGameWireframe = BlockGameWireframe(dataService: dataServiceV2)
                 ws.rootViewController.setViewControllers([blockGameWireframe.viewController], animated: true)
             }
-            
-            
         }
         
     }
