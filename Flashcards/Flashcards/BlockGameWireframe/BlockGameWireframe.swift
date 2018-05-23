@@ -16,15 +16,14 @@ class BlockGameWireframe {
     required init(dataService: IDataService, parentViewController : UINavigationController) {
         self.dataService = dataService
         self.parentViewController = parentViewController
-        setupWithCurrentLesson()
+        let phrases = dataService.prepareNextPhraseSet()
+        if phrases.count > 0 {
+            setup(with: phrases)
+        }
     }
     
-    func setupWithCurrentLesson() {
-        guard let currentLesson = self.dataService.currentLesson else {
-            print("BlockGameWireframe: currentLesson not found!")
-            return
-        }
-        let gameAssembly = GameAssembly(lesson: currentLesson, moduleOutput: self as IGameModuleOutput)
+    func setup(with phrases: Set<StatPhrase>) {
+        let gameAssembly = GameAssembly(phrases: phrases, moduleOutput: self as IGameModuleOutput)
         self.viewController = gameAssembly.viewController
     }
     
@@ -36,8 +35,9 @@ class BlockGameWireframe {
 
 extension BlockGameWireframe : IGameModuleOutput {
     func finish() {
-        if dataService.nextLesson() {
-            setupWithCurrentLesson()
+        let phrases = dataService.prepareNextPhraseSet()
+        if phrases.count > 0 {
+            setup(with: phrases)
             present()
         }
         else {

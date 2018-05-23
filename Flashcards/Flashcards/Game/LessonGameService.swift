@@ -14,8 +14,6 @@ class LessonGameService : IGameService {
     let config = GameConfig()
     var output: IGameServiceOutput!
     
-    var lesson: StatLesson
-
     var sourcePhrases : Set<StatPhrase> = []
     var phrasesInGame : [StatPhrase]!
     var currentPhrase : StatPhrase? {
@@ -24,10 +22,8 @@ class LessonGameService : IGameService {
         }
     }
 
-    required init(lesson: StatLesson) {
-        self.lesson = lesson
-        phrasesInGame = lesson.words.flatMap{return $0.phrases}
-        sourcePhrases = Set<StatPhrase>(phrasesInGame)
+    required init(phrases: Set<StatPhrase>) {
+        self.sourcePhrases = phrases
     }
     
     func readyToPresent() {
@@ -48,7 +44,7 @@ class LessonGameService : IGameService {
     }
     
     func duplicatePhrases() {
-        let phrases1piece = phrasesInGame!
+        let phrases1piece = Array(sourcePhrases)
         var result = [StatPhrase]()
         for _ in 1...GameConfig.newLessonPhaseMinQuestionsForeachPhrase {
             result += phrases1piece

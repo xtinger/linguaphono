@@ -11,9 +11,7 @@ import Foundation
 protocol IDataService {
     typealias PrepareCompletion = ()->()
     
-    var currentLesson: StatLesson? {get}
-
+//    var currentLesson: StatLesson? {get}
     func prepare(completion: @escaping PrepareCompletion)
-    
-    func nextLesson() -> Bool
+    func prepareNextPhraseSet() -> Set<StatPhrase>
 }

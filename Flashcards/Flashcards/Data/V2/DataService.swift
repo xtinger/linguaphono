@@ -13,6 +13,7 @@ class DataService : IDataService{
     
     var statRoot: StatRoot?
     var currentLesson: StatLesson?
+    var isSprintMode = false
     
     private var dataStore: IDataStore
 
@@ -27,20 +28,6 @@ class DataService : IDataService{
     func prepare(completion: @escaping IDataService.PrepareCompletion) {
         
         let loadedCompletion = {
-            if var statRoot = self.statRoot {
-                if statRoot.currentBlockIndex == -1 {
-                    statRoot.currentBlockIndex = 0
-                }
-                if statRoot.currentLessonIndex == -1 {
-                    statRoot.currentLessonIndex = 0
-                }
-                self.currentLesson = statRoot.blocks[statRoot.currentBlockIndex].lessons[statRoot.currentLessonIndex]
-                
-                assert(statRoot.currentBlockIndex >= 0)
-                assert(statRoot.currentLessonIndex >= 0)
-                assert(self.currentLesson != nil)
-            }
-
             DispatchQueue.main.async( execute: {
                 completion()
             })
@@ -62,18 +49,69 @@ class DataService : IDataService{
         }
     }
     
-    func nextLesson() -> Bool {
+    func prepareNextPhraseSet() -> Set<StatPhrase>{
+        var phrases: Set<StatPhrase> = []
+        if switchingToSprintMode() {
+            phrases = phrasesOfCurrentLesson()
+            phrases.formUnion(phrasesOfPreviousLessons())
+        }
+        else if setupNextLesson(){
+            phrases = phrasesOfCurrentLesson()
+        }
+        // empty phrase set means finish of block
+        return phrases
+    }
+    
+    private func phrasesOfCurrentLesson() -> Set<StatPhrase>{
+        guard let currentLesson = currentLesson else {return []}
+        return Set(currentLesson.words.flatMap{return $0.phrases})
+    }
+    
+    private func phrasesOfPreviousLessons() -> Set<StatPhrase> {
+        guard let statRoot = statRoot else {return []}
+        let block: StatBlock = statRoot.blocks[statRoot.currentBlockIndex]
+        let previousLessons = block.lessons[0..<statRoot.currentLessonIndex]
+        let phrases = previousLessons.flatMap({return $0.words}).flatMap({return $0.phrases})
+        return Set(phrases)
+    }
+    
+    private func switchingToSprintMode() -> Bool {
+        guard let statRoot = statRoot else {return false}
+        if isSprintMode {
+            isSprintMode = false
+            return false
+        }
+        else {
+            isSprintMode = statRoot.currentLessonIndex > 0
+        }
+        
+        return isSprintMode
+    }
+    
+    @discardableResult
+    private func setupNextLesson() -> Bool {
         guard let statRoot = statRoot else {return false}
         
+        if statRoot.currentLessonIndex == -1 {
+            statRoot.currentBlockIndex = 0
+            statRoot.currentLessonIndex = 0
+            self.currentLesson = statRoot.blocks.first?.lessons.first
+            
+            assert(statRoot.currentBlockIndex >= 0)
+            assert(statRoot.currentLessonIndex >= 0)
+            assert(self.currentLesson != nil)
+            
+            return true
+        }
+            
         let block: StatBlock = statRoot.blocks[statRoot.currentBlockIndex]
         if statRoot.currentLessonIndex < block.lessons.endIndex - 1 {
             statRoot.currentLessonIndex = block.lessons.index(after: statRoot.currentLessonIndex)
             currentLesson = statRoot.blocks[statRoot.currentBlockIndex].lessons[statRoot.currentLessonIndex]
             return true
         }
-        else {
-            return false
-        }
+        
+        return false
     }
     
     func loadStatRootFromURL(completion: @escaping IDataService.PrepareCompletion) {
