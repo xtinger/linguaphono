@@ -10,6 +10,7 @@ import Foundation
 
 struct GameConfig {
     static var newLessonPhaseMinQuestionsForeachPhrase = 1
+    static var maximumSprintAdditionalPhrases = 10
     static var delayBeforeEnglishSpeech = 0.7
     static var delayBeforeRussianSpeech = 0.7
     static var cardChangeAnimationDuration = 0.35

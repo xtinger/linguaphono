@@ -53,7 +53,7 @@ class DataService : IDataService{
         var phrases: Set<StatPhrase> = []
         if switchingToSprintMode() {
             phrases = phrasesOfCurrentLesson()
-            phrases.formUnion(phrasesOfPreviousLessons())
+            phrases.formUnion(additionalPhrasesForSprint())
         }
         else if setupNextLesson(){
             phrases = phrasesOfCurrentLesson()
@@ -65,6 +65,20 @@ class DataService : IDataService{
     private func phrasesOfCurrentLesson() -> Set<StatPhrase>{
         guard let currentLesson = currentLesson else {return []}
         return Set(currentLesson.words.flatMap{return $0.phrases})
+    }
+    
+    private func additionalPhrasesForSprint() -> Set<StatPhrase> {
+        var result: [StatPhrase] = []
+        var availablePhrases: Set<StatPhrase> = phrasesOfPreviousLessons()
+        for _ in 0 ..< min(availablePhrases.count, GameConfig.maximumSprintAdditionalPhrases) {
+            if let randomElement: StatPhrase = availablePhrases.randomObject() {
+                if !result.contains(randomElement) {
+                    result.append(randomElement)
+                    availablePhrases.remove(randomElement)
+                }
+            }
+        }
+        return Set(result)
     }
     
     private func phrasesOfPreviousLessons() -> Set<StatPhrase> {
@@ -158,5 +172,13 @@ class DataService : IDataService{
             }
         }
         dataTask.resume()
+    }
+}
+
+extension Set {
+    func randomObject<T>() -> T? {
+        let n = Int(arc4random_uniform(UInt32(self.count)))
+        let index = self.index(self.startIndex, offsetBy: n)
+        return self.count > 0 ? self[index] as? T : nil
     }
 }
