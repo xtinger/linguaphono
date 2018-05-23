@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import CSV
 
 class DataService : IDataService{
     static let userDefaultsStatDataKey = "Stat"
@@ -26,7 +27,7 @@ class DataService : IDataService{
     }
         
     func prepare(completion: @escaping IDataService.PrepareCompletion) {
-        
+
         let loadedCompletion = {
             DispatchQueue.main.async( execute: {
                 completion()
@@ -34,15 +35,15 @@ class DataService : IDataService{
         }
         
         do {
-            if dataStore.dataExists() {
-                try self.statRoot = dataStore.load()
-                loadedCompletion()
-            }
-            else {
-                loadStatRootFromURL {
+//            if dataStore.dataExists() {
+//                try self.statRoot = dataStore.load()
+//                loadedCompletion()
+//            }
+//            else {
+                loadStatRootFromCSVURL {
                     loadedCompletion()
                 }
-            }
+//            }
         }
         catch {
             
@@ -128,8 +129,83 @@ class DataService : IDataService{
         return false
     }
     
+    func loadStatRootFromCSVURL(completion: @escaping IDataService.PrepareCompletion) {
+        let endpointURL = URL(string: "https://docs.google.com/spreadsheets/d/e/2PACX-1vTw9rj-HGxxsVaHWmqY2Getn7Nw_h1RVlkjLiXZPZdXHmxDEVrXxvQbXWfgOw7sWixSEhEtSQ-jCCt4/pub?gid=0&single=true&output=csv")
+        
+        let dataTask = URLSession.shared.dataTask(with: endpointURL!) {[weak self] data, response, error in
+            guard let ws = self else {return}
+            guard error == nil, let data = data else {
+                print(error!)
+                return
+            }
+            do {
+                ws.parseCSV(data: data)
+                
+                do {
+                    try ws.dataStore.save(data: ws.statRoot!)
+                }
+                catch {
+                    print("Unable to save game data!")
+                }
+                completion()
+                
+                print("prepare OK")
+                
+            } catch {
+                print(error)
+            }
+        }
+        dataTask.resume()
+    }
+    
+    func parseCSV(data: Data) -> StatRoot? {
+        guard let csvString = String.init(data: data, encoding: String.Encoding.utf8) else {return nil}
+        let csv = try! CSVReader(string: csvString, hasHeaderRow: true, trimFields: true, delimiter: UnicodeScalar(","), whitespaces: CharacterSet.whitespaces)
+
+        var lessons: [Lesson] = []
+//        var lesson: Lesson?
+        var words: [Word]?
+        var word: Word?
+        var phrases: [Phrase]?
+
+        while let _ = csv.next() {
+            if let wordOriginal = csv["WordOriginal"], !wordOriginal.isEmpty {
+                if let parsedWord = word, let parsedPhrases = phrases {
+                    let newWord = Word(text: parsedWord.text, phrases: parsedPhrases)
+                    words?.append(newWord)
+                }
+                word = Word(text: wordOriginal, phrases: [])
+                phrases = []
+            }
+            
+            if let lessonStr = csv["Lesson"], !lessonStr.isEmpty {
+                
+                if let parsedWords = words, parsedWords.count > 0 {
+                    let newLesson = Lesson(words: parsedWords)
+                    lessons.append(newLesson)
+                }
+                
+                words = []
+            }
+
+            if let phraseOriginal = csv["PhraseOriginal"], let phraseTranslated = csv["PhraseTranslated"] {
+
+                let phrase = Phrase(textNormal: phraseOriginal, textBack: phraseTranslated)
+                phrases?.append(phrase)
+            }
+        }
+        // last lesson
+//        let lastLesson = Lesson(words: words)
+        
+        let block = Block(lessons: lessons)
+        let root = Root(blocks: [block])
+        
+        self.statRoot = self.convertModelToStatModel(model: root)
+        return nil
+    }
+    
     func loadStatRootFromURL(completion: @escaping IDataService.PrepareCompletion) {
-        let endpointURL = URL(string: "http://api.jsoneditoronline.org/v1/docs/647354f539464a22948c99613a47b269/data")
+        let endpointURL = GameConfig.phrasesURL
         
         let dataTask = URLSession.shared.dataTask(with: endpointURL!) { data, response, error in
             guard error == nil, let data = data else {
@@ -139,23 +215,7 @@ class DataService : IDataService{
             do {
                 let decoder = JSONDecoder()
                 let root = try decoder.decode(Root.self, from: data)
-                self.statRoot = StatRoot(blocks:
-                    root.blocks.map({ (block) -> StatBlock in
-                        return StatBlock(lessons:
-                            block.lessons.map({ (lesson) -> StatLesson in
-                                return StatLesson(words:
-                                    lesson.words.map({ (word) -> StatWord in
-                                        return StatWord(text:word.text, phrases:
-                                            word.phrases.map({ (phrase) -> StatPhrase in
-                                                return StatPhrase(textEng: phrase.textNormal, textRu: phrase.textBack, corrects: 0, incorrects: 0)
-                                            })
-                                        )
-                                    })
-                                )
-                            })
-                        )
-                    })
-                )
+                self.statRoot = self.convertModelToStatModel(model: root)
                 
                 do {
                     try self.dataStore.save(data: self.statRoot!)
@@ -172,6 +232,26 @@ class DataService : IDataService{
             }
         }
         dataTask.resume()
+    }
+    
+    private func convertModelToStatModel(model: Root) -> StatRoot? {
+        return StatRoot(blocks:
+            model.blocks.map({ (block) -> StatBlock in
+                return StatBlock(lessons:
+                    block.lessons.map({ (lesson) -> StatLesson in
+                        return StatLesson(words:
+                            lesson.words.map({ (word) -> StatWord in
+                                return StatWord(text:word.text, phrases:
+                                    word.phrases.map({ (phrase) -> StatPhrase in
+                                        return StatPhrase(textEng: phrase.textNormal, textRu: phrase.textBack, corrects: 0, incorrects: 0)
+                                    })
+                                )
+                            })
+                        )
+                    })
+                )
+            })
+        )
     }
 }
 

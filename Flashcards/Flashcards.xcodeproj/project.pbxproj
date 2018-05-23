@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4596345534225E6764E77037 /* Pods_Flashcards.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 961D23D1CEA890F3825DE3C1 /* Pods_Flashcards.framework */; };
 		92106C8A20ADBCF7000B16C8 /* Block.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92106C8920ADBCF7000B16C8 /* Block.swift */; };
 		92106C8C20ADBD02000B16C8 /* Lesson.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92106C8B20ADBD02000B16C8 /* Lesson.swift */; };
 		92106C8E20ADBD1D000B16C8 /* Word.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92106C8D20ADBD1D000B16C8 /* Word.swift */; };
@@ -81,6 +82,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		72FC0E6EFBA73667BDFB0FA5 /* Pods-Flashcards.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Flashcards.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Flashcards/Pods-Flashcards.debug.xcconfig"; sourceTree = "<group>"; };
 		92106C8920ADBCF7000B16C8 /* Block.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Block.swift; sourceTree = "<group>"; };
 		92106C8B20ADBD02000B16C8 /* Lesson.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lesson.swift; sourceTree = "<group>"; };
 		92106C8D20ADBD1D000B16C8 /* Word.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Word.swift; sourceTree = "<group>"; };
@@ -122,6 +124,8 @@
 		92F4AE2620A0A8F100E3EF19 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		92F4AE2820A0A8F600E3EF19 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		92F4AE2D20A0A8F600E3EF19 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		961D23D1CEA890F3825DE3C1 /* Pods_Flashcards.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Flashcards.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		96B5D2B20CFEF63F10CA9A2F /* Pods-Flashcards.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Flashcards.release.xcconfig"; path = "Pods/Target Support Files/Pods-Flashcards/Pods-Flashcards.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -130,12 +134,30 @@
 			buildActionMask = 2147483647;
 			files = (
 				92E85FC520A46F4100A54819 /* EvergreenBitsUI.framework in Frameworks */,
+				4596345534225E6764E77037 /* Pods_Flashcards.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		067224F37B31B1E106F2D1B7 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				72FC0E6EFBA73667BDFB0FA5 /* Pods-Flashcards.debug.xcconfig */,
+				96B5D2B20CFEF63F10CA9A2F /* Pods-Flashcards.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		23C43CC75EC644E62FC9A2F9 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				961D23D1CEA890F3825DE3C1 /* Pods_Flashcards.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		92106C8820ADBCCA000B16C8 /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -267,6 +289,8 @@
 				92E85FBD20A46EA600A54819 /* EvergreenBitsUI.xcodeproj */,
 				92F4AE2020A0A8F100E3EF19 /* Flashcards */,
 				92F4AE1F20A0A8F100E3EF19 /* Products */,
+				067224F37B31B1E106F2D1B7 /* Pods */,
+				23C43CC75EC644E62FC9A2F9 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -310,11 +334,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 92F4AE3020A0A8F600E3EF19 /* Build configuration list for PBXNativeTarget "Flashcards" */;
 			buildPhases = (
+				75117CF1EE20BA41D4773EF3 /* [CP] Check Pods Manifest.lock */,
 				92F4AE1A20A0A8F100E3EF19 /* Sources */,
 				92F4AE1B20A0A8F100E3EF19 /* Frameworks */,
 				92F4AE1C20A0A8F100E3EF19 /* Resources */,
 				92C2F3A820A1A73500F5982B /* ShellScript */,
 				92E85FC920A46F4100A54819 /* Embed Frameworks */,
+				38420E5B0A240D0D5FAB3CA1 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -391,6 +417,42 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		38420E5B0A240D0D5FAB3CA1 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Flashcards/Pods-Flashcards-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/CSV.swift/CSV.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CSV.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Flashcards/Pods-Flashcards-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		75117CF1EE20BA41D4773EF3 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Flashcards-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
 		92C2F3A820A1A73500F5982B /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -585,18 +647,14 @@
 		};
 		92F4AE3120A0A8F600E3EF19 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 72FC0E6EFBA73667BDFB0FA5 /* Pods-Flashcards.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 3G3BBTBF46;
 				INFOPLIST_FILE = Flashcards/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks\n$(CONFIGURATION_BUILD_DIR)",
-					"$(CONFIGURATION_BUILD_DIR)",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks\n$(CONFIGURATION_BUILD_DIR) $(CONFIGURATION_BUILD_DIR)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.emanor.Flashcards;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -606,18 +664,14 @@
 		};
 		92F4AE3220A0A8F600E3EF19 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 96B5D2B20CFEF63F10CA9A2F /* Pods-Flashcards.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 3G3BBTBF46;
 				INFOPLIST_FILE = Flashcards/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks\n$(CONFIGURATION_BUILD_DIR)",
-					"$(CONFIGURATION_BUILD_DIR)",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks\n$(CONFIGURATION_BUILD_DIR) $(CONFIGURATION_BUILD_DIR)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.emanor.Flashcards;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
