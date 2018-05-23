@@ -34,9 +34,7 @@ class DataService : IDataService{
                 if statRoot.currentLessonIndex == -1 {
                     statRoot.currentLessonIndex = 0
                 }
-                if self.currentLesson == nil {
-                    self.currentLesson = statRoot.blocks[statRoot.currentBlockIndex].lessons[statRoot.currentLessonIndex]
-                }
+                self.currentLesson = statRoot.blocks[statRoot.currentBlockIndex].lessons[statRoot.currentLessonIndex]
                 
                 assert(statRoot.currentBlockIndex >= 0)
                 assert(statRoot.currentLessonIndex >= 0)
@@ -61,6 +59,20 @@ class DataService : IDataService{
         }
         catch {
             
+        }
+    }
+    
+    func nextLesson() -> Bool {
+        guard let statRoot = statRoot else {return false}
+        
+        let block: StatBlock = statRoot.blocks[statRoot.currentBlockIndex]
+        if statRoot.currentLessonIndex < block.lessons.endIndex - 1 {
+            statRoot.currentLessonIndex = block.lessons.index(after: statRoot.currentLessonIndex)
+            currentLesson = statRoot.blocks[statRoot.currentBlockIndex].lessons[statRoot.currentLessonIndex]
+            return true
+        }
+        else {
+            return false
         }
     }
     

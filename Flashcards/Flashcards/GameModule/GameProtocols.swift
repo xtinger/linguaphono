@@ -10,6 +10,7 @@ import UIKit
 
 protocol IGamePresenter {
     var view: IGameViewInput! {get set}
+    var output: IGameModuleOutput? {get set}
 }
 
 // view

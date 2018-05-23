@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct StatBlock : Codable {
+class StatBlock : Codable {
     var lessons: [StatLesson]
     
     init(lessons: [StatLesson]) {

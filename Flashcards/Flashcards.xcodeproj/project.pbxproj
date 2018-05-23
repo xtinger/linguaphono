@@ -38,6 +38,7 @@
 		92C2F3F020A1F3EF00F5982B /* IGameService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C2F3EF20A1F3EF00F5982B /* IGameService.swift */; };
 		92C2F3F220A1FAA000F5982B /* HexColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C2F3F120A1FAA000F5982B /* HexColor.swift */; };
 		92CE27B820AB38820057988B /* Speaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CE27B720AB38820057988B /* Speaker.swift */; };
+		92D1054520B56E6100AFDFC7 /* IGameModuleOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92D1054420B56E6100AFDFC7 /* IGameModuleOutput.swift */; };
 		92E85FA720A462A100A54819 /* CardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 92E85FA620A462A100A54819 /* CardView.xib */; };
 		92E85FC520A46F4100A54819 /* EvergreenBitsUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92E85FC220A46EA800A54819 /* EvergreenBitsUI.framework */; };
 		92E85FC620A46F4100A54819 /* EvergreenBitsUI.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 92E85FC220A46EA800A54819 /* EvergreenBitsUI.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -111,6 +112,7 @@
 		92C2F3EF20A1F3EF00F5982B /* IGameService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IGameService.swift; sourceTree = "<group>"; };
 		92C2F3F120A1FAA000F5982B /* HexColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HexColor.swift; sourceTree = "<group>"; };
 		92CE27B720AB38820057988B /* Speaker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Speaker.swift; sourceTree = "<group>"; };
+		92D1054420B56E6100AFDFC7 /* IGameModuleOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IGameModuleOutput.swift; sourceTree = "<group>"; };
 		92E85FA620A462A100A54819 /* CardView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CardView.xib; sourceTree = "<group>"; };
 		92E85FBD20A46EA600A54819 /* EvergreenBitsUI.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = EvergreenBitsUI.xcodeproj; path = EvergreenBitsUI/EvergreenBitsUI.xcodeproj; sourceTree = "<group>"; };
 		92EE108A20A98C1000D5C0F4 /* LessonGameService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonGameService.swift; sourceTree = "<group>"; };
@@ -219,6 +221,7 @@
 				92C2F3CF20A1DE0400F5982B /* GameAssembly.swift */,
 				92C2F3D520A1E4F100F5982B /* GamePresenter.swift */,
 				92F4AE2320A0A8F100E3EF19 /* GameVC.swift */,
+				92D1054420B56E6100AFDFC7 /* IGameModuleOutput.swift */,
 			);
 			path = GameModule;
 			sourceTree = "<group>";
@@ -431,6 +434,7 @@
 				92CE27B820AB38820057988B /* Speaker.swift in Sources */,
 				926CB86F20B46C0C00A232D5 /* UserDefaultsDataStore.swift in Sources */,
 				92C2F3EB20A1F28B00F5982B /* IDataService.swift in Sources */,
+				92D1054520B56E6100AFDFC7 /* IGameModuleOutput.swift in Sources */,
 				927101E720AEF9ED003B9D20 /* StatRoot.swift in Sources */,
 				92106C8A20ADBCF7000B16C8 /* Block.swift in Sources */,
 				926674BF20ADC10600F91D32 /* Root.swift in Sources */,

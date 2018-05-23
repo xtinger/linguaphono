@@ -125,7 +125,7 @@ class LessonGameService : IGameService {
             return
         }
 
-        let indexToInsert = 5;//GameConfig.placeInQueueMaxOffset + Int(arc4random() % UInt32(GameConfig.placeInQueueMaxOffset - GameConfig.placeInQueueMinOffset))
+        let indexToInsert = 3;//GameConfig.placeInQueueMaxOffset + Int(arc4random() % UInt32(GameConfig.placeInQueueMaxOffset - GameConfig.placeInQueueMinOffset))
 
         while phrasesInGame.count < indexToInsert {
             // множество фразы для вставки

@@ -80,27 +80,6 @@ extension GameVC : IGameViewInput {
                 completion()
             }
         }
-        
-        
-        
-        /*
-        if let existingCardView = self.cardView {
-            
-            cardView.isHidden = true
-            cardsPlace.addSubview(cardView)
-            cardView.addFillSuperviewConstraints()
-            
-            UIView.transition(from: existingCardView, to: cardView, duration: 0.25, options: [.transitionFlipFromRight, .showHideTransitionViews]) { (finished) in
-                existingCardView.removeFromSuperview()
-            }
-        }
-        else {
-            cardsPlace.addSubview(cardView)
-            cardView.addFillSuperviewConstraints()
-        }
-        
-        self.cardView = cardView
- */
     }
 
     func flipTo(cardView: CardView, completion:FlipCompletion?) {

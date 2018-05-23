@@ -9,10 +9,12 @@
 import UIKit
 
 class GamePresenter : NSObject, IGamePresenter, IGameViewOutput {
+    
     typealias Completion = ()->()
     
     var gameService : IGameService
     weak var view: IGameViewInput!
+    var output: IGameModuleOutput?
     var presentingCard : StatPhrase?
     
     var cardNormal : CardView?
@@ -182,9 +184,8 @@ extension GamePresenter : IGameServiceOutput {
 
     func finish() {
         let alert = UIAlertController(title: "Поздравляем!", message: "Вы прошли обучение", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Выйти", style: .default, handler: {(action) in
-            exit(0)
-            
+        alert.addAction(UIAlertAction(title: "Выйти", style: .default, handler: { [weak self] (action) in
+            self?.output?.finish()
         }))
         view.alert(alert: alert, animated: true)
     }

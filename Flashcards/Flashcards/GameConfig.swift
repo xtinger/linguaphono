@@ -16,5 +16,5 @@ struct GameConfig {
     static var delayAfterAnimationIfMuted = 0.5
     static var placeInQueueMaxOffset = 6
     static var placeInQueueMinOffset = 2
-    static var muted = false
+    static var muted = true
 }

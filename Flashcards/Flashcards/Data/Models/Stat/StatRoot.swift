@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct StatRoot : Codable {
+class StatRoot : Codable {
     var blocks: [StatBlock]
     
     var currentBlockIndex = -1

@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct StatLesson : Codable {
+class StatLesson : Codable {
     var words: [StatWord]
     
     init(words: [StatWord]) {

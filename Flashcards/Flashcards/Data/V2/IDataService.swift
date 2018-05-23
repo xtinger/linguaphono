@@ -14,4 +14,6 @@ protocol IDataService {
     var currentLesson: StatLesson? {get}
 
     func prepare(completion: @escaping PrepareCompletion)
+    
+    func nextLesson() -> Bool
 }

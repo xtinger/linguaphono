@@ -11,10 +11,11 @@ import UIKit
 class GameAssembly {
     var viewController : UIViewController!
     
-    required init(lesson: StatLesson) {
+    required init(lesson: StatLesson, moduleOutput: IGameModuleOutput?) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         var game : IGameService = LessonGameService(lesson: lesson)
         var presenter : IGamePresenter & IGameViewOutput & IGameServiceOutput = GamePresenter(gameService: game)
+        presenter.output = moduleOutput
         game.output = presenter
         
         let viewController = storyboard.instantiateViewController(withIdentifier: "GameVC") as! GameVC
