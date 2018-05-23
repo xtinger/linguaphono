@@ -18,8 +18,9 @@ class DataService : IDataService{
     
     private var dataStore: IDataStore
 
-    enum DataServiceV2Errors: Error {
+    enum DataServiceErrors: Error {
         case invalidUrl
+        case parseError
     }
     
     required init(dataStore: IDataStore) {
@@ -35,15 +36,15 @@ class DataService : IDataService{
         }
         
         do {
-//            if dataStore.dataExists() {
-//                try self.statRoot = dataStore.load()
-//                loadedCompletion()
-//            }
-//            else {
+            if dataStore.dataExists() {
+                try self.statRoot = dataStore.load()
+                loadedCompletion()
+            }
+            else {
                 loadStatRootFromCSVURL {
                     loadedCompletion()
                 }
-//            }
+            }
         }
         catch {
             
@@ -132,25 +133,22 @@ class DataService : IDataService{
     func loadStatRootFromCSVURL(completion: @escaping IDataService.PrepareCompletion) {
         let endpointURL = URL(string: "https://docs.google.com/spreadsheets/d/e/2PACX-1vTw9rj-HGxxsVaHWmqY2Getn7Nw_h1RVlkjLiXZPZdXHmxDEVrXxvQbXWfgOw7sWixSEhEtSQ-jCCt4/pub?gid=0&single=true&output=csv")
         
-        let dataTask = URLSession.shared.dataTask(with: endpointURL!) {[weak self] data, response, error in
+        let dataTask = URLSession.shared.dataTask(with: endpointURL!) { [weak self] data, response, error in
             guard let ws = self else {return}
             guard error == nil, let data = data else {
                 print(error!)
                 return
             }
+            
             do {
-                ws.parseCSV(data: data)
-                
-                do {
-                    try ws.dataStore.save(data: ws.statRoot!)
+                if let root = try ws.parseCSV(data: data) {
+                    ws.statRoot = ws.convertModelToStatModel(model: root)
                 }
-                catch {
-                    print("Unable to save game data!")
-                }
-                completion()
-                
+                try ws.dataStore.save(data: ws.statRoot!)
+            
                 print("prepare OK")
                 
+                completion()
             } catch {
                 print(error)
             }
@@ -158,8 +156,8 @@ class DataService : IDataService{
         dataTask.resume()
     }
     
-    func parseCSV(data: Data) -> StatRoot? {
-        guard let csvString = String.init(data: data, encoding: String.Encoding.utf8) else {return nil}
+    func parseCSV(data: Data) throws -> Root? {
+        guard let csvString = String.init(data: data, encoding: String.Encoding.utf8) else {throw DataServiceErrors.parseError}
         let csv = try! CSVReader(string: csvString, hasHeaderRow: true, trimFields: true, delimiter: UnicodeScalar(","), whitespaces: CharacterSet.whitespaces)
 
         var lessons: [Lesson] = []
@@ -200,8 +198,7 @@ class DataService : IDataService{
         let block = Block(lessons: lessons)
         let root = Root(blocks: [block])
         
-        self.statRoot = self.convertModelToStatModel(model: root)
-        return nil
+        return root
     }
     
     func loadStatRootFromURL(completion: @escaping IDataService.PrepareCompletion) {

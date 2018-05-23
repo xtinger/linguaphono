@@ -22,6 +22,7 @@
 		927101E920AEFA12003B9D20 /* StatBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927101E820AEFA12003B9D20 /* StatBlock.swift */; };
 		927101EB20AEFA23003B9D20 /* StatLesson.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927101EA20AEFA23003B9D20 /* StatLesson.swift */; };
 		927101ED20AEFA30003B9D20 /* StatWord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927101EC20AEFA30003B9D20 /* StatWord.swift */; };
+		92A18DAC20B5D19D00DE07D2 /* MenuVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A18DAB20B5D19D00DE07D2 /* MenuVC.swift */; };
 		92B18D5120A45B0300F3CF08 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B18D5020A45B0300F3CF08 /* CardView.swift */; };
 		92B18D5320A45C5D00F3CF08 /* IGameServiceOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B18D5220A45C5D00F3CF08 /* IGameServiceOutput.swift */; };
 		92B2760020B31CDB008E51A7 /* RoundedProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B275FF20B31CDB008E51A7 /* RoundedProgressView.swift */; };
@@ -97,6 +98,7 @@
 		927101E820AEFA12003B9D20 /* StatBlock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatBlock.swift; sourceTree = "<group>"; };
 		927101EA20AEFA23003B9D20 /* StatLesson.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatLesson.swift; sourceTree = "<group>"; };
 		927101EC20AEFA30003B9D20 /* StatWord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatWord.swift; sourceTree = "<group>"; };
+		92A18DAB20B5D19D00DE07D2 /* MenuVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuVC.swift; sourceTree = "<group>"; };
 		92B18D5020A45B0300F3CF08 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		92B18D5220A45C5D00F3CF08 /* IGameServiceOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IGameServiceOutput.swift; sourceTree = "<group>"; };
 		92B275FF20B31CDB008E51A7 /* RoundedProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedProgressView.swift; sourceTree = "<group>"; };
@@ -286,6 +288,7 @@
 		92F4AE1520A0A8F100E3EF19 = {
 			isa = PBXGroup;
 			children = (
+				92A18DAB20B5D19D00DE07D2 /* MenuVC.swift */,
 				92E85FBD20A46EA600A54819 /* EvergreenBitsUI.xcodeproj */,
 				92F4AE2020A0A8F100E3EF19 /* Flashcards */,
 				92F4AE1F20A0A8F100E3EF19 /* Products */,
@@ -494,6 +497,7 @@
 				927101EB20AEFA23003B9D20 /* StatLesson.swift in Sources */,
 				92C2F3DC20A1E58C00F5982B /* GameProtocols.swift in Sources */,
 				92CE27B820AB38820057988B /* Speaker.swift in Sources */,
+				92A18DAC20B5D19D00DE07D2 /* MenuVC.swift in Sources */,
 				926CB86F20B46C0C00A232D5 /* UserDefaultsDataStore.swift in Sources */,
 				92C2F3EB20A1F28B00F5982B /* IDataService.swift in Sources */,
 				92D1054520B56E6100AFDFC7 /* IGameModuleOutput.swift in Sources */,
@@ -654,7 +658,12 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 3G3BBTBF46;
 				INFOPLIST_FILE = Flashcards/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks\n$(CONFIGURATION_BUILD_DIR) $(CONFIGURATION_BUILD_DIR)";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks\n$(CONFIGURATION_BUILD_DIR)",
+					"$(CONFIGURATION_BUILD_DIR)",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.emanor.Flashcards;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -671,7 +680,12 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 3G3BBTBF46;
 				INFOPLIST_FILE = Flashcards/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks\n$(CONFIGURATION_BUILD_DIR) $(CONFIGURATION_BUILD_DIR)";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks\n$(CONFIGURATION_BUILD_DIR)",
+					"$(CONFIGURATION_BUILD_DIR)",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.emanor.Flashcards;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;

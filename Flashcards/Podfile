@@ -8,6 +8,5 @@ target 'Flashcards' do
   # Pods for Flashcards
 
   pod 'CSV.swift', '~> 2.2.1'
-  pod 'SideMenu'
 
 end

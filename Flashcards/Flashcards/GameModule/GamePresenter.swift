@@ -32,6 +32,10 @@ class GamePresenter : NSObject, IGamePresenter, IGameViewOutput {
         gameService.readyToPresent()
     }
     
+    func userDidTouchMenu() {
+        output?.userDidTouchMenu()
+    }
+    
     func userDidTouchCard() {
         print("userDidTouchCard()")
         view.userInputEnabled(enabled: false)

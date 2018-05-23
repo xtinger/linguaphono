@@ -31,6 +31,7 @@ protocol IGameViewOutput {
     func userDidTouchYes()
     func userDidTouchNo()
     func userDidTouchRepeat()
+    func userDidTouchMenu()
 }
 
 

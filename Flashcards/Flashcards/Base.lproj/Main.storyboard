@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14111" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -49,6 +49,7 @@
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uDs-4f-Bfx" customClass="BigButton" customModule="Flashcards" customModuleProvider="target">
                                 <rect key="frame" x="16" y="480.5" width="163.5" height="166.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                 <state key="normal" title="Нет"/>
                                 <connections>
                                     <action selector="buttonNoTouched:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Yrh-te-Bbb"/>
@@ -56,6 +57,7 @@
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gvh-E7-o4H" customClass="BigButton" customModule="Flashcards" customModuleProvider="target">
                                 <rect key="frame" x="195.5" y="480.5" width="163.5" height="166.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                 <state key="normal" title="Да"/>
                                 <connections>
                                     <action selector="buttonYesTouched:" destination="BYZ-38-t0r" eventType="touchUpInside" id="eyl-JX-Qys"/>
@@ -63,6 +65,7 @@
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wlv-q9-JLq" customClass="BigButton" customModule="Flashcards" customModuleProvider="target">
                                 <rect key="frame" x="16" y="398" width="343" height="66.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                 <state key="normal" title="Повтор"/>
                                 <connections>
                                     <action selector="buttonRepeatTouched:" destination="BYZ-38-t0r" eventType="touchUpInside" id="qhk-Wu-DnH"/>
@@ -147,6 +150,21 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="116" y="117.39130434782609"/>
+        </scene>
+        <!--MenuVC-->
+        <scene sceneID="5Iw-rF-uMs">
+            <objects>
+                <viewController storyboardIdentifier="MenuVC" id="mXV-EZ-nMs" customClass="MenuVC" customModule="Flashcards" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="G80-xQ-L2T">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="ogk-H5-IiC"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="o3I-tm-xDh" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="874" y="112"/>
         </scene>
     </scenes>
     <resources>

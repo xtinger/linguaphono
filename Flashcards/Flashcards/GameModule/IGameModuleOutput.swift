@@ -10,4 +10,5 @@ import Foundation
 
 protocol IGameModuleOutput : class {
     func finish()
+    func userDidTouchMenu()
 }

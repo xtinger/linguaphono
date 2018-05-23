@@ -23,7 +23,13 @@ class GameVC: UIViewController  {
         navigationItem.title = "Flashcards"
         progressView.progressTintColor = Styles.Card.backgroundColorNormal
         
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "icon_sidebar"), style: .plain, target: self, action: #selector(menuTouched))
+        
         output.viewDidLoad()
+    }
+    
+    @objc func menuTouched(sender: UIButton) {
+        output.userDidTouchMenu()
     }
 
     @IBAction func buttonNoTouched(_ sender: Any) {

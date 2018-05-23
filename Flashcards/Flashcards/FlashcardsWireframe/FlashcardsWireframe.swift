@@ -10,9 +10,17 @@ import UIKit
 
 class FlashcardsWireframe {
     var rootViewController : UINavigationController!
+    var viewController : UIViewController!
+    var dataService: IDataService
     
     required init() {
- 
+        self.dataService = DataService(dataStore: UserDefaultsDataStore())
+        
+    }
+    
+    func setup(with phrases: Set<StatPhrase>) {
+        let gameAssembly = GameAssembly(phrases: phrases, moduleOutput: self as IGameModuleOutput)
+        self.viewController = gameAssembly.viewController
     }
     
     func present(to window: UIWindow) {
@@ -25,13 +33,55 @@ class FlashcardsWireframe {
         window.rootViewController = rootViewController
         window.makeKeyAndVisible()
         
-        let dataServiceV2: IDataService = DataService(dataStore: UserDefaultsDataStore())
-        dataServiceV2.prepare { [weak self] in
+        dataService.prepare { [weak self] in
+            
             if let ws = self {
-                let blockGameWireframe = BlockGameWireframe(dataService: dataServiceV2, parentViewController: ws.rootViewController)
-                blockGameWireframe.present()
+                let phrases = ws.dataService.prepareNextPhraseSet()
+                if phrases.count > 0 {
+                    ws.setup(with: phrases)
+                }
+                
+                ws.presentGame()
             }
         }
         
+    }
+    
+    func presentGame() {
+        rootViewController.setViewControllers([viewController], animated: true)
+    }
+    
+    func presentMenu() {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let menuVC = storyboard.instantiateViewController(withIdentifier: "MenuVC") as! MenuVC
+        menuVC.navigationItem.title = "Настройки"
+        menuVC.navigationItem.rightBarButtonItem = UIBarButtonItem(title:"Готово", style: .plain, target: self, action: #selector(settingsMenuTouched))
+        let navMenuVC = UINavigationController(rootViewController: menuVC)
+        viewController.present(navMenuVC, animated: true, completion: nil)
+//        rootViewController.setViewControllers([MenuVC], animated: true)
+    }
+    
+    
+    @objc func settingsMenuTouched(sender: UIButton) {
+        viewController.dismiss(animated: true, completion: nil)
+    }
+
+}
+
+extension FlashcardsWireframe : IGameModuleOutput {
+    func finish() {
+        let phrases = dataService.prepareNextPhraseSet()
+        if phrases.count > 0 {
+            setup(with: phrases)
+            presentGame()
+        }
+        else {
+            exit(0)
+        }
+        
+    }
+    
+    func userDidTouchMenu() {
+        presentMenu()
     }
 }
