@@ -30,4 +30,8 @@ class UserDefaultsDataStore : IDataStore{
         let json = try encoder.encode(data)
         UserDefaults.standard.set(json, forKey: DataService.userDefaultsStatDataKey)
     }
+    
+    func delete() {
+        UserDefaults.standard.removeObject(forKey: DataService.userDefaultsStatDataKey)
+    }
 }

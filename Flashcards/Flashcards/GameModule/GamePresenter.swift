@@ -114,7 +114,8 @@ class GamePresenter : NSObject, IGamePresenter, IGameViewOutput {
     func userDidTouchRepeat() {
         self.view.userInputEnabled(enabled: false)
         if let card = presentingCard {
-            attemptToSayEnglish(card: card) {
+            // произносить даже если muted
+            speaker.say(text: card.textEng, language: GameConfig.languageOriginal) {
                 self.view.userInputEnabled(enabled: true)
             }
         }

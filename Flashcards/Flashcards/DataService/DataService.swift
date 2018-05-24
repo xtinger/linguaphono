@@ -11,6 +11,7 @@ import CSV
 
 class DataService : IDataService{
     static let userDefaultsStatDataKey = "Stat"
+    static let debugAlwaysLoad = true
     
     var statRoot: StatRoot?
     var currentLesson: StatLesson?
@@ -36,7 +37,7 @@ class DataService : IDataService{
         }
         
         do {
-            if dataStore.dataExists() {
+            if !DataService.debugAlwaysLoad && dataStore.dataExists() {
                 try self.statRoot = dataStore.load()
                 loadedCompletion()
             }
@@ -130,7 +131,7 @@ class DataService : IDataService{
         return false
     }
     
-    func loadStatRootFromCSVURL(completion: @escaping IDataService.PrepareCompletion) {
+    private func loadStatRootFromCSVURL(completion: @escaping IDataService.PrepareCompletion) {
         let endpointURL = URL(string: "https://docs.google.com/spreadsheets/d/e/2PACX-1vTw9rj-HGxxsVaHWmqY2Getn7Nw_h1RVlkjLiXZPZdXHmxDEVrXxvQbXWfgOw7sWixSEhEtSQ-jCCt4/pub?gid=0&single=true&output=csv")
         
         let dataTask = URLSession.shared.dataTask(with: endpointURL!) { [weak self] data, response, error in
@@ -156,10 +157,12 @@ class DataService : IDataService{
         dataTask.resume()
     }
     
-    func parseCSV(data: Data) throws -> Root? {
+    private func parseCSV(data: Data) throws -> Root? {
         guard let csvString = String.init(data: data, encoding: String.Encoding.utf8) else {throw DataServiceErrors.parseError}
         let csv = try! CSVReader(string: csvString, hasHeaderRow: true, trimFields: true, delimiter: UnicodeScalar(","), whitespaces: CharacterSet.whitespaces)
 
+        try parseLanguages(csv: csv)
+        
         var lessons: [Lesson] = []
 //        var lesson: Lesson?
         var words: [Word]?
@@ -201,7 +204,7 @@ class DataService : IDataService{
         return root
     }
     
-    func loadStatRootFromURL(completion: @escaping IDataService.PrepareCompletion) {
+    private func loadStatRootFromURL(completion: @escaping IDataService.PrepareCompletion) {
         let endpointURL = GameConfig.phrasesURL
         
         let dataTask = URLSession.shared.dataTask(with: endpointURL!) { data, response, error in
@@ -249,6 +252,20 @@ class DataService : IDataService{
                 )
             })
         )
+    }
+    
+    private func parseLanguages(csv: CSVReader) throws {
+        guard let header = csv.headerRow, header.count >= 7 else {
+            throw DataServiceErrors.parseError
+        }
+        
+        let languageOriginal = header[5]
+        let languageTranslation = header[6]
+        guard !languageOriginal.isEmpty, !languageTranslation.isEmpty else  {
+            throw DataServiceErrors.parseError
+        }
+        GameConfig.languageOriginal = languageOriginal
+        GameConfig.languageTranslation = languageTranslation
     }
 }
 

@@ -167,15 +167,6 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
-		92106C9420ADC02D000B16C8 /* V2 */ = {
-			isa = PBXGroup;
-			children = (
-				92C2F3EA20A1F28B00F5982B /* IDataService.swift */,
-				926674BB20ADC08200F91D32 /* DataService.swift */,
-			);
-			path = V2;
-			sourceTree = "<group>";
-		};
 		923D036720B41B02001173D7 /* JSONData */ = {
 			isa = PBXGroup;
 			children = (
@@ -248,13 +239,13 @@
 			path = GameModule;
 			sourceTree = "<group>";
 		};
-		92C2F3E720A1EFFB00F5982B /* Data */ = {
+		92C2F3E720A1EFFB00F5982B /* DataService */ = {
 			isa = PBXGroup;
 			children = (
-				92106C9420ADC02D000B16C8 /* V2 */,
-				92106C8820ADBCCA000B16C8 /* Models */,
+				92C2F3EA20A1F28B00F5982B /* IDataService.swift */,
+				926674BB20ADC08200F91D32 /* DataService.swift */,
 			);
-			path = Data;
+			path = DataService;
 			sourceTree = "<group>";
 		};
 		92C2F3EE20A1F3D400F5982B /* Game */ = {
@@ -317,7 +308,8 @@
 				9243DFC320B4276900651713 /* FlashcardsWireframe */,
 				92A18DAD20B5D43C00DE07D2 /* Settings */,
 				926CB87220B46D5600A232D5 /* DataStore */,
-				92C2F3E720A1EFFB00F5982B /* Data */,
+				92106C8820ADBCCA000B16C8 /* Models */,
+				92C2F3E720A1EFFB00F5982B /* DataService */,
 				92C2F3EE20A1F3D400F5982B /* Game */,
 				92C2F3CE20A1DD5500F5982B /* GameModule */,
 				92C2F3A920A1A91200F5982B /* Views */,
