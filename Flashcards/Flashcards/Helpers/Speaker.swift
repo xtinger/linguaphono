@@ -9,12 +9,7 @@
 import Foundation
 import AVFoundation
 
-
-
 class Speaker : NSObject {
-    enum SpeakerLanguage : String {
-        case languageNormal = "fr-FR", languageBack = "ru-RU"
-    }
     
     typealias Completion = ()->()
     
@@ -26,15 +21,15 @@ class Speaker : NSObject {
         synthesizer.delegate = self
     }
     
-    func say(text: String, language: SpeakerLanguage, completion: Completion?) {
+    func say(text: String, language: String, completion: Completion?) {
         synthesizer.stopSpeaking(at: .immediate)
         let utterance = AVSpeechUtterance(string: text)
-        utterance.voice = AVSpeechSynthesisVoice(language: language.rawValue)
+        utterance.voice = AVSpeechSynthesisVoice(language: language)
         self.completion = completion
         synthesizer.speak(utterance)
     }
     
-    func say(text: String, language: SpeakerLanguage) {
+    func say(text: String, language: String) {
         say(text: text, language: language, completion: nil)
     }
     

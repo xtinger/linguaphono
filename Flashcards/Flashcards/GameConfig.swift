@@ -19,4 +19,6 @@ struct GameConfig {
     static var placeInQueueMaxOffset = 6
     static var placeInQueueMinOffset = 2
     static var muted = true
+    static var languageOriginal = "fr-FR"
+    static var languageTranslation = "ru-RU"
 }

@@ -122,7 +122,7 @@ class GamePresenter : NSObject, IGamePresenter, IGameViewOutput {
     
     func attemptToSayEnglish(card: StatPhrase, completion: Completion?) {
         guard !GameConfig.muted else {return}
-        speaker.say(text: card.textEng, language: .languageNormal, completion: completion)
+        speaker.say(text: card.textEng, language: GameConfig.languageOriginal, completion: completion)
     }
     
     func attemptToSayEnglish(card: StatPhrase) {
@@ -132,12 +132,12 @@ class GamePresenter : NSObject, IGamePresenter, IGameViewOutput {
     
     func attemptToSayRussian(card: StatPhrase, completion: Completion?) {
         guard !GameConfig.muted else {return}
-        speaker.say(text: card.textRu, language: .languageBack, completion: completion)
+        speaker.say(text: card.textRu, language: GameConfig.languageTranslation, completion: completion)
     }
     
     func attemptToSayRussian(card: StatPhrase) {
         guard !GameConfig.muted else {return}
-        speaker.say(text: card.textRu, language: .languageBack, completion: nil)
+        speaker.say(text: card.textRu, language: GameConfig.languageTranslation, completion: nil)
     }
     
     func completeIfMuted(_ completion: @escaping Completion) {
