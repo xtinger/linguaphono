@@ -12,7 +12,6 @@
 		92106C8C20ADBD02000B16C8 /* Lesson.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92106C8B20ADBD02000B16C8 /* Lesson.swift */; };
 		92106C8E20ADBD1D000B16C8 /* Word.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92106C8D20ADBD1D000B16C8 /* Word.swift */; };
 		92106C9020ADBD3C000B16C8 /* Phrase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92106C8F20ADBD3C000B16C8 /* Phrase.swift */; };
-		9243DFC220B426D900651713 /* BlockGameWireframe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9243DFC120B426D900651713 /* BlockGameWireframe.swift */; };
 		9243DFC520B4356C00651713 /* LoadingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9243DFC420B4356C00651713 /* LoadingVC.swift */; };
 		926674BC20ADC08200F91D32 /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926674BB20ADC08200F91D32 /* DataService.swift */; };
 		926674BF20ADC10600F91D32 /* Root.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926674BE20ADC10600F91D32 /* Root.swift */; };
@@ -88,7 +87,6 @@
 		92106C8B20ADBD02000B16C8 /* Lesson.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lesson.swift; sourceTree = "<group>"; };
 		92106C8D20ADBD1D000B16C8 /* Word.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Word.swift; sourceTree = "<group>"; };
 		92106C8F20ADBD3C000B16C8 /* Phrase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Phrase.swift; sourceTree = "<group>"; };
-		9243DFC120B426D900651713 /* BlockGameWireframe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockGameWireframe.swift; sourceTree = "<group>"; };
 		9243DFC420B4356C00651713 /* LoadingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingVC.swift; sourceTree = "<group>"; };
 		926674BB20ADC08200F91D32 /* DataService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
 		926674BE20ADC10600F91D32 /* Root.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Root.swift; sourceTree = "<group>"; };
@@ -188,14 +186,6 @@
 				92106C8F20ADBD3C000B16C8 /* Phrase.swift */,
 			);
 			path = JSONData;
-			sourceTree = "<group>";
-		};
-		9243DFC020B425DA00651713 /* BlockGameWireframe */ = {
-			isa = PBXGroup;
-			children = (
-				9243DFC120B426D900651713 /* BlockGameWireframe.swift */,
-			);
-			path = BlockGameWireframe;
 			sourceTree = "<group>";
 		};
 		9243DFC320B4276900651713 /* FlashcardsWireframe */ = {
@@ -325,7 +315,6 @@
 				92F4AE2D20A0A8F600E3EF19 /* Info.plist */,
 				92B924F820A5AEAB009A20B4 /* GameConfig.swift */,
 				9243DFC320B4276900651713 /* FlashcardsWireframe */,
-				9243DFC020B425DA00651713 /* BlockGameWireframe */,
 				92A18DAD20B5D43C00DE07D2 /* Settings */,
 				926CB87220B46D5600A232D5 /* DataStore */,
 				92C2F3E720A1EFFB00F5982B /* Data */,
@@ -495,7 +484,6 @@
 				92C2F3F020A1F3EF00F5982B /* IGameService.swift in Sources */,
 				92F4AE2420A0A8F100E3EF19 /* GameVC.swift in Sources */,
 				92F4AE2220A0A8F100E3EF19 /* AppDelegate.swift in Sources */,
-				9243DFC220B426D900651713 /* BlockGameWireframe.swift in Sources */,
 				92B18D5320A45C5D00F3CF08 /* IGameServiceOutput.swift in Sources */,
 				92C2F3F220A1FAA000F5982B /* HexColor.swift in Sources */,
 				92106C8C20ADBD02000B16C8 /* Lesson.swift in Sources */,
