@@ -8,7 +8,7 @@
 
 import Foundation
 
-class LessonGameService : IGameService {
+class PhrasesGameService : IGameService {
 
     private var dataService : IDataService!
     let config = GameConfig()
