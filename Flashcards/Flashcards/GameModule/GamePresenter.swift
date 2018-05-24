@@ -8,7 +8,7 @@
 
 import UIKit
 
-class GamePresenter : NSObject, IGamePresenter, IGameViewOutput {
+class GamePresenter : IGamePresenter, IGameViewOutput {
     
     typealias Completion = ()->()
     
@@ -25,7 +25,6 @@ class GamePresenter : NSObject, IGamePresenter, IGameViewOutput {
     
     required init(gameService : IGameService) {
         self.gameService = gameService
-        super.init()
     }
     
     func viewDidLoad() {
