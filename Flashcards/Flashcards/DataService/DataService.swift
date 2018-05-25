@@ -172,7 +172,7 @@ class DataService : IDataService{
 
         while let _ = csv.next() {
             if let wordOriginal = csv["WordOriginal"], !wordOriginal.isEmpty {
-                if let parsedWord = word, let parsedPhrases = phrases {
+                if let parsedWord = word, let parsedPhrases = phrases, parsedPhrases.count > 0 {
                     let newWord = Word(text: parsedWord.text, phrases: parsedPhrases)
                     words?.append(newWord)
                 }
@@ -190,8 +190,7 @@ class DataService : IDataService{
                 words = []
             }
 
-            if let phraseOriginal = csv["PhraseOriginal"], let phraseTranslated = csv["PhraseTranslated"] {
-
+            if let phraseOriginal = csv["PhraseOriginal"], let phraseTranslated = csv["PhraseTranslated"], !phraseOriginal.isEmpty, !phraseTranslated.isEmpty {
                 let phrase = Phrase(textNormal: phraseOriginal, textBack: phraseTranslated)
                 phrases?.append(phrase)
             }
