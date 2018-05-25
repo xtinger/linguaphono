@@ -11,7 +11,8 @@ import CSV
 
 class DataService : IDataService{
     static let userDefaultsStatDataKey = "Stat"
-    static let debugAlwaysLoad = true
+    
+    var loadFromURL = false
     
     var statRoot: StatRoot?
     var currentLesson: StatLesson?
@@ -29,7 +30,6 @@ class DataService : IDataService{
     }
         
     func prepare(completion: @escaping IDataService.PrepareCompletion) {
-
         let loadedCompletion = {
             DispatchQueue.main.async( execute: {
                 completion()
@@ -37,7 +37,7 @@ class DataService : IDataService{
         }
         
         do {
-            if !DataService.debugAlwaysLoad && dataStore.dataExists() {
+            if !loadFromURL && dataStore.dataExists() {
                 try self.statRoot = dataStore.load()
                 loadedCompletion()
             }
@@ -45,6 +45,7 @@ class DataService : IDataService{
                 loadStatRootFromCSVURL {
                     loadedCompletion()
                 }
+                loadFromURL = false
             }
         }
         catch {
@@ -132,7 +133,7 @@ class DataService : IDataService{
     }
     
     private func loadStatRootFromCSVURL(completion: @escaping IDataService.PrepareCompletion) {
-        let endpointURL = URL(string: "https://docs.google.com/spreadsheets/d/e/2PACX-1vTw9rj-HGxxsVaHWmqY2Getn7Nw_h1RVlkjLiXZPZdXHmxDEVrXxvQbXWfgOw7sWixSEhEtSQ-jCCt4/pub?gid=0&single=true&output=csv")
+        let endpointURL = GameConfig.phrasesURL
         
         let dataTask = URLSession.shared.dataTask(with: endpointURL!) { [weak self] data, response, error in
             guard let ws = self else {return}

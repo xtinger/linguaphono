@@ -9,7 +9,7 @@
 import Foundation
 
 struct GameConfig {
-    static var phrasesURL: URL? = URL(string: "http://api.jsoneditoronline.org/v1/docs/647354f539464a22948c99613a47b269/data")
+    static var phrasesURL: URL? = URL(string: "https://docs.google.com/spreadsheets/d/e/2PACX-1vTw9rj-HGxxsVaHWmqY2Getn7Nw_h1RVlkjLiXZPZdXHmxDEVrXxvQbXWfgOw7sWixSEhEtSQ-jCCt4/pub?gid=0&single=true&output=csv")
     static var newLessonPhaseMinQuestionsForeachPhrase = 1
     static var maximumSprintAdditionalPhrases = 10
     static var delayBeforeEnglishSpeech = 0.7
