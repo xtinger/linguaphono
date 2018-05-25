@@ -44,7 +44,31 @@ class GamePresenter : IGamePresenter, IGameViewOutput {
     func userDidTouchYes() {
         print("userDidTouchYes()")
         view.userInputEnabled(enabled: false)
-        gameService.answered(with: .Yes)
+
+        if (GameConfig.showTranslationOnAnyAnswer) {
+            if (isOnNormalSide()) {
+                guard let presentingCard = presentingCard, let cardFlipped = cardFlipped else {
+                    return
+                }
+                
+                let completion : IGameViewInput.FlipCompletion = { [weak self] in
+                    self?.gameService.answered(with: .Yes)
+                }
+                
+                view.flipTo(cardView: cardFlipped) {
+                    self.completeIfMuted(completion)
+                }
+                
+                if !GameConfig.muted {
+                    DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + GameConfig.delayBeforeRussianSpeech, execute: { [weak self] in
+                        self?.attemptToSayRussian(card: presentingCard, completion: completion)
+                    })
+                }
+            }
+        }
+        else {
+            gameService.answered(with: .Yes)
+        }
     }
     
     func userDidTouchNo() {
