@@ -22,7 +22,7 @@ class PhrasesGameService : IGameService {
         }
     }
 
-    required init(phrases: Set<StatPhrase>) {
+    required init(phrases: Set<StatPhrase>/*, languageOriginal: String, languageTranslation: String*/) {
         self.sourcePhrases = phrases
     }
     
@@ -55,7 +55,7 @@ class PhrasesGameService : IGameService {
     func shufflePhrases() {
         var result :[StatPhrase] = phrasesInGame
         
-        for i in 0..<result.count {
+        for i in 0..<result.count where result.count > 0 {
             let swapping = result[i]
             result.remove(at: i)
             let other = Int(arc4random() % UInt32(result.count))
@@ -63,7 +63,7 @@ class PhrasesGameService : IGameService {
         }
         
         // проверка на отсутствие идущих подряд одинаковых значений
-        for i in 1..<result.count {
+        for i in 1..<result.count where result.count > 0 {
             while(result[i] == result[i - 1]) {
                 var other: Int
                 repeat {

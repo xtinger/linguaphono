@@ -22,9 +22,13 @@ class Speaker : NSObject {
     }
     
     func say(text: String, language: String, completion: Completion?) {
+        print (language)
         synthesizer.stopSpeaking(at: .immediate)
         let utterance = AVSpeechUtterance(string: text)
         utterance.voice = AVSpeechSynthesisVoice(language: language)
+        utterance.rate = GameConfig.speechRatePresets.first(where: { (key, value) -> Bool in
+            return key == GameConfig.speechRatePresetKey
+        })!.1
         self.completion = completion
         synthesizer.speak(utterance)
     }

@@ -14,12 +14,24 @@ class MenuVC: UIViewController {
     
     @IBOutlet weak var urlTextField: UITextField!
     @IBOutlet weak var muteSwitch: UISwitch!
+    @IBOutlet weak var showTranslationOnAnyAnswerSwitch: UISwitch!
+    @IBOutlet weak var speechRateSegmentedControl: UISegmentedControl!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         urlTextField.text = GameConfig.phrasesURL?.absoluteString
         muteSwitch.isOn = !GameConfig.muted
+        showTranslationOnAnyAnswerSwitch.isOn = GameConfig.showTranslationOnAnyAnswer
+        
+        speechRateSegmentedControl.removeAllSegments()
+        for (key, _) in GameConfig.speechRatePresets {
+            speechRateSegmentedControl.insertSegment(withTitle: key, at: speechRateSegmentedControl.numberOfSegments, animated: false)
+        }
+        speechRateSegmentedControl.selectedSegmentIndex = GameConfig.speechRatePresets.index(where: { (key, value) -> Bool in
+            return key == GameConfig.speechRatePresetKey
+        })!
+        
     }
     
     @IBAction func buttonLoadTouched(_ sender: Any) {
@@ -31,5 +43,14 @@ class MenuVC: UIViewController {
     
     @IBAction func muteSwitchValueChanged(_ sender: Any) {
         GameConfig.muted = !muteSwitch.isOn
+    }
+    
+    @IBAction func showTranslationOnAnyAnswerSwitchValueChanged(_ sender: Any) {
+        GameConfig.showTranslationOnAnyAnswer = showTranslationOnAnyAnswerSwitch.isOn
+    }
+    
+    @IBAction func speechRateSegmentControlValueChanged(_ sender: Any) {
+        let index = speechRateSegmentedControl.selectedSegmentIndex
+        GameConfig.speechRatePresetKey = GameConfig.speechRatePresets[index].0
     }
 }
