@@ -93,7 +93,7 @@ extension GameVC : IGameViewInput {
             cardView.isHidden = true
             cardsPlace.addSubview(cardView)
             cardView.addFillSuperviewConstraints()
-            UIView.transition(from: existingCardView, to: cardView, duration: 0.25, options: [.transitionFlipFromRight, .showHideTransitionViews]) { (finished) in
+            UIView.transition(from: existingCardView, to: cardView, duration: 0.75, options: [.transitionFlipFromRight, .showHideTransitionViews]) { (finished) in
                 existingCardView.removeFromSuperview()
                 self.cardView = cardView
                 if let completion = completion {
