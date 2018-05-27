@@ -8,11 +8,10 @@
 
 import Foundation
 
-struct PhrasePresentation {
-    let statPhrase: StatPhrase
-    
+struct PhrasePresentation {    
     let languageNormal: String
     let languageFlipped: String
     let textNormal: String
     let textFlipped: String
+    let reverseLanguageInEffect: Bool
 }

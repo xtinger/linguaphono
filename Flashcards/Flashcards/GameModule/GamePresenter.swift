@@ -15,7 +15,7 @@ class GamePresenter : IGamePresenter, IGameViewOutput {
     var gameService : IGameService
     weak var view: IGameViewInput!
     var output: IGameModuleOutput?
-    var presentingCard : PhrasePresentation?
+    var phrasePresentation : PhrasePresentation?
     
     var cardNormal : CardView?
     var cardFlipped : CardView?
@@ -50,7 +50,7 @@ class GamePresenter : IGamePresenter, IGameViewOutput {
         }
 
         if GameConfig.showTranslationOnAnyAnswer && isOnNormalSide() {
-            guard let presentingCard = presentingCard, let cardFlipped = cardFlipped else {
+            guard let phrasePresentation = phrasePresentation, let cardFlipped = cardFlipped else {
                 return
             }
 
@@ -60,7 +60,7 @@ class GamePresenter : IGamePresenter, IGameViewOutput {
             
             if !GameConfig.muted {
                 DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + GameConfig.delayBeforeRussianSpeech, execute: { [weak self] in
-                    self?.attemptToSayFlipped(card: presentingCard, completion: completion)
+                    self?.attemptToSayFlipped(phrasePresentation: phrasePresentation, completion: completion)
                 })
             }
         }
@@ -78,7 +78,7 @@ class GamePresenter : IGamePresenter, IGameViewOutput {
         }
         
         if (isOnNormalSide()) {
-            guard let presentingCard = presentingCard, let cardFlipped = cardFlipped else {
+            guard let presentingCard = phrasePresentation, let cardFlipped = cardFlipped else {
                 return
             }
 
@@ -88,7 +88,7 @@ class GamePresenter : IGamePresenter, IGameViewOutput {
             
             if !GameConfig.muted {
                 DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + GameConfig.delayBeforeRussianSpeech, execute: { [weak self] in
-                    self?.attemptToSayFlipped(card: presentingCard, completion: completion)
+                    self?.attemptToSayFlipped(phrasePresentation: presentingCard, completion: completion)
                 })
             }
         }
@@ -107,7 +107,7 @@ class GamePresenter : IGamePresenter, IGameViewOutput {
     }
     
     func flip() {
-        guard let presentingCard = presentingCard, let cardFlipped = cardFlipped, let cardNormal = cardNormal else {
+        guard let phrasePresentation = phrasePresentation, let cardFlipped = cardFlipped, let cardNormal = cardNormal else {
             return
         }
         
@@ -119,14 +119,14 @@ class GamePresenter : IGamePresenter, IGameViewOutput {
             view.flipTo(cardView: cardFlipped) {
                 self.completeIfMuted(completion)
             }
-            attemptToSayFlipped(card: presentingCard, completion: completion)
+            attemptToSayFlipped(phrasePresentation: phrasePresentation, completion: completion)
             cardCurrent = cardFlipped
         }
         else {
             view.flipTo(cardView: cardNormal) {
                 self.completeIfMuted(completion)
             }
-            attemptToSayNormal(card: presentingCard, completion: completion)
+            attemptToSayNormal(phrasePresentation: phrasePresentation, completion: completion)
             
             cardCurrent = cardNormal
         }
@@ -134,7 +134,7 @@ class GamePresenter : IGamePresenter, IGameViewOutput {
     
     func userDidTouchRepeat() {
         self.view.userInputEnabled(enabled: false)
-        if let presentingCard = presentingCard {
+        if let presentingCard = phrasePresentation {
             // произносить даже если muted
             speaker.say(text: presentingCard.textNormal, language: GameConfig.languageOriginal) {
                 self.view.userInputEnabled(enabled: true)
@@ -142,24 +142,24 @@ class GamePresenter : IGamePresenter, IGameViewOutput {
         }
     }
     
-    func attemptToSayNormal(card: PhrasePresentation, completion: Completion?) {
+    func attemptToSayNormal(phrasePresentation: PhrasePresentation, completion: Completion?) {
         guard !GameConfig.muted else {return}
-        speaker.say(text: card.textNormal, language: card.languageNormal, completion: completion)
+        speaker.say(text: phrasePresentation.textNormal, language: phrasePresentation.languageNormal, completion: completion)
     }
     
-    func attemptToSayNormal(card: PhrasePresentation) {
+    func attemptToSayNormal(phrasePresentation: PhrasePresentation) {
         guard !GameConfig.muted else {return}
-        attemptToSayNormal(card:card, completion: nil)
+        attemptToSayNormal(phrasePresentation:phrasePresentation, completion: nil)
     }
     
-    func attemptToSayFlipped(card: PhrasePresentation, completion: Completion?) {
+    func attemptToSayFlipped(phrasePresentation: PhrasePresentation, completion: Completion?) {
         guard !GameConfig.muted else {return}
-        speaker.say(text: card.textFlipped, language: card.languageFlipped, completion: completion)
+        speaker.say(text: phrasePresentation.textFlipped, language: phrasePresentation.languageFlipped, completion: completion)
     }
     
-    func attemptToSayFlipped(card: PhrasePresentation) {
+    func attemptToSayFlipped(phrasePresentation: PhrasePresentation) {
         guard !GameConfig.muted else {return}
-        attemptToSayFlipped(card: card, completion: nil)
+        attemptToSayFlipped(phrasePresentation: phrasePresentation, completion: nil)
     }
     
     func completeIfMuted(_ completion: @escaping Completion) {
@@ -187,8 +187,8 @@ extension GamePresenter : IGameServiceOutput {
         cardViewFlipped.label.text = phrasePresentation.textFlipped
         cardViewFlipped.backColor = Styles.Card.backgroundColorFlipped
         self.cardFlipped = cardViewFlipped
-
-        presentingCard = phrasePresentation
+        
+        self.phrasePresentation = phrasePresentation
         
         self.view.userInputEnabled(enabled: false)
         
@@ -203,8 +203,8 @@ extension GamePresenter : IGameServiceOutput {
         
         if !GameConfig.muted {
             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + GameConfig.delayBeforeEnglishSpeech, execute: { [weak self] in
-                if let presentingCard = self?.presentingCard {
-                    self?.attemptToSayNormal(card: presentingCard, completion: enableUI)
+                if let phrasePresentation = self?.phrasePresentation {
+                    self?.attemptToSayNormal(phrasePresentation: phrasePresentation, completion: enableUI)
                 }
             })
         }

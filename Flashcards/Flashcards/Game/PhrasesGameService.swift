@@ -33,13 +33,13 @@ class PhrasesGameService : IGameService {
     }
 
     func buildPhrasePresentation(phrase: StatPhrase) -> PhrasePresentation {
-        let swapLanguages = GameConfig.reverseLanguageMode == .on || arc4random_uniform(2) == 1
+        let reverseLanguageInEffect = GameConfig.reverseLanguageMode == .on || arc4random_uniform(2) == 1
         
-        let languageNormal = swapLanguages ? GameConfig.languageTranslation : GameConfig.languageOriginal
-        let languageFlipped = swapLanguages ? GameConfig.languageOriginal : GameConfig.languageTranslation
-        let textNormal = swapLanguages ? phrase.textTranslated : phrase.textOriginal
-        let textFlipped = swapLanguages ? phrase.textOriginal : phrase.textTranslated
-        let settings = PhrasePresentation(statPhrase: phrase, languageNormal: languageNormal, languageFlipped: languageFlipped, textNormal: textNormal, textFlipped: textFlipped)
+        let languageNormal = reverseLanguageInEffect ? GameConfig.languageTranslation : GameConfig.languageOriginal
+        let languageFlipped = reverseLanguageInEffect ? GameConfig.languageOriginal : GameConfig.languageTranslation
+        let textNormal = reverseLanguageInEffect ? phrase.textTranslated : phrase.textOriginal
+        let textFlipped = reverseLanguageInEffect ? phrase.textOriginal : phrase.textTranslated
+        let settings = PhrasePresentation(languageNormal: languageNormal, languageFlipped: languageFlipped, textNormal: textNormal, textFlipped: textFlipped, reverseLanguageInEffect: reverseLanguageInEffect)
         
         return settings
     }

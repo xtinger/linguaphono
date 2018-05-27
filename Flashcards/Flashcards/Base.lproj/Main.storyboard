@@ -224,7 +224,7 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Режим обратного перевода" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hee-RK-pug">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Режим обратного перевода" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hee-RK-pug">
                                 <rect key="frame" x="16" y="309" width="225" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
@@ -268,6 +268,7 @@
                             <constraint firstItem="5b7-5p-JZv" firstAttribute="leading" secondItem="G80-xQ-L2T" secondAttribute="leading" constant="16" id="laf-Ok-dzg"/>
                             <constraint firstItem="ogk-H5-IiC" firstAttribute="trailing" secondItem="ICr-eg-PgX" secondAttribute="trailing" constant="16" id="oVt-WF-zcO"/>
                             <constraint firstItem="hee-RK-pug" firstAttribute="top" secondItem="jRL-bu-TXA" secondAttribute="bottom" constant="8" id="qYo-1x-CDQ"/>
+                            <constraint firstItem="hee-RK-pug" firstAttribute="leading" secondItem="ogk-H5-IiC" secondAttribute="leading" constant="16" id="qqQ-iT-jQy"/>
                             <constraint firstItem="xGO-cQ-iym" firstAttribute="leading" secondItem="G80-xQ-L2T" secondAttribute="leading" constant="16" id="s8C-vf-wG7"/>
                             <constraint firstItem="fdb-cV-1O6" firstAttribute="centerY" secondItem="5b7-5p-JZv" secondAttribute="centerY" id="ssb-pn-6Mc"/>
                             <constraint firstItem="ogk-H5-IiC" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="fdb-cV-1O6" secondAttribute="trailing" constant="16" id="uyO-p3-7sw"/>

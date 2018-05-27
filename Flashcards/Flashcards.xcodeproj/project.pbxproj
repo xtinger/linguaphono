@@ -163,13 +163,14 @@
 		92106C8820ADBCCA000B16C8 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				923D036720B41B02001173D7 /* JSONData */,
-				927101E520AEF9CE003B9D20 /* Stat */,
+				923D036720B41B02001173D7 /* Backend */,
+				927101E520AEF9CE003B9D20 /* BusinessLogic */,
+				927257BA20BADCDA006EC5D9 /* Presentation */,
 			);
 			path = Models;
 			sourceTree = "<group>";
 		};
-		923D036720B41B02001173D7 /* JSONData */ = {
+		923D036720B41B02001173D7 /* Backend */ = {
 			isa = PBXGroup;
 			children = (
 				926674BE20ADC10600F91D32 /* Root.swift */,
@@ -178,7 +179,7 @@
 				92106C8D20ADBD1D000B16C8 /* Word.swift */,
 				92106C8F20ADBD3C000B16C8 /* Phrase.swift */,
 			);
-			path = JSONData;
+			path = Backend;
 			sourceTree = "<group>";
 		};
 		9243DFC320B4276900651713 /* FlashcardsWireframe */ = {
@@ -198,7 +199,7 @@
 			path = DataStore;
 			sourceTree = "<group>";
 		};
-		927101E520AEF9CE003B9D20 /* Stat */ = {
+		927101E520AEF9CE003B9D20 /* BusinessLogic */ = {
 			isa = PBXGroup;
 			children = (
 				927101E620AEF9ED003B9D20 /* StatRoot.swift */,
@@ -207,7 +208,15 @@
 				927101EC20AEFA30003B9D20 /* StatWord.swift */,
 				92C2F3E820A1F01E00F5982B /* StatPhrase.swift */,
 			);
-			path = Stat;
+			path = BusinessLogic;
+			sourceTree = "<group>";
+		};
+		927257BA20BADCDA006EC5D9 /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				927257B820BACD22006EC5D9 /* PhrasePresentation.swift */,
+			);
+			path = Presentation;
 			sourceTree = "<group>";
 		};
 		92A18DAD20B5D43C00DE07D2 /* Settings */ = {
@@ -256,7 +265,6 @@
 				92C2F3EF20A1F3EF00F5982B /* IGameService.swift */,
 				92B18D5220A45C5D00F3CF08 /* IGameServiceOutput.swift */,
 				92EE108A20A98C1000D5C0F4 /* PhrasesGameService.swift */,
-				927257B820BACD22006EC5D9 /* PhrasePresentation.swift */,
 			);
 			path = Game;
 			sourceTree = "<group>";
