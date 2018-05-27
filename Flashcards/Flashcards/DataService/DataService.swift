@@ -12,7 +12,7 @@ import CSV
 class DataService : IDataService{
     static let userDefaultsStatDataKey = "Stat"
     
-    var loadFromURL = false
+    var loadFromURL = true
     
     var statRoot: StatRoot?
     var currentLesson: StatLesson?
@@ -243,7 +243,7 @@ class DataService : IDataService{
                             lesson.words.map({ (word) -> StatWord in
                                 return StatWord(text:word.text, phrases:
                                     word.phrases.map({ (phrase) -> StatPhrase in
-                                        return StatPhrase(textEng: phrase.textNormal, textRu: phrase.textBack, corrects: 0, incorrects: 0)
+                                        return StatPhrase(textOriginal: phrase.textNormal, textTranslated: phrase.textBack, corrects: 0, incorrects: 0)
                                     })
                                 )
                             })

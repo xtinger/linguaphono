@@ -31,4 +31,5 @@ class GameConfig {
     static var showTranslationOnAnyAnswer = true
     static var languageOriginal = "en-US"
     static var languageTranslation = "ru-RU"
+    static var randomLanguageMode = false
 }

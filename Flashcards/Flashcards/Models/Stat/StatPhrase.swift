@@ -14,18 +14,18 @@ enum AnswerType : Int, Codable{
 
 class StatPhrase: Codable, Hashable {
 
-    var textEng : String
-    var textRu : String
+    var textOriginal : String
+    var textTranslated : String
     var corrects : Int
     var incorrects : Int
     
     var hashValue: Int {
-        return textEng.hashValue ^ textRu.hashValue
+        return textOriginal.hashValue ^ textTranslated.hashValue
     }
     
-    init(textEng: String, textRu: String, corrects: Int, incorrects: Int) {
-        self.textEng = textEng
-        self.textRu = textRu
+    init(textOriginal: String, textTranslated: String, corrects: Int, incorrects: Int) {
+        self.textOriginal = textOriginal
+        self.textTranslated = textTranslated
         self.corrects = corrects
         self.incorrects = incorrects
     }
@@ -39,10 +39,10 @@ extension StatPhrase: Equatable {
 
 extension StatPhrase: CustomStringConvertible, CustomDebugStringConvertible {
     var debugDescription: String {
-        return "\(textEng) : \(textRu) [\(corrects):\(incorrects)]\n"
+        return "\(textOriginal) : \(textTranslated) [\(corrects):\(incorrects)]\n"
     }
     
     var description: String {
-        return "\(textEng) : \(textRu) [\(corrects):\(incorrects)]\n"
+        return "\(textOriginal) : \(textTranslated) [\(corrects):\(incorrects)]\n"
     }
 }

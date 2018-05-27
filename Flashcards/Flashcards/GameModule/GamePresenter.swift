@@ -15,7 +15,7 @@ class GamePresenter : IGamePresenter, IGameViewOutput {
     var gameService : IGameService
     weak var view: IGameViewInput!
     var output: IGameModuleOutput?
-    var presentingCard : StatPhrase?
+    var presentingCard : PhrasePresentation?
     
     var cardNormal : CardView?
     var cardFlipped : CardView?
@@ -60,7 +60,7 @@ class GamePresenter : IGamePresenter, IGameViewOutput {
             
             if !GameConfig.muted {
                 DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + GameConfig.delayBeforeRussianSpeech, execute: { [weak self] in
-                    self?.attemptToSayRussian(card: presentingCard, completion: completion)
+                    self?.attemptToSayFlipped(card: presentingCard, completion: completion)
                 })
             }
         }
@@ -88,7 +88,7 @@ class GamePresenter : IGamePresenter, IGameViewOutput {
             
             if !GameConfig.muted {
                 DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + GameConfig.delayBeforeRussianSpeech, execute: { [weak self] in
-                    self?.attemptToSayRussian(card: presentingCard, completion: completion)
+                    self?.attemptToSayFlipped(card: presentingCard, completion: completion)
                 })
             }
         }
@@ -119,14 +119,14 @@ class GamePresenter : IGamePresenter, IGameViewOutput {
             view.flipTo(cardView: cardFlipped) {
                 self.completeIfMuted(completion)
             }
-            attemptToSayRussian(card: presentingCard, completion: completion)
+            attemptToSayFlipped(card: presentingCard, completion: completion)
             cardCurrent = cardFlipped
         }
         else {
             view.flipTo(cardView: cardNormal) {
                 self.completeIfMuted(completion)
             }
-            attemptToSayEnglish(card: presentingCard, completion: completion)
+            attemptToSayNormal(card: presentingCard, completion: completion)
             
             cardCurrent = cardNormal
         }
@@ -134,32 +134,32 @@ class GamePresenter : IGamePresenter, IGameViewOutput {
     
     func userDidTouchRepeat() {
         self.view.userInputEnabled(enabled: false)
-        if let card = presentingCard {
+        if let presentingCard = presentingCard {
             // произносить даже если muted
-            speaker.say(text: card.textEng, language: GameConfig.languageOriginal) {
+            speaker.say(text: presentingCard.textNormal, language: GameConfig.languageOriginal) {
                 self.view.userInputEnabled(enabled: true)
             }
         }
     }
     
-    func attemptToSayEnglish(card: StatPhrase, completion: Completion?) {
+    func attemptToSayNormal(card: PhrasePresentation, completion: Completion?) {
         guard !GameConfig.muted else {return}
-        speaker.say(text: card.textEng, language: GameConfig.languageOriginal, completion: completion)
+        speaker.say(text: card.textNormal, language: card.languageNormal, completion: completion)
     }
     
-    func attemptToSayEnglish(card: StatPhrase) {
+    func attemptToSayNormal(card: PhrasePresentation) {
         guard !GameConfig.muted else {return}
-        attemptToSayEnglish(card:card, completion: nil)
+        attemptToSayNormal(card:card, completion: nil)
     }
     
-    func attemptToSayRussian(card: StatPhrase, completion: Completion?) {
+    func attemptToSayFlipped(card: PhrasePresentation, completion: Completion?) {
         guard !GameConfig.muted else {return}
-        speaker.say(text: card.textRu, language: GameConfig.languageTranslation, completion: completion)
+        speaker.say(text: card.textFlipped, language: card.languageFlipped, completion: completion)
     }
     
-    func attemptToSayRussian(card: StatPhrase) {
+    func attemptToSayFlipped(card: PhrasePresentation) {
         guard !GameConfig.muted else {return}
-        speaker.say(text: card.textRu, language: GameConfig.languageTranslation, completion: nil)
+        attemptToSayFlipped(card: card, completion: nil)
     }
     
     func completeIfMuted(_ completion: @escaping Completion) {
@@ -176,19 +176,19 @@ extension GamePresenter : IGameServiceOutput {
         view.changeProgress(value: progress)
     }
     
-    func presentCard(_ card: StatPhrase) {
+    func presentPhrase(_ phrasePresentation: PhrasePresentation) {
         
         let cardViewNormal = CardView()
-        cardViewNormal.label.text = card.textEng
+        cardViewNormal.label.text = phrasePresentation.textNormal
         cardViewNormal.backColor = Styles.Card.backgroundColorNormal
         self.cardNormal = cardViewNormal
         
         let cardViewFlipped = CardView()
-        cardViewFlipped.label.text = card.textRu
+        cardViewFlipped.label.text = phrasePresentation.textFlipped
         cardViewFlipped.backColor = Styles.Card.backgroundColorFlipped
         self.cardFlipped = cardViewFlipped
 
-        presentingCard = card
+        presentingCard = phrasePresentation
         
         self.view.userInputEnabled(enabled: false)
         
@@ -203,7 +203,9 @@ extension GamePresenter : IGameServiceOutput {
         
         if !GameConfig.muted {
             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + GameConfig.delayBeforeEnglishSpeech, execute: { [weak self] in
-                self?.attemptToSayEnglish(card: card, completion: enableUI)
+                if let presentingCard = self?.presentingCard {
+                    self?.attemptToSayNormal(card: presentingCard, completion: enableUI)
+                }
             })
         }
     }

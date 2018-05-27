@@ -32,10 +32,23 @@ class PhrasesGameService : IGameService {
         presentPhrase()
     }
 
+    func buildPhrasePresentation(phrase: StatPhrase) -> PhrasePresentation {
+        let languageNormal = GameConfig.randomLanguageMode ? GameConfig.languageTranslation : GameConfig.languageOriginal
+        let languageFlipped = GameConfig.randomLanguageMode ? GameConfig.languageOriginal : GameConfig.languageTranslation
+        let textNormal = GameConfig.randomLanguageMode ? phrase.textTranslated : phrase.textOriginal
+        let textFlipped = GameConfig.randomLanguageMode ? phrase.textOriginal : phrase.textTranslated
+        let settings = PhrasePresentation(statPhrase: phrase, languageNormal: languageNormal, languageFlipped: languageFlipped, textNormal: textNormal, textFlipped: textFlipped)
+        
+        return settings
+    }
+    
     func presentPhrase() {
+        
+        
         if let currentPhrase = currentPhrase {
 //            print("\n\n\(phrasesInGame!)")
-            output.presentCard(currentPhrase)
+            let phrasePresentation = buildPhrasePresentation(phrase: currentPhrase)
+            output.presentPhrase(phrasePresentation)
         }
         
         let total: Float = Float(GameConfig.newLessonPhaseMinQuestionsForeachPhrase * sourcePhrases.count)
