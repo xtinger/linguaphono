@@ -42,7 +42,9 @@ class Speaker : NSObject {
 extension Speaker : AVSpeechSynthesizerDelegate {
     public func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didFinish utterance: AVSpeechUtterance) {
         if let completion = completion {
-            completion()
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now(), execute: {
+                completion()
+            })
         }
     }
 }

@@ -44,46 +44,16 @@ class GamePresenter : IGamePresenter, IGameViewOutput {
     func userDidTouchYes() {
         print("userDidTouchYes()")
         view.userInputEnabled(enabled: false)
-
-        if (GameConfig.showTranslationOnAnyAnswer) {
-            if (isOnNormalSide()) {
-                guard let presentingCard = presentingCard, let cardFlipped = cardFlipped else {
-                    return
-                }
-                
-                let completion : IGameViewInput.FlipCompletion = { [weak self] in
-                    self?.gameService.answered(with: .Yes)
-                }
-                
-                view.flipTo(cardView: cardFlipped) {
-                    self.completeIfMuted(completion)
-                }
-                
-                if !GameConfig.muted {
-                    DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + GameConfig.delayBeforeRussianSpeech, execute: { [weak self] in
-                        self?.attemptToSayRussian(card: presentingCard, completion: completion)
-                    })
-                }
-            }
-        }
-        else {
-            gameService.answered(with: .Yes)
-        }
-    }
-    
-    func userDidTouchNo() {
-        print("userDidTouchNo()")
-        view.userInputEnabled(enabled: false)
         
-        if (isOnNormalSide()) {
+        let completion : IGameViewInput.FlipCompletion = { [weak self] in
+            self?.gameService.answered(with: .Yes)
+        }
+
+        if GameConfig.showTranslationOnAnyAnswer && isOnNormalSide() {
             guard let presentingCard = presentingCard, let cardFlipped = cardFlipped else {
                 return
             }
-            
-            let completion : IGameViewInput.FlipCompletion = { [weak self] in
-                self?.gameService.answered(with: .No)
-            }
-            
+
             view.flipTo(cardView: cardFlipped) {
                 self.completeIfMuted(completion)
             }
@@ -95,7 +65,35 @@ class GamePresenter : IGamePresenter, IGameViewOutput {
             }
         }
         else {
-            gameService.answered(with: .No)
+           completion()
+        }
+    }
+    
+    func userDidTouchNo() {
+        print("userDidTouchNo()")
+        view.userInputEnabled(enabled: false)
+        
+        let completion : IGameViewInput.FlipCompletion = { [weak self] in
+            self?.gameService.answered(with: .No)
+        }
+        
+        if (isOnNormalSide()) {
+            guard let presentingCard = presentingCard, let cardFlipped = cardFlipped else {
+                return
+            }
+
+            view.flipTo(cardView: cardFlipped) {
+                self.completeIfMuted(completion)
+            }
+            
+            if !GameConfig.muted {
+                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + GameConfig.delayBeforeRussianSpeech, execute: { [weak self] in
+                    self?.attemptToSayRussian(card: presentingCard, completion: completion)
+                })
+            }
+        }
+        else {
+            completion()
         }
     }
     
@@ -218,15 +216,3 @@ extension GamePresenter : IGameServiceOutput {
         view.alert(alert: alert, animated: true)
     }
 }
-//
-//extension GamePresenter : AVSpeechSynthesizerDelegate {
-//    public func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didFinish utterance: AVSpeechUtterance) {
-//        if utterance.voice?.language == "en-US" {
-//            if let card = presentingCard {
-//                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + GameConfig.delayBeforeRussiahSpeech, execute: { [weak self] in
-//                    self?.sayRussian(card: card)
-//                })
-//            }
-//        }
-//    }
-//}
