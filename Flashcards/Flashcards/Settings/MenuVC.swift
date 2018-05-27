@@ -16,6 +16,7 @@ class MenuVC: UIViewController {
     @IBOutlet weak var muteSwitch: UISwitch!
     @IBOutlet weak var showTranslationOnAnyAnswerSwitch: UISwitch!
     @IBOutlet weak var speechRateSegmentedControl: UISegmentedControl!
+    @IBOutlet weak var reverseLanguageModeSegmentedControl: UISegmentedControl!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,6 +33,14 @@ class MenuVC: UIViewController {
             return key == GameConfig.speechRatePresetKey
         })!
         
+        
+        reverseLanguageModeSegmentedControl.removeAllSegments()
+        for (key, _) in GameConfig.reverseLanguageModeSetting {
+            reverseLanguageModeSegmentedControl.insertSegment(withTitle: key, at: reverseLanguageModeSegmentedControl.numberOfSegments, animated: false)
+        }
+        reverseLanguageModeSegmentedControl.selectedSegmentIndex = GameConfig.reverseLanguageModeSetting.index(where: { (key, value) -> Bool in
+            return value == GameConfig.reverseLanguageMode
+        })!
     }
     
     @IBAction func buttonLoadTouched(_ sender: Any) {
@@ -52,5 +61,10 @@ class MenuVC: UIViewController {
     @IBAction func speechRateSegmentControlValueChanged(_ sender: Any) {
         let index = speechRateSegmentedControl.selectedSegmentIndex
         GameConfig.speechRatePresetKey = GameConfig.speechRatePresets[index].0
+    }
+    
+    @IBAction func reverseLanguageModeSegmentedControlValueChanged(_ sender: Any) {
+        let index = reverseLanguageModeSegmentedControl.selectedSegmentIndex
+        GameConfig.reverseLanguageMode = GameConfig.reverseLanguageModeSetting[index].1
     }
 }

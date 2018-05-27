@@ -179,7 +179,7 @@
                                 </connections>
                             </switch>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Произносить текст карточек" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fdb-cV-1O6">
-                                <rect key="frame" x="73" y="154" width="230.5" height="21"/>
+                                <rect key="frame" x="73" y="154" width="231" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -197,13 +197,13 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Скорость речи" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gf7-hM-Ig5">
-                                <rect key="frame" x="16" y="248" width="119" height="20.5"/>
+                                <rect key="frame" x="16" y="248" width="119" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="jRL-bu-TXA">
-                                <rect key="frame" x="16" y="272.5" width="343" height="29"/>
+                                <rect key="frame" x="16" y="273" width="343" height="29"/>
                                 <segments>
                                     <segment title="1"/>
                                     <segment title="2"/>
@@ -215,10 +215,37 @@
                                     <action selector="speechRateSegmentControlValueChanged:" destination="mXV-EZ-nMs" eventType="valueChanged" id="Of5-f3-QFL"/>
                                 </connections>
                             </segmentedControl>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I66-m2-Hp5">
+                                <rect key="frame" x="359" y="303" width="0.0" height="41"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="41" id="8Pz-es-RTX"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Режим обратного перевода" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hee-RK-pug">
+                                <rect key="frame" x="16" y="309" width="225" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="ICr-eg-PgX">
+                                <rect key="frame" x="16" y="334" width="343" height="29"/>
+                                <segments>
+                                    <segment title="Выключен"/>
+                                    <segment title="Случайный"/>
+                                    <segment title="Постоянный"/>
+                                </segments>
+                                <connections>
+                                    <action selector="reverseLanguageModeSegmentedControlValueChanged:" destination="mXV-EZ-nMs" eventType="valueChanged" id="V44-Se-Xfi"/>
+                                </connections>
+                            </segmentedControl>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="sal-gb-FY0" firstAttribute="leading" secondItem="xGO-cQ-iym" secondAttribute="trailing" constant="8" id="6tO-Jt-TGa"/>
+                            <constraint firstItem="I66-m2-Hp5" firstAttribute="top" secondItem="G80-xQ-L2T" secondAttribute="top" constant="303" id="8lS-jh-g4w"/>
                             <constraint firstItem="ogk-H5-IiC" firstAttribute="trailing" secondItem="Cgz-gy-BA1" secondAttribute="trailing" constant="16" id="8te-ve-q0C"/>
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="VhH-Vy-JGT" secondAttribute="trailing" constant="16" id="9Tx-yu-dY0"/>
                             <constraint firstItem="Gf7-hM-Ig5" firstAttribute="top" secondItem="sal-gb-FY0" secondAttribute="bottom" constant="16" id="Adn-mg-WNy"/>
@@ -227,24 +254,31 @@
                             <constraint firstItem="sal-gb-FY0" firstAttribute="centerY" secondItem="xGO-cQ-iym" secondAttribute="centerY" id="FMW-vg-1bB"/>
                             <constraint firstItem="xGO-cQ-iym" firstAttribute="top" secondItem="5b7-5p-JZv" secondAttribute="bottom" constant="16" id="IJf-es-pnB"/>
                             <constraint firstItem="jRL-bu-TXA" firstAttribute="top" secondItem="Gf7-hM-Ig5" secondAttribute="bottom" constant="4" id="IQk-T9-6vc"/>
+                            <constraint firstItem="ICr-eg-PgX" firstAttribute="top" secondItem="hee-RK-pug" secondAttribute="bottom" constant="4" id="LSL-3g-XHo"/>
                             <constraint firstItem="Gf7-hM-Ig5" firstAttribute="leading" secondItem="ogk-H5-IiC" secondAttribute="leading" constant="16" id="Qez-Nc-nq5"/>
                             <constraint firstItem="Cgz-gy-BA1" firstAttribute="leading" secondItem="ogk-H5-IiC" secondAttribute="leading" constant="16" id="RZY-ib-YHS"/>
+                            <constraint firstItem="ogk-H5-IiC" firstAttribute="trailing" secondItem="I66-m2-Hp5" secondAttribute="trailing" constant="16" id="Rsu-Fj-VFs"/>
                             <constraint firstItem="jRL-bu-TXA" firstAttribute="leading" secondItem="ogk-H5-IiC" secondAttribute="leading" constant="16" id="UNJ-U6-lcx"/>
                             <constraint firstItem="fdb-cV-1O6" firstAttribute="leading" secondItem="5b7-5p-JZv" secondAttribute="trailing" constant="8" id="Uaa-Nc-sg5"/>
                             <constraint firstItem="ogk-H5-IiC" firstAttribute="trailing" secondItem="sal-gb-FY0" secondAttribute="trailing" constant="16" id="VBH-D8-bUN"/>
+                            <constraint firstItem="I66-m2-Hp5" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="G80-xQ-L2T" secondAttribute="leading" constant="20" symbolic="YES" id="Zio-zl-nOj"/>
                             <constraint firstItem="5b7-5p-JZv" firstAttribute="top" secondItem="Cgz-gy-BA1" secondAttribute="bottom" constant="45" id="cXH-XF-Rfq"/>
                             <constraint firstItem="VhH-Vy-JGT" firstAttribute="leading" secondItem="ogk-H5-IiC" secondAttribute="leading" constant="16" id="dfU-FD-bgJ"/>
                             <constraint firstItem="Cgz-gy-BA1" firstAttribute="top" secondItem="VhH-Vy-JGT" secondAttribute="bottom" constant="8" id="fm1-ga-oVj"/>
                             <constraint firstItem="5b7-5p-JZv" firstAttribute="leading" secondItem="G80-xQ-L2T" secondAttribute="leading" constant="16" id="laf-Ok-dzg"/>
+                            <constraint firstItem="ogk-H5-IiC" firstAttribute="trailing" secondItem="ICr-eg-PgX" secondAttribute="trailing" constant="16" id="oVt-WF-zcO"/>
+                            <constraint firstItem="hee-RK-pug" firstAttribute="top" secondItem="jRL-bu-TXA" secondAttribute="bottom" constant="8" id="qYo-1x-CDQ"/>
                             <constraint firstItem="xGO-cQ-iym" firstAttribute="leading" secondItem="G80-xQ-L2T" secondAttribute="leading" constant="16" id="s8C-vf-wG7"/>
                             <constraint firstItem="fdb-cV-1O6" firstAttribute="centerY" secondItem="5b7-5p-JZv" secondAttribute="centerY" id="ssb-pn-6Mc"/>
                             <constraint firstItem="ogk-H5-IiC" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="fdb-cV-1O6" secondAttribute="trailing" constant="16" id="uyO-p3-7sw"/>
+                            <constraint firstItem="ICr-eg-PgX" firstAttribute="leading" secondItem="ogk-H5-IiC" secondAttribute="leading" constant="16" id="xJx-xh-cWQ"/>
                             <constraint firstItem="VhH-Vy-JGT" firstAttribute="top" secondItem="ogk-H5-IiC" secondAttribute="top" constant="16" id="zkT-Ay-5ZV"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="ogk-H5-IiC"/>
                     </view>
                     <connections>
                         <outlet property="muteSwitch" destination="5b7-5p-JZv" id="Epg-1n-exr"/>
+                        <outlet property="reverseLanguageModeSegmentedControl" destination="ICr-eg-PgX" id="RjZ-UR-4fS"/>
                         <outlet property="showTranslationOnAnyAnswerSwitch" destination="xGO-cQ-iym" id="nMs-QX-Mpm"/>
                         <outlet property="speechRateSegmentedControl" destination="jRL-bu-TXA" id="0MU-2q-Bod"/>
                         <outlet property="urlTextField" destination="Cgz-gy-BA1" id="M3W-mT-RUq"/>
@@ -252,7 +286,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="o3I-tm-xDh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="874" y="112"/>
+            <point key="canvasLocation" x="872.79999999999995" y="111.99400299850076"/>
         </scene>
     </scenes>
     <resources>

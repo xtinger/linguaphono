@@ -17,6 +17,16 @@ class GameConfig {
         ("5", 0.5)
     ]
     
+    enum ReverseLanguageMode {
+        case off, random, on
+    }
+    
+    static var reverseLanguageModeSetting: [(String, ReverseLanguageMode)] = [
+        ("Выключен", .off),
+        ("Случайный", .random),
+        ("Постоянный", .on),
+    ]
+    
     static var phrasesURL: URL? = URL(string: "https://docs.google.com/spreadsheets/d/e/2PACX-1vTw9rj-HGxxsVaHWmqY2Getn7Nw_h1RVlkjLiXZPZdXHmxDEVrXxvQbXWfgOw7sWixSEhEtSQ-jCCt4/pub?gid=0&single=true&output=csv")
     static var newLessonPhaseMinQuestionsForeachPhrase = 1
     static var maximumSprintAdditionalPhrases = 10
@@ -31,5 +41,5 @@ class GameConfig {
     static var showTranslationOnAnyAnswer = true
     static var languageOriginal = "en-US"
     static var languageTranslation = "ru-RU"
-    static var randomLanguageMode = false
+    static var reverseLanguageMode: ReverseLanguageMode = .off
 }
