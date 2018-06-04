@@ -33,7 +33,7 @@ class FlashcardsWireframe {
         dataService.prepare { [weak self] in
             
             if let ws = self {
-                if let gameStartupData = ws.dataService.prepareNextPhraseSet() {
+                if let gameStartupData = ws.dataService.prepareNextGame() {
                     ws.setup(with: gameStartupData, config: ws.dataService.config)
                 }
 
@@ -72,7 +72,7 @@ class FlashcardsWireframe {
 
 extension FlashcardsWireframe : IGameModuleOutput {
     func gameFinished() {
-        if let gameStartupData = dataService.prepareNextPhraseSet() {
+        if let gameStartupData = dataService.prepareNextGame() {
             setup(with: gameStartupData, config: dataService.config)
             presentGame()
         }

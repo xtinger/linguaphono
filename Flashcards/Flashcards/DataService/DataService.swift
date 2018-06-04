@@ -71,7 +71,7 @@ class DataService : IDataService{
         }
     }
     
-    func prepareNextPhraseSet() -> GameStartupData?{
+    func prepareNextGame() -> GameStartupData?{
         
         var phrases: Set<StatPhrase> = []
 
