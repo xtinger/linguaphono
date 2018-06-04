@@ -140,8 +140,15 @@ class GamePresenter : IGamePresenter, IGameViewOutput {
         self.view.userInputEnabled(enabled: false)
         if let presentingCard = phrasePresentation {
             // произносить даже если muted
-            speaker.say(text: presentingCard.textNormal, language: config.languageOriginal) {
-                self.view.userInputEnabled(enabled: true)
+            if isOnNormalSide() {
+                speaker.say(text: presentingCard.textNormal, language: presentingCard.languageNormal) {
+                    self.view.userInputEnabled(enabled: true)
+                }
+            }
+            else {
+                speaker.say(text: presentingCard.textFlipped, language: presentingCard.languageFlipped) {
+                    self.view.userInputEnabled(enabled: true)
+                }
             }
         }
     }
