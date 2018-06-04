@@ -28,6 +28,10 @@
 		92B2760020B31CDB008E51A7 /* RoundedProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B275FF20B31CDB008E51A7 /* RoundedProgressView.swift */; };
 		92B924F920A5AEAB009A20B4 /* GameConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B924F820A5AEAB009A20B4 /* GameConfig.swift */; };
 		92C285D320C57B9100932894 /* GameState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C285D220C57B9100932894 /* GameState.swift */; };
+		92C285D620C57D5A00932894 /* CSVResourceReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C285D520C57D5A00932894 /* CSVResourceReader.swift */; };
+		92C285D820C580B100932894 /* IResourceReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C285D720C580B100932894 /* IResourceReader.swift */; };
+		92C285DA20C5838700932894 /* JSONResourceReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C285D920C5838700932894 /* JSONResourceReader.swift */; };
+		92C285DC20C58A8500932894 /* GameStartupData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C285DB20C58A8500932894 /* GameStartupData.swift */; };
 		92C2F3AB20A1A95300F5982B /* BigButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C2F3AA20A1A95300F5982B /* BigButton.swift */; };
 		92C2F3D020A1DE0400F5982B /* GameAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C2F3CF20A1DE0400F5982B /* GameAssembly.swift */; };
 		92C2F3D220A1E1E700F5982B /* FlashcardsWireframe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C2F3D120A1E1E700F5982B /* FlashcardsWireframe.swift */; };
@@ -105,6 +109,10 @@
 		92B275FF20B31CDB008E51A7 /* RoundedProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedProgressView.swift; sourceTree = "<group>"; };
 		92B924F820A5AEAB009A20B4 /* GameConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameConfig.swift; sourceTree = "<group>"; };
 		92C285D220C57B9100932894 /* GameState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameState.swift; sourceTree = "<group>"; };
+		92C285D520C57D5A00932894 /* CSVResourceReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSVResourceReader.swift; sourceTree = "<group>"; };
+		92C285D720C580B100932894 /* IResourceReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IResourceReader.swift; sourceTree = "<group>"; };
+		92C285D920C5838700932894 /* JSONResourceReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONResourceReader.swift; sourceTree = "<group>"; };
+		92C285DB20C58A8500932894 /* GameStartupData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameStartupData.swift; sourceTree = "<group>"; };
 		92C2F3AA20A1A95300F5982B /* BigButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BigButton.swift; sourceTree = "<group>"; };
 		92C2F3CF20A1DE0400F5982B /* GameAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameAssembly.swift; sourceTree = "<group>"; };
 		92C2F3D120A1E1E700F5982B /* FlashcardsWireframe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlashcardsWireframe.swift; sourceTree = "<group>"; };
@@ -230,6 +238,16 @@
 			path = Settings;
 			sourceTree = "<group>";
 		};
+		92C285D420C57D3000932894 /* ResourceReaders */ = {
+			isa = PBXGroup;
+			children = (
+				92C285D720C580B100932894 /* IResourceReader.swift */,
+				92C285D520C57D5A00932894 /* CSVResourceReader.swift */,
+				92C285D920C5838700932894 /* JSONResourceReader.swift */,
+			);
+			path = ResourceReaders;
+			sourceTree = "<group>";
+		};
 		92C2F3A920A1A91200F5982B /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -258,6 +276,7 @@
 			children = (
 				92C2F3EA20A1F28B00F5982B /* IDataService.swift */,
 				926674BB20ADC08200F91D32 /* DataService.swift */,
+				92C285DB20C58A8500932894 /* GameStartupData.swift */,
 			);
 			path = DataService;
 			sourceTree = "<group>";
@@ -321,6 +340,7 @@
 				92B924F820A5AEAB009A20B4 /* GameConfig.swift */,
 				9243DFC320B4276900651713 /* FlashcardsWireframe */,
 				92A18DAD20B5D43C00DE07D2 /* Settings */,
+				92C285D420C57D3000932894 /* ResourceReaders */,
 				926CB87220B46D5600A232D5 /* DataStore */,
 				92106C8820ADBCCA000B16C8 /* Models */,
 				92C2F3E720A1EFFB00F5982B /* DataService */,
@@ -479,6 +499,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				92C285DA20C5838700932894 /* JSONResourceReader.swift in Sources */,
 				927101E920AEFA12003B9D20 /* StatBlock.swift in Sources */,
 				92B2760020B31CDB008E51A7 /* RoundedProgressView.swift in Sources */,
 				92B924F920A5AEAB009A20B4 /* GameConfig.swift in Sources */,
@@ -486,6 +507,7 @@
 				92EE108B20A98C1000D5C0F4 /* PhrasesGameService.swift in Sources */,
 				92106C8E20ADBD1D000B16C8 /* Word.swift in Sources */,
 				92C2F3D220A1E1E700F5982B /* FlashcardsWireframe.swift in Sources */,
+				92C285D820C580B100932894 /* IResourceReader.swift in Sources */,
 				92C285D320C57B9100932894 /* GameState.swift in Sources */,
 				92B18D5120A45B0300F3CF08 /* CardView.swift in Sources */,
 				92C2F3F020A1F3EF00F5982B /* IGameService.swift in Sources */,
@@ -508,6 +530,8 @@
 				92106C8A20ADBCF7000B16C8 /* Block.swift in Sources */,
 				926674BF20ADC10600F91D32 /* Root.swift in Sources */,
 				92106C9020ADBD3C000B16C8 /* Phrase.swift in Sources */,
+				92C285D620C57D5A00932894 /* CSVResourceReader.swift in Sources */,
+				92C285DC20C58A8500932894 /* GameStartupData.swift in Sources */,
 				926CB87120B46D5200A232D5 /* IDataStore.swift in Sources */,
 				92C2F3D020A1DE0400F5982B /* GameAssembly.swift in Sources */,
 				926674BC20ADC08200F91D32 /* DataService.swift in Sources */,

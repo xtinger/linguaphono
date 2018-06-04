@@ -11,7 +11,7 @@ import Foundation
 protocol IDataService {
     typealias PrepareCompletion = ()->()
     func prepare(completion: @escaping PrepareCompletion)
-    func prepareNextPhraseSet() -> Set<StatPhrase>
+    func prepareNextPhraseSet() -> GameStartupData?
     
     var config: GameConfig {get}
 }

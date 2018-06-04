@@ -12,8 +12,12 @@ class StatBlock : Codable {
     var id: Int = 1 // пока только один блок
     
     var lessons: [StatLesson]
+    var languageOriginal: String
+    var languageTranslation: String
     
-    init(lessons: [StatLesson]) {
+    init(lessons: [StatLesson], languageOriginal: String, languageTranslation: String) {
         self.lessons = lessons
+        self.languageOriginal = languageOriginal
+        self.languageTranslation = languageTranslation
     }
 }

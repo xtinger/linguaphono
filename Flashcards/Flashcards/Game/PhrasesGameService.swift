@@ -21,10 +21,15 @@ class PhrasesGameService : IGameService {
             return phrasesInGame.first
         }
     }
+    
+    var languageOriginal: String
+    var languageTranslation: String
 
-    required init(phrases: Set<StatPhrase>, config: GameConfig) {
-        self.sourcePhrases = phrases
+    required init(gameStartupData: GameStartupData, config: GameConfig) {
+        self.sourcePhrases = gameStartupData.phraseSet
         self.config = config
+        self.languageOriginal = gameStartupData.languageOriginal
+        self.languageTranslation = gameStartupData.languageTranslation
     }
     
     func readyToPresent() {
@@ -36,8 +41,8 @@ class PhrasesGameService : IGameService {
     func buildPhrasePresentation(phrase: StatPhrase) -> PhrasePresentation {
         let reverseLanguageInEffect = config.reverseLanguageMode == .on || arc4random_uniform(2) == 1
         
-        let languageNormal = reverseLanguageInEffect ? config.languageTranslation : config.languageOriginal
-        let languageFlipped = reverseLanguageInEffect ? config.languageOriginal : config.languageTranslation
+        let languageNormal = reverseLanguageInEffect ? languageTranslation : languageOriginal
+        let languageFlipped = reverseLanguageInEffect ? languageOriginal : languageTranslation
         let textNormal = reverseLanguageInEffect ? phrase.textTranslated : phrase.textOriginal
         let textFlipped = reverseLanguageInEffect ? phrase.textOriginal : phrase.textTranslated
         let settings = PhrasePresentation(languageNormal: languageNormal, languageFlipped: languageFlipped, textNormal: textNormal, textFlipped: textFlipped, reverseLanguageInEffect: reverseLanguageInEffect)

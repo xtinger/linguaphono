@@ -23,8 +23,6 @@ class GameConfig : Codable, IGameVCConfig  {
         case speechRatePresetKey
         case muted
         case showTranslationOnAnyAnswer
-        case languageOriginal
-        case languageTranslation
         case reverseLanguageMode
     }
     
@@ -58,7 +56,5 @@ class GameConfig : Codable, IGameVCConfig  {
     var speechRatePresetKey = "3"
     var muted = false
     var showTranslationOnAnyAnswer = true
-    var languageOriginal = "en-US"
-    var languageTranslation = "ru-RU"
     var reverseLanguageMode: ReverseLanguageMode = .off
 }

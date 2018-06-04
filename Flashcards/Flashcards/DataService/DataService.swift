@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import CSV
 
 class DataService : IDataService{
     var config: GameConfig
@@ -18,16 +17,17 @@ class DataService : IDataService{
     var currentLesson: StatLesson?
     var isSprintMode = false
     
+    var resourceReader: IResourceReader
+    
     private var dataStore: IDataStore & IConfigStore
 
-    enum DataServiceErrors: Error {
-        case invalidUrl
-        case parseError
-    }
+    
     
     required init(dataStore: IDataStore & IConfigStore) {
         self.dataStore = dataStore
         self.config = GameConfig()
+        
+        self.resourceReader = CSVResourceReader.init(endpointURL: config.phrasesURL!)
         
         let notificationCenter = NotificationCenter.default
         notificationCenter.addObserver(self, selector: #selector(appResignActive), name: Notification.Name.UIApplicationWillResignActive, object: nil)
@@ -60,7 +60,7 @@ class DataService : IDataService{
                 loadedCompletion()
             }
             else {
-                loadStatRootFromCSVURL {
+                loadStatRoot {
                     loadedCompletion()
                 }
                 loadFromURL = false
@@ -71,7 +71,8 @@ class DataService : IDataService{
         }
     }
     
-    func prepareNextPhraseSet() -> Set<StatPhrase>{
+    func prepareNextPhraseSet() -> GameStartupData?{
+        
         var phrases: Set<StatPhrase> = []
 
         if switchingToSprintMode() {
@@ -81,8 +82,18 @@ class DataService : IDataService{
         else if setupNextLesson(){
             phrases = phrasesOfCurrentLesson()
         }
-        // empty phrase set means finish of block
-        return phrases
+        
+        guard let statRoot = statRoot else {
+            fatalError("StatRoot not ready")
+        }
+    
+        var gameStartupData: GameStartupData?
+        if !phrases.isEmpty {
+            let block: StatBlock = statRoot.blocks[statRoot.currentBlockIndex]
+            gameStartupData = GameStartupData(phraseSet: phrases, languageOriginal: block.languageOriginal, languageTranslation: block.languageTranslation)
+        }
+        // empty gameStartupData set means finish of block
+        return gameStartupData
     }
     
     private func phrasesOfCurrentLesson() -> Set<StatPhrase>{
@@ -151,103 +162,13 @@ class DataService : IDataService{
         return false
     }
     
-    private func loadStatRootFromCSVURL(completion: @escaping IDataService.PrepareCompletion) {
-        let endpointURL = config.phrasesURL
-        
-        let dataTask = URLSession.shared.dataTask(with: endpointURL!) { [weak self] data, response, error in
+    private func loadStatRoot(completion: @escaping IDataService.PrepareCompletion) {
+        resourceReader.read { [weak self] (root) in
             guard let ws = self else {return}
-            guard error == nil, let data = data else {
-                print(error!)
-                return
-            }
-            
-            do {
-                if let root = try ws.parseCSV(data: data) {
-                    ws.statRoot = ws.convertModelToStatModel(model: root)
-                }
-                try ws.dataStore.saveStat(data: ws.statRoot!)
-            
-                print("prepare OK")
-                
-                completion()
-            } catch {
-                print(error)
-            }
+            ws.statRoot = ws.convertModelToStatModel(model: root)
+            try! ws.dataStore.saveStat(data: ws.statRoot!)
+            completion()
         }
-        dataTask.resume()
-    }
-    
-    private func parseCSV(data: Data) throws -> Root? {
-        guard let csvString = String.init(data: data, encoding: String.Encoding.utf8) else {throw DataServiceErrors.parseError}
-        let csv = try! CSVReader(string: csvString, hasHeaderRow: true, trimFields: true, delimiter: UnicodeScalar(","), whitespaces: CharacterSet.whitespaces)
-
-        try parseLanguages(csv: csv)
-        
-        var lessons: [Lesson] = []
-        var words: [Word]?
-        var word: Word?
-        var phrases: [Phrase]?
-
-        while let _ = csv.next() {
-            if let wordOriginal = csv["WordOriginal"], !wordOriginal.isEmpty {
-                if let parsedWord = word, let parsedPhrases = phrases, parsedPhrases.count > 0 {
-                    let newWord = Word(text: parsedWord.text, phrases: parsedPhrases)
-                    words?.append(newWord)
-                }
-                word = Word(text: wordOriginal, phrases: [])
-                phrases = []
-            }
-            
-            if let lessonStr = csv["Lesson"], !lessonStr.isEmpty {
-                
-                if let parsedWords = words, parsedWords.count > 0 {
-                    let newLesson = Lesson(words: parsedWords)
-                    lessons.append(newLesson)
-                }
-                
-                words = []
-            }
-
-            if let phraseOriginal = csv["PhraseOriginal"], let phraseTranslated = csv["PhraseTranslated"], !phraseOriginal.isEmpty, !phraseTranslated.isEmpty {
-                let phrase = Phrase(textNormal: phraseOriginal, textBack: phraseTranslated)
-                phrases?.append(phrase)
-            }
-        }
-        
-        let block = Block(lessons: lessons)
-        let root = Root(blocks: [block])
-        
-        return root
-    }
-    
-    private func loadStatRootFromURL(completion: @escaping IDataService.PrepareCompletion) {
-        let endpointURL = config.phrasesURL
-        
-        let dataTask = URLSession.shared.dataTask(with: endpointURL!) { data, response, error in
-            guard error == nil, let data = data else {
-                print(error!)
-                return
-            }
-            do {
-                let decoder = JSONDecoder()
-                let root = try decoder.decode(Root.self, from: data)
-                self.statRoot = self.convertModelToStatModel(model: root)
-                
-                do {
-                    try self.dataStore.saveStat(data: self.statRoot!)
-                }
-                catch {
-                    print("Unable to save game data!")
-                }
-                completion()
-                
-                print("prepare OK")
-                
-            } catch {
-                print(error)
-            }
-        }
-        dataTask.resume()
     }
     
     private func convertModelToStatModel(model: Root) -> StatRoot? {
@@ -264,25 +185,15 @@ class DataService : IDataService{
                                 )
                             })
                         )
-                    })
+                    }),
+                                 languageOriginal: block.languageOriginal,
+                                 languageTranslation: block.languageTranslation
                 )
             })
         )
     }
     
-    private func parseLanguages(csv: CSVReader) throws {
-        guard let header = csv.headerRow, header.count >= 7 else {
-            throw DataServiceErrors.parseError
-        }
-        
-        let languageOriginal = header[5]
-        let languageTranslation = header[6]
-        guard !languageOriginal.isEmpty, !languageTranslation.isEmpty else  {
-            throw DataServiceErrors.parseError
-        }
-        config.languageOriginal = languageOriginal
-        config.languageTranslation = languageTranslation
-    }
+    
 }
 
 extension Set {

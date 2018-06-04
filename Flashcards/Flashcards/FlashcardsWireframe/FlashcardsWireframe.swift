@@ -13,8 +13,8 @@ class FlashcardsWireframe {
     var viewController : UIViewController!
     var dataService: IDataService!
     
-    func setup(with phrases: Set<StatPhrase>, config: GameConfig) {
-        let gameAssembly = GameAssembly(phrases: phrases, config: config, moduleOutput: self as IGameModuleOutput)
+    func setup(with gameStartupData: GameStartupData, config: GameConfig) {
+        let gameAssembly = GameAssembly(gameStartupData: gameStartupData, config: config, moduleOutput: self as IGameModuleOutput)
         self.viewController = gameAssembly.viewController
     }
     
@@ -33,11 +33,10 @@ class FlashcardsWireframe {
         dataService.prepare { [weak self] in
             
             if let ws = self {
-                let phrases = ws.dataService.prepareNextPhraseSet()
-                if phrases.count > 0 {
-                    ws.setup(with: phrases, config: ws.dataService.config)
+                if let gameStartupData = ws.dataService.prepareNextPhraseSet() {
+                    ws.setup(with: gameStartupData, config: ws.dataService.config)
                 }
-                
+
                 ws.presentGame()
             }
         }
@@ -69,20 +68,17 @@ class FlashcardsWireframe {
         dataStore.deleteStat()
         present(to: UIApplication.shared.keyWindow!)
     }
-
 }
 
 extension FlashcardsWireframe : IGameModuleOutput {
     func gameFinished() {
-        let phrases = dataService.prepareNextPhraseSet()
-        if phrases.count > 0 {
-            setup(with: phrases, config: dataService.config)
+        if let gameStartupData = dataService.prepareNextPhraseSet() {
+            setup(with: gameStartupData, config: dataService.config)
             presentGame()
         }
         else {
             exit(0)
         }
-        
     }
     
     func userDidTouchMenu() {

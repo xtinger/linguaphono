@@ -10,4 +10,6 @@ import Foundation
 
 struct Block : Codable {
     let lessons: [Lesson]
+    let languageOriginal: String
+    let languageTranslation: String
 }

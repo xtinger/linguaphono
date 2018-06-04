@@ -11,8 +11,8 @@ import UIKit
 class GameAssembly {
     var viewController : UIViewController!
     
-    required init(phrases: Set<StatPhrase>, config: GameConfig, moduleOutput: IGameModuleOutput?) {
-        var game : IGameService = PhrasesGameService(phrases: phrases, config: config)
+    required init(gameStartupData: GameStartupData, config: GameConfig, moduleOutput: IGameModuleOutput?) {
+        var game : IGameService = PhrasesGameService(gameStartupData: gameStartupData, config: config)
         var presenter : IGamePresenter & IGameViewOutput & IGameServiceOutput = GamePresenter(gameService: game, config: config)
         presenter.output = moduleOutput
         game.output = presenter
