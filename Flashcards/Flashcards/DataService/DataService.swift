@@ -21,8 +21,6 @@ class DataService : IDataService{
     
     private var dataStore: IDataStore & IConfigStore
 
-    
-    
     required init(dataStore: IDataStore & IConfigStore) {
         self.dataStore = dataStore
         self.config = GameConfig()
