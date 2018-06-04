@@ -13,10 +13,23 @@ enum DataStoreError: Error {
 }
 
 protocol IDataStore {
-    
-    func dataExists() -> Bool
-    
-    func load() throws -> StatRoot
-    
-    func save(data: StatRoot) throws
+    func statExists() -> Bool
+    func loadStat() throws -> StatRoot
+    func saveStat(data: StatRoot) throws
+    func deleteStat()
 }
+
+protocol IConfigStore {
+    func configExists() -> Bool
+    func loadConfig() throws -> GameConfig
+    func saveConfig(_ config: GameConfig) throws
+    func deleteConfig()
+}
+
+protocol IGameStateStore1 {
+    func gameStateExists() -> Bool
+    func loadGameState() throws -> GameState
+    func saveGameState(_ gameState: GameState) throws
+    func deleteConfig()
+}
+

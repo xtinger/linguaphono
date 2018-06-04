@@ -15,8 +15,10 @@ class Speaker : NSObject {
     
     lazy var synthesizer = {return AVSpeechSynthesizer()}()
     var completion: Completion?
+    var config: GameConfig
     
-    override init() {
+    required init(config: GameConfig) {
+        self.config = config
         super.init()
         synthesizer.delegate = self
     }
@@ -27,7 +29,7 @@ class Speaker : NSObject {
         let utterance = AVSpeechUtterance(string: text)
         utterance.voice = AVSpeechSynthesisVoice(language: language)
         utterance.rate = GameConfig.speechRatePresets.first(where: { (key, value) -> Bool in
-            return key == GameConfig.speechRatePresetKey
+            return key == config.speechRatePresetKey
         })!.1
         self.completion = completion
         synthesizer.speak(utterance)

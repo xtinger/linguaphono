@@ -13,8 +13,8 @@ class FlashcardsWireframe {
     var viewController : UIViewController!
     var dataService: IDataService!
     
-    func setup(with phrases: Set<StatPhrase>) {
-        let gameAssembly = GameAssembly(phrases: phrases, moduleOutput: self as IGameModuleOutput)
+    func setup(with phrases: Set<StatPhrase>, config: GameConfig) {
+        let gameAssembly = GameAssembly(phrases: phrases, config: config, moduleOutput: self as IGameModuleOutput)
         self.viewController = gameAssembly.viewController
     }
     
@@ -28,13 +28,14 @@ class FlashcardsWireframe {
         window.rootViewController = rootViewController
         window.makeKeyAndVisible()
         
-        dataService = DataService(dataStore: UserDefaultsDataStore())
+        let dataStore = UserDefaultsDataStore()
+        dataService = DataService(dataStore: dataStore)
         dataService.prepare { [weak self] in
             
             if let ws = self {
                 let phrases = ws.dataService.prepareNextPhraseSet()
                 if phrases.count > 0 {
-                    ws.setup(with: phrases)
+                    ws.setup(with: phrases, config: ws.dataService.config)
                 }
                 
                 ws.presentGame()
@@ -50,6 +51,7 @@ class FlashcardsWireframe {
     func presentMenu() {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let menuVC = storyboard.instantiateViewController(withIdentifier: "MenuVC") as! MenuVC
+        menuVC.config = dataService.config
         menuVC.wireframe = self
         menuVC.navigationItem.title = "Настройки"
         menuVC.navigationItem.rightBarButtonItem = UIBarButtonItem(title:"Готово", style: .plain, target: self, action: #selector(settingsMenuTouched))
@@ -64,17 +66,17 @@ class FlashcardsWireframe {
     
     func reload() {
         let dataStore = UserDefaultsDataStore()
-        dataStore.delete()
+        dataStore.deleteStat()
         present(to: UIApplication.shared.keyWindow!)
     }
 
 }
 
 extension FlashcardsWireframe : IGameModuleOutput {
-    func finish() {
+    func gameFinished() {
         let phrases = dataService.prepareNextPhraseSet()
         if phrases.count > 0 {
-            setup(with: phrases)
+            setup(with: phrases, config: dataService.config)
             presentGame()
         }
         else {

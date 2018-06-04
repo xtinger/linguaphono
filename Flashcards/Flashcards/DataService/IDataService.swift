@@ -10,8 +10,8 @@ import Foundation
 
 protocol IDataService {
     typealias PrepareCompletion = ()->()
-    
-//    var currentLesson: StatLesson? {get}
     func prepare(completion: @escaping PrepareCompletion)
     func prepareNextPhraseSet() -> Set<StatPhrase>
+    
+    var config: GameConfig {get}
 }

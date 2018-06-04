@@ -9,6 +9,8 @@
 import Foundation
 
 class StatBlock : Codable {
+    var id: Int = 1 // пока только один блок
+    
     var lessons: [StatLesson]
     
     init(lessons: [StatLesson]) {

@@ -10,26 +10,44 @@ import Foundation
 import CSV
 
 class DataService : IDataService{
-    static let userDefaultsStatDataKey = "Stat"
-    
+    var config: GameConfig
+
     var loadFromURL = true
     
     var statRoot: StatRoot?
     var currentLesson: StatLesson?
     var isSprintMode = false
     
-    private var dataStore: IDataStore
+    private var dataStore: IDataStore & IConfigStore
 
     enum DataServiceErrors: Error {
         case invalidUrl
         case parseError
     }
     
-    required init(dataStore: IDataStore) {
+    required init(dataStore: IDataStore & IConfigStore) {
         self.dataStore = dataStore
+        self.config = GameConfig()
+        
+        let notificationCenter = NotificationCenter.default
+        notificationCenter.addObserver(self, selector: #selector(appResignActive), name: Notification.Name.UIApplicationWillResignActive, object: nil)
+    }
+    
+    @objc func appResignActive() {
+        try! dataStore.saveConfig(config)
     }
         
     func prepare(completion: @escaping IDataService.PrepareCompletion) {
+        
+        if dataStore.configExists() {
+            do {
+                config = try dataStore.loadConfig()
+            }
+            catch {
+                print(error)
+            }
+        }
+        
         let loadedCompletion = {
             DispatchQueue.main.async( execute: {
                 completion()
@@ -37,8 +55,8 @@ class DataService : IDataService{
         }
         
         do {
-            if !loadFromURL && dataStore.dataExists() {
-                try self.statRoot = dataStore.load()
+            if !loadFromURL && dataStore.statExists() {
+                try self.statRoot = dataStore.loadStat()
                 loadedCompletion()
             }
             else {
@@ -55,6 +73,7 @@ class DataService : IDataService{
     
     func prepareNextPhraseSet() -> Set<StatPhrase>{
         var phrases: Set<StatPhrase> = []
+
         if switchingToSprintMode() {
             phrases = phrasesOfCurrentLesson()
             phrases.formUnion(additionalPhrasesForSprint())
@@ -74,7 +93,7 @@ class DataService : IDataService{
     private func additionalPhrasesForSprint() -> Set<StatPhrase> {
         var result: [StatPhrase] = []
         var availablePhrases: Set<StatPhrase> = phrasesOfPreviousLessons()
-        for _ in 0 ..< min(availablePhrases.count, GameConfig.maximumSprintAdditionalPhrases) {
+        for _ in 0 ..< min(availablePhrases.count, config.maximumSprintAdditionalPhrases) {
             if let randomElement: StatPhrase = availablePhrases.randomObject() {
                 if !result.contains(randomElement) {
                     result.append(randomElement)
@@ -133,7 +152,7 @@ class DataService : IDataService{
     }
     
     private func loadStatRootFromCSVURL(completion: @escaping IDataService.PrepareCompletion) {
-        let endpointURL = GameConfig.phrasesURL
+        let endpointURL = config.phrasesURL
         
         let dataTask = URLSession.shared.dataTask(with: endpointURL!) { [weak self] data, response, error in
             guard let ws = self else {return}
@@ -146,7 +165,7 @@ class DataService : IDataService{
                 if let root = try ws.parseCSV(data: data) {
                     ws.statRoot = ws.convertModelToStatModel(model: root)
                 }
-                try ws.dataStore.save(data: ws.statRoot!)
+                try ws.dataStore.saveStat(data: ws.statRoot!)
             
                 print("prepare OK")
                 
@@ -165,7 +184,6 @@ class DataService : IDataService{
         try parseLanguages(csv: csv)
         
         var lessons: [Lesson] = []
-//        var lesson: Lesson?
         var words: [Word]?
         var word: Word?
         var phrases: [Phrase]?
@@ -195,8 +213,6 @@ class DataService : IDataService{
                 phrases?.append(phrase)
             }
         }
-        // last lesson
-//        let lastLesson = Lesson(words: words)
         
         let block = Block(lessons: lessons)
         let root = Root(blocks: [block])
@@ -205,7 +221,7 @@ class DataService : IDataService{
     }
     
     private func loadStatRootFromURL(completion: @escaping IDataService.PrepareCompletion) {
-        let endpointURL = GameConfig.phrasesURL
+        let endpointURL = config.phrasesURL
         
         let dataTask = URLSession.shared.dataTask(with: endpointURL!) { data, response, error in
             guard error == nil, let data = data else {
@@ -218,7 +234,7 @@ class DataService : IDataService{
                 self.statRoot = self.convertModelToStatModel(model: root)
                 
                 do {
-                    try self.dataStore.save(data: self.statRoot!)
+                    try self.dataStore.saveStat(data: self.statRoot!)
                 }
                 catch {
                     print("Unable to save game data!")
@@ -264,8 +280,8 @@ class DataService : IDataService{
         guard !languageOriginal.isEmpty, !languageTranslation.isEmpty else  {
             throw DataServiceErrors.parseError
         }
-        GameConfig.languageOriginal = languageOriginal
-        GameConfig.languageTranslation = languageTranslation
+        config.languageOriginal = languageOriginal
+        config.languageTranslation = languageTranslation
     }
 }
 

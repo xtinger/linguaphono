@@ -11,7 +11,7 @@ import Foundation
 class PhrasesGameService : IGameService {
 
     private var dataService : IDataService!
-    let config = GameConfig()
+    var config: GameConfig
     var output: IGameServiceOutput!
     
     var sourcePhrases : Set<StatPhrase> = []
@@ -22,8 +22,9 @@ class PhrasesGameService : IGameService {
         }
     }
 
-    required init(phrases: Set<StatPhrase>/*, languageOriginal: String, languageTranslation: String*/) {
+    required init(phrases: Set<StatPhrase>, config: GameConfig) {
         self.sourcePhrases = phrases
+        self.config = config
     }
     
     func readyToPresent() {
@@ -33,10 +34,10 @@ class PhrasesGameService : IGameService {
     }
 
     func buildPhrasePresentation(phrase: StatPhrase) -> PhrasePresentation {
-        let reverseLanguageInEffect = GameConfig.reverseLanguageMode == .on || arc4random_uniform(2) == 1
+        let reverseLanguageInEffect = config.reverseLanguageMode == .on || arc4random_uniform(2) == 1
         
-        let languageNormal = reverseLanguageInEffect ? GameConfig.languageTranslation : GameConfig.languageOriginal
-        let languageFlipped = reverseLanguageInEffect ? GameConfig.languageOriginal : GameConfig.languageTranslation
+        let languageNormal = reverseLanguageInEffect ? config.languageTranslation : config.languageOriginal
+        let languageFlipped = reverseLanguageInEffect ? config.languageOriginal : config.languageTranslation
         let textNormal = reverseLanguageInEffect ? phrase.textTranslated : phrase.textOriginal
         let textFlipped = reverseLanguageInEffect ? phrase.textOriginal : phrase.textTranslated
         let settings = PhrasePresentation(languageNormal: languageNormal, languageFlipped: languageFlipped, textNormal: textNormal, textFlipped: textFlipped, reverseLanguageInEffect: reverseLanguageInEffect)
@@ -53,7 +54,7 @@ class PhrasesGameService : IGameService {
             output.presentPhrase(phrasePresentation)
         }
         
-        let total: Float = Float(GameConfig.newLessonPhaseMinQuestionsForeachPhrase * sourcePhrases.count)
+        let total: Float = Float(config.newLessonPhaseMinQuestionsForeachPhrase * sourcePhrases.count)
         let progressValue: Float = (total - Float(phrasesInGame.count)) / total
         output.updateProgress(progressValue)
     }
@@ -61,7 +62,7 @@ class PhrasesGameService : IGameService {
     func duplicatePhrases() {
         let phrases1piece = Array(sourcePhrases)
         var result = [StatPhrase]()
-        for _ in 1...GameConfig.newLessonPhaseMinQuestionsForeachPhrase {
+        for _ in 1...config.newLessonPhaseMinQuestionsForeachPhrase {
             result += phrases1piece
         }
         self.phrasesInGame = result
@@ -131,7 +132,7 @@ class PhrasesGameService : IGameService {
         
         let answeredCard = removePhraseFromGame()
         
-        let whereToInsert = phrasesInGame.prefix(GameConfig.placeInQueueMaxOffset)
+        let whereToInsert = phrasesInGame.prefix(config.placeInQueueMaxOffset)
         guard !whereToInsert.contains(currentPhrase) else {
             return
         }

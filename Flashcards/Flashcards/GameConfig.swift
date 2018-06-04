@@ -8,7 +8,26 @@
 
 import Foundation
 
-class GameConfig {
+class GameConfig : Codable, IGameVCConfig  {
+
+    private enum CodingKeys: String, CodingKey {
+        case phrasesURL
+        case newLessonPhaseMinQuestionsForeachPhrase
+        case maximumSprintAdditionalPhrases
+        case delayBeforeEnglishSpeech
+        case delayBeforeRussianSpeech
+        case cardChangeAnimationDuration
+        case delayAfterAnimationIfMuted
+        case placeInQueueMaxOffset
+        case placeInQueueMinOffset
+        case speechRatePresetKey
+        case muted
+        case showTranslationOnAnyAnswer
+        case languageOriginal
+        case languageTranslation
+        case reverseLanguageMode
+    }
+    
     static var speechRatePresets: [(String, Float)] = [
         ("1", 0.3),
         ("2", 0.35),
@@ -17,7 +36,7 @@ class GameConfig {
         ("5", 0.5)
     ]
     
-    enum ReverseLanguageMode {
+    enum ReverseLanguageMode: Int, Codable {
         case off, random, on
     }
     
@@ -27,19 +46,19 @@ class GameConfig {
         ("Постоянный", .on),
     ]
     
-    static var phrasesURL: URL? = URL(string: "https://docs.google.com/spreadsheets/d/e/2PACX-1vTw9rj-HGxxsVaHWmqY2Getn7Nw_h1RVlkjLiXZPZdXHmxDEVrXxvQbXWfgOw7sWixSEhEtSQ-jCCt4/pub?gid=0&single=true&output=csv")
-    static var newLessonPhaseMinQuestionsForeachPhrase = 1
-    static var maximumSprintAdditionalPhrases = 10
-    static var delayBeforeEnglishSpeech = 0.7
-    static var delayBeforeRussianSpeech = 0.7
-    static var cardChangeAnimationDuration = 0.35
-    static var delayAfterAnimationIfMuted = 0.5
-    static var placeInQueueMaxOffset = 6
-    static var placeInQueueMinOffset = 2
-    static var speechRatePresetKey = "3"
-    static var muted = false
-    static var showTranslationOnAnyAnswer = true
-    static var languageOriginal = "en-US"
-    static var languageTranslation = "ru-RU"
-    static var reverseLanguageMode: ReverseLanguageMode = .off
+    var phrasesURL: URL? = URL(string: "https://docs.google.com/spreadsheets/d/e/2PACX-1vTw9rj-HGxxsVaHWmqY2Getn7Nw_h1RVlkjLiXZPZdXHmxDEVrXxvQbXWfgOw7sWixSEhEtSQ-jCCt4/pub?gid=0&single=true&output=csv")
+    var newLessonPhaseMinQuestionsForeachPhrase = 1
+    var maximumSprintAdditionalPhrases = 10
+    var delayBeforeEnglishSpeech = 0.7
+    var delayBeforeRussianSpeech = 0.7
+    var cardChangeAnimationDuration: TimeInterval = 0.35
+    var delayAfterAnimationIfMuted = 0.5
+    var placeInQueueMaxOffset = 6
+    var placeInQueueMinOffset = 2
+    var speechRatePresetKey = "3"
+    var muted = false
+    var showTranslationOnAnyAnswer = true
+    var languageOriginal = "en-US"
+    var languageTranslation = "ru-RU"
+    var reverseLanguageMode: ReverseLanguageMode = .off
 }

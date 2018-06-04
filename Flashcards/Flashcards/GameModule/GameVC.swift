@@ -8,12 +8,18 @@
 
 import UIKit
 
+protocol IGameVCConfig {
+    var cardChangeAnimationDuration: TimeInterval {get}
+}
+
 class GameVC: UIViewController  {
 
     var output: IGameViewOutput!
     
     @IBOutlet weak var progressView: UIProgressView!
     @IBOutlet weak var cardsPlace: UIView!
+    
+    var config: IGameVCConfig?
     
     weak var cardView: UIView?
     
@@ -66,7 +72,12 @@ extension GameVC : IGameViewInput {
             cardsPlace.addSubview(cardView)
             cardView.addFillSuperviewConstraints()
             
-            UIView.animate(withDuration: GameConfig.cardChangeAnimationDuration, delay: 0, options: [.curveEaseIn], animations: {
+            var duration = 0.35
+            if let config = config {
+                duration = config.cardChangeAnimationDuration
+            }
+            
+            UIView.animate(withDuration: duration, delay: 0, options: [.curveEaseIn], animations: {
                 existingCardView.transform = CGAffineTransform(translationX: -500, y: 0)
                 cardView.transform = CGAffineTransform(translationX: 0, y: 0)
                 
