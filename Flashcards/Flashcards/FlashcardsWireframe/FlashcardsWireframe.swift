@@ -9,9 +9,13 @@
 import UIKit
 
 class FlashcardsWireframe {
+    
     var rootViewController : UINavigationController!
     var viewController : UIViewController!
-    var dataService: IDataService!
+    var dataService: IDataService = {
+        let dataStore = UserDefaultsDataStore()
+        return DataService(dataStore: dataStore)
+    }()
     
     func setup(with gameStartupData: GameStartupData, config: GameConfig) {
         let gameAssembly = GameAssembly(gameStartupData: gameStartupData, config: config, moduleOutput: self as IGameModuleOutput)
@@ -28,19 +32,14 @@ class FlashcardsWireframe {
         window.rootViewController = rootViewController
         window.makeKeyAndVisible()
         
-        let dataStore = UserDefaultsDataStore()
-        dataService = DataService(dataStore: dataStore)
         dataService.prepare { [weak self] in
-            
             if let ws = self {
                 if let gameStartupData = ws.dataService.prepareNextGame() {
                     ws.setup(with: gameStartupData, config: ws.dataService.config)
                 }
-
                 ws.presentGame()
             }
         }
-        
     }
     
     func presentGame() {
@@ -56,7 +55,6 @@ class FlashcardsWireframe {
         menuVC.navigationItem.rightBarButtonItem = UIBarButtonItem(title:"Готово", style: .plain, target: self, action: #selector(settingsMenuTouched))
         let navMenuVC = UINavigationController(rootViewController: menuVC)
         viewController.present(navMenuVC, animated: true, completion: nil)
-//        rootViewController.setViewControllers([MenuVC], animated: true)
     }
 
     @objc func settingsMenuTouched(sender: UIButton) {
@@ -64,8 +62,7 @@ class FlashcardsWireframe {
     }
     
     func reload() {
-        let dataStore = UserDefaultsDataStore()
-        dataStore.deleteStat()
+        dataService.deleteStat()
         present(to: UIApplication.shared.keyWindow!)
     }
 }

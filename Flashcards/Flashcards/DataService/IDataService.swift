@@ -12,6 +12,6 @@ protocol IDataService {
     typealias PrepareCompletion = ()->()
     func prepare(completion: @escaping PrepareCompletion)
     func prepareNextGame() -> GameStartupData?
-    
+    func deleteStat()
     var config: GameConfig {get}
 }

@@ -10,7 +10,6 @@ import Foundation
 
 class PhrasesGameService : IGameService {
 
-    private var dataService : IDataService!
     var config: GameConfig
     var output: IGameServiceOutput!
     
@@ -51,10 +50,7 @@ class PhrasesGameService : IGameService {
     }
     
     func presentPhrase() {
-        
-        
         if let currentPhrase = currentPhrase {
-//            print("\n\n\(phrasesInGame!)")
             let phrasePresentation = buildPhrasePresentation(phrase: currentPhrase)
             output.presentPhrase(phrasePresentation)
         }
@@ -102,7 +98,7 @@ class PhrasesGameService : IGameService {
     func answered(with action: GameInputAction) {
         
         guard let currentPhrase = self.currentPhrase else {
-            return
+            fatalError("currentPhrase not set!")
         }
         
         switch action {

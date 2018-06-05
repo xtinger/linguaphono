@@ -19,7 +19,7 @@ class DataService : IDataService{
     
     var resourceReader: IResourceReader
     
-    private var dataStore: IDataStore & IConfigStore
+    var dataStore: IDataStore & IConfigStore
 
     required init(dataStore: IDataStore & IConfigStore) {
         self.dataStore = dataStore
@@ -191,7 +191,9 @@ class DataService : IDataService{
         )
     }
     
-    
+    func deleteStat() {
+        dataStore.deleteStat()
+    }
 }
 
 extension Set {
