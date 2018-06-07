@@ -14,4 +14,5 @@ protocol IDataService {
     func prepareNextGame() -> GameStartupData?
     func deleteStat()
     var config: GameConfig {get}
+    func saveConfig()
 }

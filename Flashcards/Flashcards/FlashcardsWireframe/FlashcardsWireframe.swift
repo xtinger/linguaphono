@@ -62,6 +62,7 @@ class FlashcardsWireframe {
     }
     
     func reload() {
+        dataService.saveConfig()
         dataService.deleteStat()
         present(to: UIApplication.shared.keyWindow!)
     }

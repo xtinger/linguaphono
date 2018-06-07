@@ -18,11 +18,15 @@ class MenuVC: UIViewController {
     @IBOutlet weak var showTranslationOnAnyAnswerSwitch: UISwitch!
     @IBOutlet weak var speechRateSegmentedControl: UISegmentedControl!
     @IBOutlet weak var reverseLanguageModeSegmentedControl: UISegmentedControl!
+    @IBOutlet weak var minQuestionsSeegmentedControl: UISegmentedControl!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         urlTextField.text = config.phrasesURL?.absoluteString
+        
+        minQuestionsSeegmentedControl.selectedSegmentIndex = config.newLessonPhaseMinQuestionsForeachPhrase - 1
+        
         muteSwitch.isOn = !config.muted
         showTranslationOnAnyAnswerSwitch.isOn = config.showTranslationOnAnyAnswer
         
@@ -49,6 +53,10 @@ class MenuVC: UIViewController {
             config.phrasesURL = phrasesURL
             wireframe?.reload()
         }
+    }
+    
+    @IBAction func minQuestionsSegmentedControlValueChanged(_ sender: Any) {
+        config.newLessonPhaseMinQuestionsForeachPhrase = minQuestionsSeegmentedControl.selectedSegmentIndex + 1
     }
     
     @IBAction func muteSwitchValueChanged(_ sender: Any) {

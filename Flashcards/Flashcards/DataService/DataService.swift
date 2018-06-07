@@ -28,10 +28,10 @@ class DataService : IDataService{
         self.resourceReader = CSVResourceReader.init(endpointURL: config.phrasesURL!)
         
         let notificationCenter = NotificationCenter.default
-        notificationCenter.addObserver(self, selector: #selector(appResignActive), name: Notification.Name.UIApplicationWillResignActive, object: nil)
+        notificationCenter.addObserver(self, selector: #selector(saveConfig), name: Notification.Name.UIApplicationWillResignActive, object: nil)
     }
     
-    @objc func appResignActive() {
+    @objc func saveConfig() {
         try! dataStore.saveConfig(config)
     }
         
