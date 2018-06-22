@@ -32,7 +32,14 @@ class GamePresenter : IGamePresenter, IGameViewOutput {
     }
     
     func viewDidLoad() {
+        let notificationCenter = NotificationCenter.default
+        notificationCenter.addObserver(self, selector: #selector(saveState), name: Notification.Name.UIApplicationWillResignActive, object: nil)
+        
         gameService.readyToPresent()
+    }
+    
+    @objc func saveState() {
+        gameService.saveState()
     }
     
     func userDidTouchMenu() {

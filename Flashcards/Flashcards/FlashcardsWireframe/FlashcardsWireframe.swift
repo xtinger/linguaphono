@@ -22,24 +22,57 @@ class FlashcardsWireframe {
         self.viewController = gameAssembly.viewController
     }
     
+    func setup(with gameState: GameState, config: GameConfig) {
+        let gameAssembly = GameAssembly(gameState: gameState, config: config, moduleOutput: self as IGameModuleOutput)
+        self.viewController = gameAssembly.viewController
+    }
+    
     func present(to window: UIWindow) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let loadingVC = storyboard.instantiateViewController(withIdentifier: "LoadingVC") as! LoadingVC
-        loadingVC.wireframe = self // extend FlashcardsWireframe life
-        
-        rootViewController = UINavigationController(rootViewController: loadingVC)
-        window.backgroundColor = Styles.Main.backgroundColor
-        window.rootViewController = rootViewController
-        window.makeKeyAndVisible()
-        
-        dataService.prepare { [weak self] in
-            if let ws = self {
-                if let gameStartupData = ws.dataService.prepareNextGame() {
-                    ws.setup(with: gameStartupData, config: ws.dataService.config)
-                }
-                ws.presentGame()
+
+        if dataService.isSaved() {
+            let ws = self
+            dataService.prepare { /*[weak self]*/ (gameState)  in
+//                if let ws = self {
+                    if let gameState = gameState {
+                        ws.setup(with: gameState, config: ws.dataService.config)
+                    }
+                    else if let gameStartupData = ws.dataService.prepareNextGame() {
+                        ws.setup(with: gameStartupData, config: ws.dataService.config)
+                    }
+                    
+                    ws.rootViewController = UINavigationController(rootViewController: ws.viewController)
+                    window.backgroundColor = Styles.Main.backgroundColor
+                    window.rootViewController = ws.rootViewController
+                    window.makeKeyAndVisible()
+                    
+                    ws.presentGame()
+//                }
             }
         }
+        else {
+            let loadingVC = storyboard.instantiateViewController(withIdentifier: "LoadingVC") as! LoadingVC
+            loadingVC.wireframe = self // extend FlashcardsWireframe life
+            
+            rootViewController = UINavigationController(rootViewController: loadingVC)
+            window.backgroundColor = Styles.Main.backgroundColor
+            window.rootViewController = rootViewController
+            window.makeKeyAndVisible()
+            
+            dataService.prepare { [weak self] (gameState)  in
+                if let ws = self {
+                    if let gameState = gameState {
+                        ws.setup(with: gameState, config: ws.dataService.config)
+                    }
+                    else if let gameStartupData = ws.dataService.prepareNextGame() {
+                        ws.setup(with: gameStartupData, config: ws.dataService.config)
+                    }
+                    ws.presentGame()
+                }
+            }
+        }
+        
+        
     }
     
     func presentGame() {

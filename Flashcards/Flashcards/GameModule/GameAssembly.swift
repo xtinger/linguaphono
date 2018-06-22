@@ -13,9 +13,19 @@ class GameAssembly {
     
     required init(gameStartupData: GameStartupData, config: GameConfig, moduleOutput: IGameModuleOutput?) {
         var game : IGameService = PhrasesGameService(gameStartupData: gameStartupData, config: config)
+        commonInit(game: &game, config: config, moduleOutput: moduleOutput)
+    }
+    
+    required init(gameState: GameState, config: GameConfig, moduleOutput: IGameModuleOutput?) {
+        var game : IGameService = PhrasesGameService(gameState: gameState, config: config)
+        commonInit(game: &game, config: config, moduleOutput: moduleOutput)
+    }
+    
+    private func commonInit(game : inout IGameService, config: GameConfig, moduleOutput: IGameModuleOutput?) {
         var presenter : IGamePresenter & IGameViewOutput & IGameServiceOutput = GamePresenter(gameService: game, config: config)
         presenter.output = moduleOutput
         game.output = presenter
+        game.dataOutput = UserDefaultsDataStore()
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let viewController = storyboard.instantiateViewController(withIdentifier: "GameVC") as! GameVC

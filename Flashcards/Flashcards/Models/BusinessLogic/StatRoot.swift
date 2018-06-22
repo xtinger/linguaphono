@@ -11,10 +11,12 @@ import Foundation
 class StatRoot : Codable {
     var blocks: [StatBlock]
     
-    var currentBlockIndex = -1
-    var currentLessonIndex = -1
+    var currentBlockIndex: Int
+    var currentLessonIndex: Int
     
     init(blocks: [StatBlock]) {
         self.blocks = blocks
+        self.currentBlockIndex = -1
+        self.currentLessonIndex = -1
     }
 }

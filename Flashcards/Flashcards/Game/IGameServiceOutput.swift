@@ -13,3 +13,7 @@ protocol IGameServiceOutput {
     func updateProgress(_ progress: Float)
     func finish()
 }
+
+protocol IGameServiceDataOutput {
+    func saveGameState(_ gameState: GameState) throws
+}

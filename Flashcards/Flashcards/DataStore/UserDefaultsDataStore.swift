@@ -69,7 +69,7 @@ extension UserDefaultsDataStore : IConfigStore {
 }
 
 
-extension UserDefaultsDataStore : IGameStateStore1 {
+extension UserDefaultsDataStore : IGameStateStore1, IGameServiceDataOutput {
     
     func gameStateExists() -> Bool {
         return UserDefaults.standard.object(forKey: UserDefaultsDataStore.userDefaultsGameStateKey) != nil
@@ -88,7 +88,7 @@ extension UserDefaultsDataStore : IGameStateStore1 {
     func saveGameState(_ gameState: GameState) throws {
         let encoder = JSONEncoder()
         let json = try encoder.encode(gameState)
-        UserDefaults.standard.set(json, forKey: UserDefaultsDataStore.userDefaultsConfigKey)
+        UserDefaults.standard.set(json, forKey: UserDefaultsDataStore.userDefaultsGameStateKey)
     }
     
     

@@ -16,8 +16,10 @@ enum GameInputAction {
 
 protocol IGameService {
     var output: IGameServiceOutput! {get set}
+    var dataOutput: IGameServiceDataOutput! {get set}
     func readyToPresent()
     func answered(with action: GameInputAction)
+    func saveState()
 }
 
 

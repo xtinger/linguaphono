@@ -44,7 +44,14 @@ class GameConfig : Codable, IGameVCConfig  {
         ("Постоянный", .on),
     ]
     
-    var phrasesURL: URL? = URL(string: "https://docs.google.com/spreadsheets/d/e/2PACX-1vTw9rj-HGxxsVaHWmqY2Getn7Nw_h1RVlkjLiXZPZdXHmxDEVrXxvQbXWfgOw7sWixSEhEtSQ-jCCt4/pub?gid=0&single=true&output=csv")
+    
+    // Gennady
+//    var phrasesURL: URL? = URL(string: "https://docs.google.com/spreadsheets/d/e/2PACX-1vTw9rj-HGxxsVaHWmqY2Getn7Nw_h1RVlkjLiXZPZdXHmxDEVrXxvQbXWfgOw7sWixSEhEtSQ-jCCt4/pub?gid=0&single=true&output=csv")
+    
+    // Denis
+    var phrasesURL: URL? = URL(string: "https://docs.google.com/spreadsheets/d/e/2PACX-1vTU-6DIkV0r9tpxevoVTPJerk9D7xA0GjY-qdjgASDwXUL0FwHftAXMhXmeUlEDb_wcn4pgfSgNMmx4/pub?gid=0&single=true&output=csv")
+    
+    
     var newLessonPhaseMinQuestionsForeachPhrase = 1
     var maximumSprintAdditionalPhrases = 10
     var delayBeforeEnglishSpeech = 0.7

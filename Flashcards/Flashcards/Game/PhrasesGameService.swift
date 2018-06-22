@@ -12,9 +12,11 @@ class PhrasesGameService : IGameService {
 
     var config: GameConfig
     var output: IGameServiceOutput!
+    var dataOutput: IGameServiceDataOutput!
     
     var sourcePhrases : Set<StatPhrase> = []
     var phrasesInGame : [StatPhrase]!
+    
     var currentPhrase : StatPhrase? {
         get {
             return phrasesInGame.first
@@ -23,22 +25,49 @@ class PhrasesGameService : IGameService {
     
     var languageOriginal: String
     var languageTranslation: String
+    
+    var needToRestoreLanguageMode = false
+    var lastPhraseReverseLanguageModeInEffect: Bool = false
 
     required init(gameStartupData: GameStartupData, config: GameConfig) {
         self.sourcePhrases = gameStartupData.phraseSet
         self.config = config
         self.languageOriginal = gameStartupData.languageOriginal
         self.languageTranslation = gameStartupData.languageTranslation
+        
+        duplicatePhrases()
+        shufflePhrases()
+    }
+    
+    required init(gameState: GameState, config: GameConfig) {
+//        self.sourcePhrases = gameStartupData.phraseSet
+        self.config = config
+        self.sourcePhrases = gameState.sourcePhrases
+        self.phrasesInGame = gameState.phrasesInGame
+        self.languageOriginal = gameState.languageOriginal
+        self.languageTranslation = gameState.languageTranslation
+        
+        self.lastPhraseReverseLanguageModeInEffect = gameState.lastPhraseReverseLanguageModeInEffect
+        self.needToRestoreLanguageMode = true
+    }
+    
+    func saveState() {
+        let gameState = GameState(sourcePhrases: sourcePhrases, phrasesInGame: phrasesInGame, languageOriginal: languageOriginal, languageTranslation: languageTranslation, lastPhraseReverseLanguageModeInEffect: lastPhraseReverseLanguageModeInEffect)
+        try! dataOutput.saveGameState(gameState)
     }
     
     func readyToPresent() {
-        duplicatePhrases()
-        shufflePhrases()
+        
         presentPhrase()
     }
 
     func buildPhrasePresentation(phrase: StatPhrase) -> PhrasePresentation {
-        let reverseLanguageInEffect = config.reverseLanguageMode == .on || arc4random_uniform(2) == 1
+        var reverseLanguageInEffect = config.reverseLanguageMode == .on || arc4random_uniform(2) == 1
+        
+        if needToRestoreLanguageMode {
+            reverseLanguageInEffect = lastPhraseReverseLanguageModeInEffect
+            needToRestoreLanguageMode = false
+        }
         
         let languageNormal = reverseLanguageInEffect ? languageTranslation : languageOriginal
         let languageFlipped = reverseLanguageInEffect ? languageOriginal : languageTranslation
@@ -46,12 +75,15 @@ class PhrasesGameService : IGameService {
         let textFlipped = reverseLanguageInEffect ? phrase.textOriginal : phrase.textTranslated
         let settings = PhrasePresentation(languageNormal: languageNormal, languageFlipped: languageFlipped, textNormal: textNormal, textFlipped: textFlipped, reverseLanguageInEffect: reverseLanguageInEffect)
         
+        lastPhraseReverseLanguageModeInEffect = reverseLanguageInEffect
+        
         return settings
     }
     
     func presentPhrase() {
         if let currentPhrase = currentPhrase {
             let phrasePresentation = buildPhrasePresentation(phrase: currentPhrase)
+            lastPhraseReverseLanguageModeInEffect = phrasePresentation.reverseLanguageInEffect
             output.presentPhrase(phrasePresentation)
         }
         

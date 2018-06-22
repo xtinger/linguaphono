@@ -12,7 +12,7 @@ class GameStartupData {
     var phraseSet: Set<StatPhrase>
     var languageOriginal: String
     var languageTranslation: String
-    
+
     init(phraseSet: Set<StatPhrase>, languageOriginal: String, languageTranslation: String) {
         self.phraseSet = phraseSet
         self.languageOriginal = languageOriginal

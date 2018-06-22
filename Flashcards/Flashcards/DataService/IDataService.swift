@@ -9,10 +9,11 @@
 import Foundation
 
 protocol IDataService {
-    typealias PrepareCompletion = ()->()
+    typealias PrepareCompletion = (GameState?)->()
     func prepare(completion: @escaping PrepareCompletion)
     func prepareNextGame() -> GameStartupData?
     func deleteStat()
     var config: GameConfig {get}
     func saveConfig()
+    func isSaved() -> Bool
 }

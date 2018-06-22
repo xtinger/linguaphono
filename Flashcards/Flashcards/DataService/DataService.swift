@@ -11,7 +11,7 @@ import Foundation
 class DataService : IDataService{
     var config: GameConfig
 
-    var loadFromURL = true
+    var loadFromURL = false
     
     var statRoot: StatRoot?
     var currentLesson: StatLesson?
@@ -19,9 +19,9 @@ class DataService : IDataService{
     
     var resourceReader: IResourceReader
     
-    var dataStore: IDataStore & IConfigStore
+    var dataStore: IDataStore & IConfigStore & IGameStateStore1
 
-    required init(dataStore: IDataStore & IConfigStore) {
+    required init(dataStore: IDataStore & IConfigStore & IGameStateStore1) {
         self.dataStore = dataStore
         self.config = GameConfig()
         
@@ -33,8 +33,13 @@ class DataService : IDataService{
     
     @objc func saveConfig() {
         try! dataStore.saveConfig(config)
+        try! dataStore.saveStat(data: statRoot!)
     }
-        
+    
+    func isSaved() -> Bool {
+        return dataStore.gameStateExists()
+    }
+    
     func prepare(completion: @escaping IDataService.PrepareCompletion) {
         
         if dataStore.configExists() {
@@ -45,21 +50,28 @@ class DataService : IDataService{
                 print(error)
             }
         }
-        
-        let loadedCompletion = {
-            DispatchQueue.main.async( execute: {
-                completion()
-            })
-        }
-        
+
         do {
             if !loadFromURL && dataStore.statExists() {
                 try self.statRoot = dataStore.loadStat()
-                loadedCompletion()
+                
+                if dataStore.gameStateExists() {
+                    let gameState = try dataStore.loadGameState()
+                    DispatchQueue.main.async( execute: {
+                        completion(gameState)
+                    })
+                }
+                else {
+                    DispatchQueue.main.async( execute: {
+                        completion(nil)
+                    })
+                }
             }
             else {
-                loadStatRoot {
-                    loadedCompletion()
+                loadStatRoot {_ in
+                    DispatchQueue.main.async( execute: {
+                        completion(nil)
+                    })
                 }
                 loadFromURL = false
             }
@@ -165,7 +177,7 @@ class DataService : IDataService{
             guard let ws = self else {return}
             ws.statRoot = ws.convertModelToStatModel(model: root)
             try! ws.dataStore.saveStat(data: ws.statRoot!)
-            completion()
+            completion(nil)
         }
     }
     
