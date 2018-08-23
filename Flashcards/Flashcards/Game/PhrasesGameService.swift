@@ -170,7 +170,7 @@ class PhrasesGameService : IGameService {
             return
         }
 
-        let indexToInsert = 3;//GameConfig.placeInQueueMaxOffset + Int(arc4random() % UInt32(GameConfig.placeInQueueMaxOffset - GameConfig.placeInQueueMinOffset))
+        let indexToInsert = config.placeInQueueMaxOffset + Int(arc4random() % UInt32(config.placeInQueueMaxOffset - config.placeInQueueMinOffset))
 
         while phrasesInGame.count < indexToInsert {
             // множество фразы для вставки

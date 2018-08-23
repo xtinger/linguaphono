@@ -58,8 +58,8 @@ class GameConfig : Codable, IGameVCConfig  {
     var delayBeforeRussianSpeech = 0.7
     var cardChangeAnimationDuration: TimeInterval = 0.35
     var delayAfterAnimationIfMuted = 0.5
-    var placeInQueueMaxOffset = 6
-    var placeInQueueMinOffset = 2
+    var placeInQueueMaxOffset = 18
+    var placeInQueueMinOffset = 9
     var speechRatePresetKey = "3"
     var muted = false
     var showTranslationOnAnyAnswer = true
