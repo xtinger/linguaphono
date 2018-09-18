@@ -18,6 +18,7 @@ class CSVResourceReader : IResourceReader {
     }
     
     func read(completion: @escaping ResourceLoadingCompletion) {
+        print(endpointURL)
         let dataTask = URLSession.shared.dataTask(with: endpointURL) { [weak self] data, response, error in
             guard let ws = self else {return}
             guard error == nil, let data = data else {
@@ -26,7 +27,9 @@ class CSVResourceReader : IResourceReader {
             }
             
             do {
+                print(data)
                 if let root = try ws.parseCSV(data: data) {
+                    print(root)
                     completion(root)
                 }
                 
@@ -40,6 +43,7 @@ class CSVResourceReader : IResourceReader {
     
     private func parseCSV(data: Data) throws -> Root? {
         guard let csvString = String.init(data: data, encoding: String.Encoding.utf8) else {throw ResourceReaderErrors.parseError}
+        print(csvString)
         let csv = try! CSVReader(string: csvString, hasHeaderRow: true, trimFields: true, delimiter: UnicodeScalar(","), whitespaces: CharacterSet.whitespaces)
         
         var lessons: [Lesson] = []

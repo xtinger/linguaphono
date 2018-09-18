@@ -17,15 +17,13 @@ class DataService : IDataService{
     var currentLesson: StatLesson?
     var isSprintMode = false
     
-    var resourceReader: IResourceReader
+    var resourceReader: IResourceReader?
     
     var dataStore: IDataStore & IConfigStore & IGameStateStore1
 
     required init(dataStore: IDataStore & IConfigStore & IGameStateStore1) {
         self.dataStore = dataStore
         self.config = GameConfig()
-        
-        self.resourceReader = CSVResourceReader.init(endpointURL: config.phrasesURL!)
         
         let notificationCenter = NotificationCenter.default
         notificationCenter.addObserver(self, selector: #selector(saveConfig), name: Notification.Name.UIApplicationWillResignActive, object: nil)
@@ -68,6 +66,7 @@ class DataService : IDataService{
                 }
             }
             else {
+                self.resourceReader = CSVResourceReader.init(endpointURL: config.phrasesURL!)
                 loadStatRoot {_ in
                     DispatchQueue.main.async( execute: {
                         completion(nil)
@@ -173,7 +172,7 @@ class DataService : IDataService{
     }
     
     private func loadStatRoot(completion: @escaping IDataService.PrepareCompletion) {
-        resourceReader.read { [weak self] (root) in
+        resourceReader?.read { [weak self] (root) in
             guard let ws = self else {return}
             ws.statRoot = ws.convertModelToStatModel(model: root)
             try! ws.dataStore.saveStat(data: ws.statRoot!)
