@@ -8,7 +8,7 @@
 
 import Foundation
 
-class JSONResourceReader: IResourceReader {
+class JSONResourceReader: ResourceReaderProtocol {
     var endpointURL: URL
     
     init(endpointURL: URL) {

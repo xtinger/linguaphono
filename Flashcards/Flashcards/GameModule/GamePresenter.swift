@@ -8,13 +8,13 @@
 
 import UIKit
 
-class GamePresenter : IGamePresenter, IGameViewOutput {
+class GamePresenter : GamePresenterProtocol, GameViewOutputProtocol {
     
     typealias Completion = ()->()
     
     var gameService : IGameService
-    weak var view: IGameViewInput!
-    var output: IGameModuleOutput?
+    weak var view: GameViewInputProtocol!
+    var output: GameModuleOutputProtocol?
     var phrasePresentation : PhrasePresentation?
     
     var config: GameConfig!
@@ -56,7 +56,7 @@ class GamePresenter : IGamePresenter, IGameViewOutput {
         print("userDidTouchYes()")
         view.userInputEnabled(enabled: false)
         
-        let completion : IGameViewInput.FlipCompletion = { [weak self] in
+        let completion : GameViewInputProtocol.FlipCompletion = { [weak self] in
             self?.gameService.answered(with: .Yes)
         }
 
@@ -84,7 +84,7 @@ class GamePresenter : IGamePresenter, IGameViewOutput {
         print("userDidTouchNo()")
         view.userInputEnabled(enabled: false)
         
-        let completion : IGameViewInput.FlipCompletion = { [weak self] in
+        let completion : GameViewInputProtocol.FlipCompletion = { [weak self] in
             self?.gameService.answered(with: .No)
         }
         

@@ -9,7 +9,15 @@
 import Foundation
 import CSV
 
-class CSVResourceReader : IResourceReader {
+struct Columns {
+    static let lesson = "Lesson"
+    static let wordOriginal = "WordOriginal"
+    static let phraseOriginal = "PhraseOriginal"
+    static let phraseTranslated = "PhraseTranslated"
+    static let delimiter = UnicodeScalar(",")!
+}
+
+class CSVResourceReader : ResourceReaderProtocol {
 
     var endpointURL: URL
     
@@ -40,11 +48,10 @@ class CSVResourceReader : IResourceReader {
         dataTask.resume()
     }
 
-    
     private func parseCSV(data: Data) throws -> Root? {
-        guard let csvString = String.init(data: data, encoding: String.Encoding.utf8) else {throw ResourceReaderErrors.parseError}
+        guard let csvString = String.init(data: data, encoding: String.Encoding.utf8) else {throw ResourceReaderError.parseError}
         print(csvString)
-        let csv = try! CSVReader(string: csvString, hasHeaderRow: true, trimFields: true, delimiter: UnicodeScalar(","), whitespaces: CharacterSet.whitespaces)
+        let csv = try! CSVReader(string: csvString, hasHeaderRow: true, trimFields: true, delimiter: Columns.delimiter, whitespaces: CharacterSet.whitespaces)
         
         var lessons: [Lesson] = []
         var words: [Word]?
@@ -52,7 +59,7 @@ class CSVResourceReader : IResourceReader {
         var phrases: [Phrase]?
         
         while let _ = csv.next() {
-            if let wordOriginal = csv["WordOriginal"], !wordOriginal.isEmpty {
+            if let wordOriginal = csv[Columns.wordOriginal], !wordOriginal.isEmpty {
                 if let parsedWord = word, let parsedPhrases = phrases, parsedPhrases.count > 0 {
                     let newWord = Word(text: parsedWord.text, phrases: parsedPhrases)
                     words?.append(newWord)
@@ -61,7 +68,7 @@ class CSVResourceReader : IResourceReader {
                 phrases = []
             }
             
-            if let lessonStr = csv["Lesson"], !lessonStr.isEmpty {
+            if let lessonStr = csv[Columns.lesson], !lessonStr.isEmpty {
                 
                 if let parsedWords = words, parsedWords.count > 0 {
                     let newLesson = Lesson(words: parsedWords)
@@ -71,20 +78,20 @@ class CSVResourceReader : IResourceReader {
                 words = []
             }
             
-            if let phraseOriginal = csv["PhraseOriginal"], let phraseTranslated = csv["PhraseTranslated"], !phraseOriginal.isEmpty, !phraseTranslated.isEmpty {
+            if let phraseOriginal = csv[Columns.phraseOriginal], let phraseTranslated = csv[Columns.phraseTranslated], !phraseOriginal.isEmpty, !phraseTranslated.isEmpty {
                 let phrase = Phrase(textNormal: phraseOriginal, textBack: phraseTranslated)
                 phrases?.append(phrase)
             }
         }
         
         guard let header = csv.headerRow, header.count >= 7 else {
-            throw ResourceReaderErrors.parseError
+            throw ResourceReaderError.parseError
         }
         
         let languageOriginal = header[5]
         let languageTranslation = header[6]
         guard !languageOriginal.isEmpty, !languageTranslation.isEmpty else  {
-            throw ResourceReaderErrors.parseError
+            throw ResourceReaderError.parseError
         }
         
         let block = Block(lessons: lessons, languageOriginal: languageOriginal, languageTranslation: languageTranslation)

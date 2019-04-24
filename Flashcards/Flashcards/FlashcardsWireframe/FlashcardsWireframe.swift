@@ -18,12 +18,12 @@ class FlashcardsWireframe {
     }()
     
     func setup(with gameStartupData: GameStartupData, config: GameConfig) {
-        let gameAssembly = GameAssembly(gameStartupData: gameStartupData, config: config, moduleOutput: self as IGameModuleOutput)
+        let gameAssembly = GameAssembly(gameStartupData: gameStartupData, config: config, moduleOutput: self as GameModuleOutputProtocol)
         self.viewController = gameAssembly.viewController
     }
     
     func setup(with gameState: GameState, config: GameConfig) {
-        let gameAssembly = GameAssembly(gameState: gameState, config: config, moduleOutput: self as IGameModuleOutput)
+        let gameAssembly = GameAssembly(gameState: gameState, config: config, moduleOutput: self as GameModuleOutputProtocol)
         self.viewController = gameAssembly.viewController
     }
     
@@ -101,7 +101,7 @@ class FlashcardsWireframe {
     }
 }
 
-extension FlashcardsWireframe : IGameModuleOutput {
+extension FlashcardsWireframe : GameModuleOutputProtocol {
     func gameFinished() {
         if let gameStartupData = dataService.prepareNextGame() {
             setup(with: gameStartupData, config: dataService.config)

@@ -17,7 +17,7 @@ class DataService : IDataService{
     var currentLesson: StatLesson?
     var isSprintMode = false
     
-    var resourceReader: IResourceReader?
+    var resourceReader: ResourceReaderProtocol?
     
     var dataStore: IDataStore & IConfigStore & IGameStateStore1
 

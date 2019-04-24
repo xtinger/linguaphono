@@ -8,18 +8,18 @@
 
 import UIKit
 
-protocol IGameVCConfig {
+protocol GameUIConfig {
     var cardChangeAnimationDuration: TimeInterval {get}
 }
 
-class GameVC: UIViewController  {
+class GameViewController: UIViewController  {
 
-    var output: IGameViewOutput!
+    var output: GameViewOutputProtocol!
     
     @IBOutlet weak var progressView: UIProgressView!
     @IBOutlet weak var cardsPlace: UIView!
     
-    var config: IGameVCConfig?
+    var config: GameUIConfig?
     
     weak var cardView: UIView?
     
@@ -55,7 +55,7 @@ class GameVC: UIViewController  {
     }
 }
 
-extension GameVC : IGameViewInput {
+extension GameViewController : GameViewInputProtocol {
     func changeProgress(value: Float) {
         progressView.progress = value
     }

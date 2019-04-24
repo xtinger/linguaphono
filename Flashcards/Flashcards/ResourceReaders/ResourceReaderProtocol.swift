@@ -10,11 +10,11 @@ import Foundation
 
 typealias ResourceLoadingCompletion = (Root)->()
 
-enum ResourceReaderErrors: Error {
+enum ResourceReaderError: Error {
     case invalidUrl
     case parseError
 }
 
-protocol IResourceReader {
+protocol ResourceReaderProtocol {
     func read(completion: @escaping ResourceLoadingCompletion)
 }

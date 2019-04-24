@@ -8,7 +8,7 @@
 
 import Foundation
 
-class GameConfig : Codable, IGameVCConfig  {
+class GameConfig : Codable, GameUIConfig  {
 
     private enum CodingKeys: String, CodingKey {
         case phrasesURL

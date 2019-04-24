@@ -29,7 +29,7 @@
 		92B924F920A5AEAB009A20B4 /* GameConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B924F820A5AEAB009A20B4 /* GameConfig.swift */; };
 		92C285D320C57B9100932894 /* GameState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C285D220C57B9100932894 /* GameState.swift */; };
 		92C285D620C57D5A00932894 /* CSVResourceReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C285D520C57D5A00932894 /* CSVResourceReader.swift */; };
-		92C285D820C580B100932894 /* IResourceReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C285D720C580B100932894 /* IResourceReader.swift */; };
+		92C285D820C580B100932894 /* ResourceReaderProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C285D720C580B100932894 /* ResourceReaderProtocol.swift */; };
 		92C285DA20C5838700932894 /* JSONResourceReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C285D920C5838700932894 /* JSONResourceReader.swift */; };
 		92C285DC20C58A8500932894 /* GameStartupData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C285DB20C58A8500932894 /* GameStartupData.swift */; };
 		92C2F3AB20A1A95300F5982B /* BigButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C2F3AA20A1A95300F5982B /* BigButton.swift */; };
@@ -45,13 +45,13 @@
 		92C2F3F020A1F3EF00F5982B /* IGameService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C2F3EF20A1F3EF00F5982B /* IGameService.swift */; };
 		92C2F3F220A1FAA000F5982B /* HexColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C2F3F120A1FAA000F5982B /* HexColor.swift */; };
 		92CE27B820AB38820057988B /* Speaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CE27B720AB38820057988B /* Speaker.swift */; };
-		92D1054520B56E6100AFDFC7 /* IGameModuleOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92D1054420B56E6100AFDFC7 /* IGameModuleOutput.swift */; };
+		92D1054520B56E6100AFDFC7 /* GameModuleOutputProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92D1054420B56E6100AFDFC7 /* GameModuleOutputProtocol.swift */; };
 		92E85FA720A462A100A54819 /* CardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 92E85FA620A462A100A54819 /* CardView.xib */; };
 		92E85FC520A46F4100A54819 /* EvergreenBitsUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92E85FC220A46EA800A54819 /* EvergreenBitsUI.framework */; };
 		92E85FC620A46F4100A54819 /* EvergreenBitsUI.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 92E85FC220A46EA800A54819 /* EvergreenBitsUI.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		92EE108B20A98C1000D5C0F4 /* PhrasesGameService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92EE108A20A98C1000D5C0F4 /* PhrasesGameService.swift */; };
 		92F4AE2220A0A8F100E3EF19 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F4AE2120A0A8F100E3EF19 /* AppDelegate.swift */; };
-		92F4AE2420A0A8F100E3EF19 /* GameVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F4AE2320A0A8F100E3EF19 /* GameVC.swift */; };
+		92F4AE2420A0A8F100E3EF19 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F4AE2320A0A8F100E3EF19 /* GameViewController.swift */; };
 		92F4AE2720A0A8F100E3EF19 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 92F4AE2520A0A8F100E3EF19 /* Main.storyboard */; };
 		92F4AE2920A0A8F600E3EF19 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 92F4AE2820A0A8F600E3EF19 /* Assets.xcassets */; };
 /* End PBXBuildFile section */
@@ -110,7 +110,7 @@
 		92B924F820A5AEAB009A20B4 /* GameConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameConfig.swift; sourceTree = "<group>"; };
 		92C285D220C57B9100932894 /* GameState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameState.swift; sourceTree = "<group>"; };
 		92C285D520C57D5A00932894 /* CSVResourceReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSVResourceReader.swift; sourceTree = "<group>"; };
-		92C285D720C580B100932894 /* IResourceReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IResourceReader.swift; sourceTree = "<group>"; };
+		92C285D720C580B100932894 /* ResourceReaderProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResourceReaderProtocol.swift; sourceTree = "<group>"; };
 		92C285D920C5838700932894 /* JSONResourceReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONResourceReader.swift; sourceTree = "<group>"; };
 		92C285DB20C58A8500932894 /* GameStartupData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameStartupData.swift; sourceTree = "<group>"; };
 		92C2F3AA20A1A95300F5982B /* BigButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BigButton.swift; sourceTree = "<group>"; };
@@ -126,13 +126,13 @@
 		92C2F3EF20A1F3EF00F5982B /* IGameService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IGameService.swift; sourceTree = "<group>"; };
 		92C2F3F120A1FAA000F5982B /* HexColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HexColor.swift; sourceTree = "<group>"; };
 		92CE27B720AB38820057988B /* Speaker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Speaker.swift; sourceTree = "<group>"; };
-		92D1054420B56E6100AFDFC7 /* IGameModuleOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IGameModuleOutput.swift; sourceTree = "<group>"; };
+		92D1054420B56E6100AFDFC7 /* GameModuleOutputProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameModuleOutputProtocol.swift; sourceTree = "<group>"; };
 		92E85FA620A462A100A54819 /* CardView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CardView.xib; sourceTree = "<group>"; };
 		92E85FBD20A46EA600A54819 /* EvergreenBitsUI.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = EvergreenBitsUI.xcodeproj; path = EvergreenBitsUI/EvergreenBitsUI.xcodeproj; sourceTree = "<group>"; };
 		92EE108A20A98C1000D5C0F4 /* PhrasesGameService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhrasesGameService.swift; sourceTree = "<group>"; };
 		92F4AE1E20A0A8F100E3EF19 /* Flashcards.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Flashcards.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		92F4AE2120A0A8F100E3EF19 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		92F4AE2320A0A8F100E3EF19 /* GameVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameVC.swift; sourceTree = "<group>"; };
+		92F4AE2320A0A8F100E3EF19 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		92F4AE2620A0A8F100E3EF19 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		92F4AE2820A0A8F600E3EF19 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		92F4AE2D20A0A8F600E3EF19 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -241,7 +241,7 @@
 		92C285D420C57D3000932894 /* ResourceReaders */ = {
 			isa = PBXGroup;
 			children = (
-				92C285D720C580B100932894 /* IResourceReader.swift */,
+				92C285D720C580B100932894 /* ResourceReaderProtocol.swift */,
 				92C285D520C57D5A00932894 /* CSVResourceReader.swift */,
 				92C285D920C5838700932894 /* JSONResourceReader.swift */,
 			);
@@ -265,8 +265,8 @@
 				92C2F3DB20A1E58C00F5982B /* GameProtocols.swift */,
 				92C2F3CF20A1DE0400F5982B /* GameAssembly.swift */,
 				92C2F3D520A1E4F100F5982B /* GamePresenter.swift */,
-				92F4AE2320A0A8F100E3EF19 /* GameVC.swift */,
-				92D1054420B56E6100AFDFC7 /* IGameModuleOutput.swift */,
+				92F4AE2320A0A8F100E3EF19 /* GameViewController.swift */,
+				92D1054420B56E6100AFDFC7 /* GameModuleOutputProtocol.swift */,
 			);
 			path = GameModule;
 			sourceTree = "<group>";
@@ -507,11 +507,11 @@
 				92EE108B20A98C1000D5C0F4 /* PhrasesGameService.swift in Sources */,
 				92106C8E20ADBD1D000B16C8 /* Word.swift in Sources */,
 				92C2F3D220A1E1E700F5982B /* FlashcardsWireframe.swift in Sources */,
-				92C285D820C580B100932894 /* IResourceReader.swift in Sources */,
+				92C285D820C580B100932894 /* ResourceReaderProtocol.swift in Sources */,
 				92C285D320C57B9100932894 /* GameState.swift in Sources */,
 				92B18D5120A45B0300F3CF08 /* CardView.swift in Sources */,
 				92C2F3F020A1F3EF00F5982B /* IGameService.swift in Sources */,
-				92F4AE2420A0A8F100E3EF19 /* GameVC.swift in Sources */,
+				92F4AE2420A0A8F100E3EF19 /* GameViewController.swift in Sources */,
 				92F4AE2220A0A8F100E3EF19 /* AppDelegate.swift in Sources */,
 				92B18D5320A45C5D00F3CF08 /* IGameServiceOutput.swift in Sources */,
 				92C2F3F220A1FAA000F5982B /* HexColor.swift in Sources */,
@@ -525,7 +525,7 @@
 				92A18DAC20B5D19D00DE07D2 /* MenuVC.swift in Sources */,
 				926CB86F20B46C0C00A232D5 /* UserDefaultsDataStore.swift in Sources */,
 				92C2F3EB20A1F28B00F5982B /* IDataService.swift in Sources */,
-				92D1054520B56E6100AFDFC7 /* IGameModuleOutput.swift in Sources */,
+				92D1054520B56E6100AFDFC7 /* GameModuleOutputProtocol.swift in Sources */,
 				927101E720AEF9ED003B9D20 /* StatRoot.swift in Sources */,
 				92106C8A20ADBCF7000B16C8 /* Block.swift in Sources */,
 				926674BF20ADC10600F91D32 /* Root.swift in Sources */,

@@ -11,24 +11,24 @@ import UIKit
 class GameAssembly {
     var viewController : UIViewController!
     
-    required init(gameStartupData: GameStartupData, config: GameConfig, moduleOutput: IGameModuleOutput?) {
+    required init(gameStartupData: GameStartupData, config: GameConfig, moduleOutput: GameModuleOutputProtocol?) {
         var game : IGameService = PhrasesGameService(gameStartupData: gameStartupData, config: config)
         commonInit(game: &game, config: config, moduleOutput: moduleOutput)
     }
     
-    required init(gameState: GameState, config: GameConfig, moduleOutput: IGameModuleOutput?) {
+    required init(gameState: GameState, config: GameConfig, moduleOutput: GameModuleOutputProtocol?) {
         var game : IGameService = PhrasesGameService(gameState: gameState, config: config)
         commonInit(game: &game, config: config, moduleOutput: moduleOutput)
     }
     
-    private func commonInit(game : inout IGameService, config: GameConfig, moduleOutput: IGameModuleOutput?) {
-        var presenter : IGamePresenter & IGameViewOutput & IGameServiceOutput = GamePresenter(gameService: game, config: config)
+    private func commonInit(game : inout IGameService, config: GameConfig, moduleOutput: GameModuleOutputProtocol?) {
+        var presenter : GamePresenterProtocol & GameViewOutputProtocol & IGameServiceOutput = GamePresenter(gameService: game, config: config)
         presenter.output = moduleOutput
         game.output = presenter
         game.dataOutput = UserDefaultsDataStore()
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let viewController = storyboard.instantiateViewController(withIdentifier: "GameVC") as! GameVC
+        let viewController = storyboard.instantiateViewController(withIdentifier: "GameVC") as! GameViewController
         viewController.config = config
         viewController.output = presenter
         presenter.view = viewController

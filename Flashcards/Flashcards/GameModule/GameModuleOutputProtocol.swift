@@ -8,7 +8,4 @@
 
 import Foundation
 
-protocol IGameModuleOutput : class {
-    func gameFinished()
-    func userDidTouchMenu()
-}
+

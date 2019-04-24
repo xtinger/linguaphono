@@ -8,13 +8,12 @@
 
 import UIKit
 
-protocol IGamePresenter {
-    var view: IGameViewInput! {get set}
-    var output: IGameModuleOutput? {get set}
+protocol GamePresenterProtocol {
+    var view: GameViewInputProtocol! {get set}
+    var output: GameModuleOutputProtocol? {get set}
 }
 
-// view
-protocol IGameViewInput : class {
+protocol GameViewInputProtocol : class {
     typealias FlipCompletion = ()->()
     func show(cardView: CardView, completion:FlipCompletion?)
     func flipTo(cardView: CardView)
@@ -24,8 +23,7 @@ protocol IGameViewInput : class {
     func alert(alert: UIAlertController, animated: Bool)
 }
 
-// presenter
-protocol IGameViewOutput {
+protocol GameViewOutputProtocol {
     func viewDidLoad()
     func userDidTouchCard()
     func userDidTouchYes()
@@ -34,4 +32,7 @@ protocol IGameViewOutput {
     func userDidTouchMenu()
 }
 
-
+protocol GameModuleOutputProtocol {
+    func gameFinished()
+    func userDidTouchMenu()
+}
